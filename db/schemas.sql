@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS trending_topic
-(
-  id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  hashtag_name 
-)

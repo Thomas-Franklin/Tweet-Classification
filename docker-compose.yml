@@ -16,3 +16,26 @@ services:
       - "9000:8080"
     volumes:
       - ./api/build/libs/api.war:/usr/local/tomcat/webapps/ROOT.war
+
+  stream:
+      build:
+        ./tomcat
+      ports:
+        - "9001:8080"
+      volumes:
+        - ./stream/build/libs/stream.war:/usr/local/tomcat/webapps/ROOT.war
+
+  db:
+    build:
+      ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: twitter_classification
+      MYSQL_USER: twitter
+      MYSQL_PASSWORD: password
+      TZ: Europe/London
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db/db_data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
