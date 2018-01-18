@@ -1,0 +1,7 @@
+.idea
+out
+logs
+.gradle
+build/
+.DS_Store
+final-year.iml

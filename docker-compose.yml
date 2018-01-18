@@ -1,0 +1,18 @@
+version: '2.1'
+
+services:
+  frontend:
+    build:
+      ./tomcat
+    ports:
+      - "8000:8080"
+    volumes:
+      - ./frontend/build/libs/frontend.war:/usr/local/tomcat/webapps/ROOT.war
+
+  api:
+    build:
+      ./tomcat
+    ports:
+      - "9000:8080"
+    volumes:
+      - ./api/build/libs/api.war:/usr/local/tomcat/webapps/ROOT.war
