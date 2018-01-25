@@ -25,6 +25,14 @@ services:
       volumes:
         - ./stream/build/libs/stream.war:/usr/local/tomcat/webapps/ROOT.war
 
+  classifier:
+        build:
+          ./tomcat
+        ports:
+          - "9002:8080"
+        volumes:
+          - ./classifier/build/libs/classifier.war:/usr/local/tomcat/webapps/ROOT.war
+
   db:
     build:
       ./db
@@ -39,3 +47,14 @@ services:
     volumes:
       - ./db/db_data:/var/lib/mysql
       - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+  queue:
+    build:
+      ./queue
+    hostname: "queue"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: twitter
+      RABBITMQ_DEFAULT_PASS: password
