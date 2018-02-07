@@ -1,0 +1,15 @@
+group 'twitter.classification.common'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = 1.8
+
+apply plugin: 'java'
+
+dependencies {
+
+    compile 'com.diffplug.gradle.spotless:spotless:2.4.1'
+    compile "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyMediaVersion}"
+    compile "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyServletVersion}"
+    compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${jerseyJaxrsJsonVersion}"
+}

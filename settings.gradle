@@ -1,0 +1,16 @@
+
+rootProject.name = 'Tweet-Classification'
+
+include 'common'
+include 'classifier'
+include 'api'
+include 'frontend'
+include 'stream'
+include 'queue-reader'
+
+project(':common').name='common'
+project(':classifier').name='classifier'
+project(':api').name='api'
+project(':frontend').name='frontend'
+project(':stream').name='stream'
+project(':queue-reader').name='queue-reader'
