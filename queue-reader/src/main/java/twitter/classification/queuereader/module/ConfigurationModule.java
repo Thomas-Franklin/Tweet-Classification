@@ -1,46 +1,71 @@
 package twitter.classification.queuereader.module;
 
-import java.lang.reflect.Field;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.glassfish.jersey.apache.connector.ApacheClientProperties;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.google.inject.TypeLiteral;
-import com.google.inject.matcher.Matchers;
-import com.google.inject.spi.TypeEncounter;
-import com.google.inject.spi.TypeListener;
-import twitter.classification.common.system.ConfigurationVariable;
-import twitter.classification.common.system.helper.ConfigurationVariableParam;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Consumer;
+import twitter.classification.common.system.helper.FileVariables;
+import twitter.classification.queuereader.consumer.TweetConsumer;
 import twitter.classification.queuereader.reader.QueueReader;
+import twitter.classification.queuereader.tweetdetails.TweetDetailsClient;
 
 public class ConfigurationModule extends AbstractModule {
 
-  @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_HOST)
-  private String queue;
+  private static final Logger logger = LoggerFactory.getLogger(ConfigurationModule.class);
 
   @Override
   protected void configure() {
 
-    bindListener(Matchers.any(), new TypeListener() {
-      @Override
-      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-
-        Class<?> clazz = type.getRawType();
-
-        for (Field field : clazz.getDeclaredFields()) {
-
-          if (field.getType().isAnnotationPresent(ConfigurationVariableParam.class)) {
-
-            System.out.println("hi");
-          }
-        }
-
-      }
-    });
+    Names.bindProperties(binder(), FileVariables.properties);
   }
 
   @Provides
-  public QueueReader provideQueueReader(@ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_HOST) String queue) {
+  public QueueReader provideQueueReader(
+      @Named("QUEUE_USER") String queueUsername,
+      @Named("QUEUE_PASSWORD") String queuePassword,
+      @Named("QUEUE_HOST") String queueHost,
+      TweetDetailsClient client) throws IOException, TimeoutException {
 
-    return new QueueReader(queue);
+    ConnectionFactory connectionFactory = new ConnectionFactory();
+    connectionFactory.setUsername(queueUsername);
+    connectionFactory.setPassword(queuePassword);
+    connectionFactory.setHost(queueHost);
+
+    Connection connection = connectionFactory.newConnection();
+
+    Channel channel = connection.createChannel();
+
+    channel.queueDeclare("tweets", false, false, false, null);
+
+    return new QueueReader(channel, new TweetConsumer(channel, client));
+  }
+
+  @Provides
+  public TweetDetailsClient provideTweetDetailClient() {
+
+    PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
+    poolingHttpClientConnectionManager.setMaxTotal(16);
+
+    ClientConfig clientConfig = new ClientConfig().connectorProvider(new ApacheConnectorProvider());
+    clientConfig = clientConfig.property(ApacheClientProperties.CONNECTION_MANAGER, poolingHttpClientConnectionManager);
+    clientConfig = clientConfig.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+    clientConfig = clientConfig.property(ClientProperties.READ_TIMEOUT, 1000);
+
+    return new TweetDetailsClient(clientConfig, "http://pre-processor:8080/");
   }
 }

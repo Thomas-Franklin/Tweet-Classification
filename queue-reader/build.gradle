@@ -9,5 +9,6 @@ apply plugin: 'java'
 dependencies {
 
     compile "com.google.inject:guice:${guiceVersion}"
+    compile "org.glassfish.jersey.connectors:jersey-apache-connector:${jerseyConnectorsVersion}"
     compile 'com.rabbitmq:amqp-client:5.1.2'
 }

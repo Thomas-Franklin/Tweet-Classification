@@ -25,7 +25,8 @@ public class NewTweetListener implements StatusListener {
 
     JsonObject jsonObject = new JsonParser().parse(TwitterObjectFactory.getRawJSON(status)).getAsJsonObject();
 
-    if (!status.isRetweet() && jsonObject.get("in_reply_to_status_id_str").getAsJsonNull() == JsonNull.INSTANCE) {
+    if (!status.isRetweet() && jsonObject.get("in_reply_to_status_id_str").getAsJsonNull() == JsonNull.INSTANCE
+        && status.getHashtagEntities().length > 0) {
 
       try {
 

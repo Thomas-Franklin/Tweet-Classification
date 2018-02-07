@@ -64,3 +64,14 @@ services:
     volumes:
       - ./queue-reader/build/libs/queue-reader-all.jar:/app.jar
     entrypoint: ["sh", "-c", "java -jar /app.jar"]
+    depends_on:
+      queue:
+        condition: service_healthy
+
+  pre-processor:
+    build:
+          ./tomcat
+    ports:
+      - "9003:8080"
+    volumes:
+      - ./pre-processor/build/libs/pre-processor.war:/usr/local/tomcat/webapps/ROOT.war

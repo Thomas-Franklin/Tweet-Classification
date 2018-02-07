@@ -25,6 +25,7 @@ allprojects {
         jerseyMediaVersion = '2.6'
         jerseyServletVersion = '2.6'
         jerseyJaxrsJsonVersion = '2.4.1'
+        jerseyConnectorsVersion = '2.20'
         slf4jVersion = '1.7.21'
         slf4jLayout = 'b657ab3466'
 

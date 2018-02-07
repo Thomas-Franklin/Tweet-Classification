@@ -1,24 +1,33 @@
 package twitter.classification.queuereader.reader;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.common.system.ConfigurationVariable;
-import twitter.classification.common.system.helper.ConfigurationVariableParam;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Consumer;
 
 public class QueueReader {
 
-  public static final Logger logger = LoggerFactory.getLogger(QueueReader.class);
+  private static final Logger logger = LoggerFactory.getLogger(QueueReader.class);
 
-  private String test;
+  private Channel channel;
 
-  public QueueReader(String queue) {
+  private Consumer consumer;
 
-    test = queue;
+  public QueueReader(Channel channel, Consumer consumer) {
+
+    this.channel = channel;
+    this.consumer = consumer;
   }
 
   public void run() {
 
-    logger.info("Hello in the reader, {}", test);
+    try {
+      channel.basicConsume("tweets", true, consumer);
+    } catch (IOException e) {
+      logger.error("Issue consuming the queue", e);
+    }
   }
 }
