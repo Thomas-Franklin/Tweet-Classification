@@ -1,51 +1,15 @@
-apply plugin: 'java'
-apply plugin: 'war'
+group 'twitter.classification.classifier'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-    maven { url 'http://download.eclipse.org/rt/eclipselink/maven.repo' }
-    maven { url 'https://jitpack.io' }
-}
+apply plugin: 'java'
+apply plugin: 'war'
 
 dependencies {
 
-    testCompile 'junit:junit:4.11'
-    compile group: 'cc.mallet', name: 'mallet', version: '2.0.7-RC2'
-    compile 'org.slf4j:slf4j-log4j12:1.6.6'
-
-    compile 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
-
-    compile 'com.github.szhem:log4j-json-layout:b657ab3466'
-
-    compile 'com.github.jknack:handlebars:4.0.6'
-
-    compile 'org.slf4j:slf4j-log4j12:1.7.21'
-
-
-    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.6'
-    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.6'
-    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.4.1'
-    compile 'com.diffplug.gradle.spotless:spotless:2.4.1'
+    compile "cc.mallet:mallet:2.0.7-RC2"
 
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
-}
-
-sourceSets {
-    integrationTest {
-        java {
-            compileClasspath += main.output + test.output
-            runtimeClasspath += main.output + test.output
-            srcDir file('src/integration-test/java')
-        }
-        resources.srcDir file('src/integration-test/resources')
-    }
-}
-
-configurations {
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
 }

@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import twitter.classification.stream.application.system.ConfigurationVariable;
-import twitter.classification.stream.application.system.helper.ConfigurationVariableParam;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;

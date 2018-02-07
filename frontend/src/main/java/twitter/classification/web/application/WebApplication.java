@@ -2,9 +2,9 @@ package twitter.classification.web.application;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
-import twitter.classification.web.application.system.binder.ConfigurationVariableBinder;
+import twitter.classification.common.system.binder.ConfigurationVariableBinder;
+import twitter.classification.common.system.helper.FileVariables;
 import twitter.classification.web.application.system.binder.TemplateRenderBinder;
-import twitter.classification.web.application.system.helper.FileVariables;
 
 public class WebApplication extends ResourceConfig {
 

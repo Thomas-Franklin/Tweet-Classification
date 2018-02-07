@@ -3,6 +3,7 @@ package twitter.classification.classifier.application.system.binder.factory;
 import javax.inject.Inject;
 
 import twitter.classification.classifier.service.NaiveBayesClassifier;
+import twitter.classification.common.system.binder.factory.BaseFactory;
 
 public class ClassifierFactory implements BaseFactory<NaiveBayesClassifier> {
 
@@ -17,6 +18,6 @@ public class ClassifierFactory implements BaseFactory<NaiveBayesClassifier> {
   @Override
   public NaiveBayesClassifier provide() {
 
-    return classifier.trainClassifier();
+    return classifier.getTrainedClassifier();
   }
 }

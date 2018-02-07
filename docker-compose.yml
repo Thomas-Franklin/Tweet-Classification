@@ -58,3 +58,9 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: twitter
       RABBITMQ_DEFAULT_PASS: password
+
+  queue-reader:
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ./queue-reader/build/libs/queue-reader-all.jar:/app.jar
+    entrypoint: ["sh", "-c", "java -jar /app.jar"]
