@@ -34,14 +34,14 @@ public class ClassificationResource {
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ClassificationModel getClassifyForTweet(PreProcessedItem postModel) {
+  public ClassificationModel getClassifyForTweet(PreProcessedItem preProcessedItem) {
 
     try {
-      logger.info("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(postModel));
+      logger.debug("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(preProcessedItem));
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
 
-    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(postModel.getProcessedTweetBody()).toString());
+    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()).toString());
   }
 }

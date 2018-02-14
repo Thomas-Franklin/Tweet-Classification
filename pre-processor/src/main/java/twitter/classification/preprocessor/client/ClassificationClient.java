@@ -18,6 +18,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import twitter.classification.common.exceptions.PreProcessingClientException;
 import twitter.classification.common.exceptions.PreProcessingResponseException;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
+import twitter.classification.common.tweetdetails.processing.ProcessResponse;
 
 public class ClassificationClient {
 
@@ -48,41 +49,6 @@ public class ClassificationClient {
       throw new PreProcessingClientException(exception);
     }
 
-    return processResponse(response);
-  }
-
-  private Optional<ClassificationModel> processResponse(Response response) throws PreProcessingClientException {
-
-    int responseStatus = response.getStatus();
-
-    if (responseStatus == Response.Status.OK.getStatusCode()) {
-
-      try {
-
-        return Optional.of(response.readEntity(ClassificationModel.class));
-
-      } catch (Exception readingException) {
-
-        throw new PreProcessingClientException(readingException);
-      }
-    } else if (responseStatus == Response.Status.NOT_FOUND.getStatusCode()) {
-
-      return Optional.empty();
-    } else {
-
-      String content = "";
-      try {
-
-        if (response.hasEntity()) {
-
-          content = response.readEntity(String.class);
-        }
-      } catch (Exception readingException) {
-
-        throw new PreProcessingClientException(readingException);
-      }
-
-      throw new PreProcessingResponseException(responseStatus, content);
-    }
+    return ProcessResponse.processResponse(response, ClassificationModel.class);
   }
 }

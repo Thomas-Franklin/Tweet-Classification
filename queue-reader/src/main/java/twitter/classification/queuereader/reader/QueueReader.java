@@ -25,6 +25,7 @@ public class QueueReader {
   public void run() {
 
     try {
+
       channel.basicConsume("tweets", true, consumer);
     } catch (IOException e) {
       logger.error("Issue consuming the queue", e);

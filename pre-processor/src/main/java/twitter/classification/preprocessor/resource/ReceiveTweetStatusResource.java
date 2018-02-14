@@ -64,7 +64,7 @@ public class ReceiveTweetStatusResource {
       // this is where the pre processing will occur
       preProcessedItem.setProcessedTweetBody(TweetBodyProcessor.processTweetBody(status.getText()));
 
-      logger.info("Tweet body is: {}", preProcessedItem.getProcessedTweetBody());
+      logger.debug("Tweet body is: {}", preProcessedItem.getProcessedTweetBody());
 
       for (HashtagEntity hashtagEntity : status.getHashtagEntities()) {
 
@@ -78,7 +78,7 @@ public class ReceiveTweetStatusResource {
     } catch (TwitterException e) {
       logger.error("Issue creating status from tweet details", e);
     } catch (PreProcessingClientException | JsonProcessingException e) {
-      e.printStackTrace();
+      logger.info("Issue processing object", e);
     }
 
     return processedStatusResponse;

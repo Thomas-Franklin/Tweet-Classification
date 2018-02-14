@@ -15,10 +15,10 @@ public class PreProcessedItem implements Serializable {
   private String username;
 
   @JsonProperty("userId")
-  private Integer userId;
+  private Long userId;
 
   @JsonProperty("tweetId")
-  private Integer tweetId;
+  private Long tweetId;
 
   @JsonProperty("processedTweetBody")
   private String processedTweetBody;
@@ -56,24 +56,24 @@ public class PreProcessedItem implements Serializable {
     this.username = username;
   }
 
-  public Integer getUserId() {
+  public Long getUserId() {
 
     return userId;
   }
 
   public void setUserId(Long userId) {
 
-    this.userId = userId.intValue();
+    this.userId = userId;
   }
 
-  public Integer getTweetId() {
+  public Long getTweetId() {
 
     return tweetId;
   }
 
   public void setTweetId(Long tweetId) {
 
-    this.tweetId = tweetId.intValue();
+    this.tweetId = tweetId;
   }
 
   public String getProcessedTweetBody() {
