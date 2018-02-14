@@ -20,7 +20,7 @@ import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 @Singleton
-@Path("/")
+@Path("/stream")
 public class StreamTweetsResource {
 
   public static Channel channel;

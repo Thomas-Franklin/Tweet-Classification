@@ -38,8 +38,7 @@ public class ConfigurationModule extends AbstractModule {
   public QueueReader provideQueueReader(
       @Named("QUEUE_USER") String queueUsername,
       @Named("QUEUE_PASSWORD") String queuePassword,
-      @Named("QUEUE_HOST") String queueHost,
-      TweetDetailsClient client) throws IOException, TimeoutException {
+      @Named("QUEUE_HOST") String queueHost) throws IOException, TimeoutException {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
     connectionFactory.setUsername(queueUsername);
@@ -52,20 +51,6 @@ public class ConfigurationModule extends AbstractModule {
 
     channel.queueDeclare("tweets", false, false, false, null);
 
-    return new QueueReader(channel, new TweetConsumer(channel, client));
-  }
-
-  @Provides
-  public TweetDetailsClient provideTweetDetailClient() {
-
-    PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
-    poolingHttpClientConnectionManager.setMaxTotal(16);
-
-    ClientConfig clientConfig = new ClientConfig().connectorProvider(new ApacheConnectorProvider());
-    clientConfig = clientConfig.property(ApacheClientProperties.CONNECTION_MANAGER, poolingHttpClientConnectionManager);
-    clientConfig = clientConfig.property(ClientProperties.CONNECT_TIMEOUT, 1000);
-    clientConfig = clientConfig.property(ClientProperties.READ_TIMEOUT, 1000);
-
-    return new TweetDetailsClient(clientConfig, "http://pre-processor:8080/");
+    return new QueueReader(channel, new TweetConsumer(channel, new TweetDetailsClient("http://pre-processor:8080/process")));
   }
 }

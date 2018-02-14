@@ -11,11 +11,11 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.classifier.model.ClassificationModel;
-import twitter.classification.classifier.model.PostModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.classifier.service.NaiveBayesClassifier;
-import twitter.classification.common.system.ConfigurationVariable;
-import twitter.classification.common.system.helper.ConfigurationVariableParam;
+import twitter.classification.common.tweetdetails.model.ClassificationModel;
+import twitter.classification.common.tweetdetails.model.PreProcessedItem;
 
 @Singleton
 @Path("/classify")
@@ -24,22 +24,24 @@ public class ClassificationResource {
   private static final Logger logger = LoggerFactory.getLogger(ClassificationResource.class);
 
   private NaiveBayesClassifier classifier;
-  private String host;
 
   @Inject
-  public ClassificationResource(NaiveBayesClassifier classifier, @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_HOST) String host) {
+  public ClassificationResource(NaiveBayesClassifier classifier) {
 
-    this.host = host;
     this.classifier = classifier;
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ClassificationModel getClassifyForTweet(PostModel postModel) {
+  public ClassificationModel getClassifyForTweet(PreProcessedItem postModel) {
 
-    logger.info(host);
+    try {
+      logger.info("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(postModel));
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
 
-    return new ClassificationModel().setLabel(classifier.classifyTweet(postModel.getText()).toString());
+    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(postModel.getProcessedTweetBody()).toString());
   }
 }

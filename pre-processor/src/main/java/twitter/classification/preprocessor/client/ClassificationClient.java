@@ -1,4 +1,4 @@
-package twitter.classification.queuereader.tweetdetails;
+package twitter.classification.preprocessor.client;
 
 import java.util.Optional;
 
@@ -17,32 +17,31 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import twitter.classification.common.exceptions.PreProcessingClientException;
 import twitter.classification.common.exceptions.PreProcessingResponseException;
-import twitter.classification.common.tweetdetails.model.ProcessedStatusResponse;
-import twitter4j.Status;
+import twitter.classification.common.tweetdetails.model.ClassificationModel;
 
-public class TweetDetailsClient {
+public class ClassificationClient {
 
-  private static final Logger logger = LoggerFactory.getLogger(TweetDetailsClient.class);
+  private static final Logger logger = LoggerFactory.getLogger(ClassificationClient.class);
 
   private Client client;
   private String uri;
 
-  public TweetDetailsClient(String uri) {
+  public ClassificationClient(String uri) {
 
     this.client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
     this.uri = uri;
   }
 
-  public Optional<ProcessedStatusResponse> postStatusForProcessing(String status) throws PreProcessingClientException {
+  public Optional<ClassificationModel> postProcessedTweetItem(String processedItem) throws PreProcessingClientException {
 
     Response response;
 
     try {
-      WebTarget target = client.target(uri);
+      WebTarget target = client.target(this.uri);
 
       response = client.target(target.getUri())
           .request()
-          .post(Entity.entity(status, MediaType.APPLICATION_JSON));
+          .post(Entity.entity(processedItem, MediaType.APPLICATION_JSON));
 
     } catch (ProcessingException exception) {
 
@@ -52,7 +51,7 @@ public class TweetDetailsClient {
     return processResponse(response);
   }
 
-  private Optional<ProcessedStatusResponse> processResponse(Response response) throws PreProcessingClientException {
+  private Optional<ClassificationModel> processResponse(Response response) throws PreProcessingClientException {
 
     int responseStatus = response.getStatus();
 
@@ -60,7 +59,7 @@ public class TweetDetailsClient {
 
       try {
 
-        return Optional.of(response.readEntity(ProcessedStatusResponse.class));
+        return Optional.of(response.readEntity(ClassificationModel.class));
 
       } catch (Exception readingException) {
 
