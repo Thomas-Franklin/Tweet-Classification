@@ -19,7 +19,7 @@ public class NaiveBayesClassifier {
   /**
    * Assumes that a classifier has been trained and
    * serialised to disk and stored in WEB-INF/classes/trained-classifier/classifier.txt
-   * <p>
+   *
    * Can use TrainClassifier to train and serialise a classifier to disk
    *
    * @return NaiveBayesClassifier

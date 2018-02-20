@@ -10,7 +10,10 @@ import twitter.classification.common.exceptions.PreProcessingResponseException;
 public class ProcessResponse {
 
   /**
-   * Generic response processor for processing http responses
+   * Generic response processor for processing http responses, used
+   * by my clients in the various services, as the only thing
+   * that changes in processing is the type of class which needs to
+   * be read
    *
    * @param response Response
    * @param clazz genericClazz

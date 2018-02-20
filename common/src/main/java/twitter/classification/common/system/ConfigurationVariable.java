@@ -5,6 +5,8 @@ import twitter.classification.common.config.ConfigurationKey;
 public enum ConfigurationVariable implements ConfigurationKey {
 
   DB_USERNAME("DB_USERNAME"),
+  DB_PASSWORD("DB_PASSWORD"),
+  DB_URL("DB_URL"),
   TWITTER_OAUTH_ACCESS_KEY("TWITTER_OAUTH_ACCESS_KEY"),
   TWITTER_OAUTH_ACCESS_SECRET("TWITTER_OAUTH_ACCESS_SECRET"),
   TWITTER_OAUTH_CONSUMER_KEY("TWITTER_OAUTH_CONSUMER_KEY"),

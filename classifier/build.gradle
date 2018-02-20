@@ -10,6 +10,7 @@ apply plugin: 'war'
 dependencies {
 
     compile "cc.mallet:mallet:2.0.7-RC2"
+    compile 'mysql:mysql-connector-java:8.0.9-rc'
 
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
 }
