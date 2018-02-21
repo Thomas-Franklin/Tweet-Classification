@@ -38,6 +38,7 @@ public class ClassificationClient {
     Response response;
 
     try {
+
       WebTarget target = client.target(this.uri);
 
       response = client.target(target.getUri())

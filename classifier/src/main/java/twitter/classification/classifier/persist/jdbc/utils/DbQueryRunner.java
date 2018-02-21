@@ -25,7 +25,7 @@ public class DbQueryRunner {
       preparedStatement.executeUpdate();
     } catch (SQLException exception) {
 
-      logger.error("Issue executing query", exception);
+      logger.error("Issue executing query, " + sql, exception);
     }
   }
 

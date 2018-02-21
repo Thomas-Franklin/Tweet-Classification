@@ -14,10 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import twitter.classification.classifier.service.InsertTweetService;
+import twitter.classification.classifier.service.HandleProcessedTweetService;
 import twitter.classification.classifier.service.NaiveBayesClassifier;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
+import twitter.classification.common.tweetdetails.model.ProcessedTweetModel;
 
 @Singleton
 @Path("/classify")
@@ -26,24 +27,16 @@ public class ClassificationResource {
   private static final Logger logger = LoggerFactory.getLogger(ClassificationResource.class);
 
   private NaiveBayesClassifier classifier;
-  private InsertTweetService insertTweetService;
+  private HandleProcessedTweetService handleProcessedTweetService;
 
   @Inject
   public ClassificationResource(
       NaiveBayesClassifier classifier,
-      InsertTweetService insertTweetService
+      HandleProcessedTweetService handleProcessedTweetService
   ) {
 
     this.classifier = classifier;
-    this.insertTweetService = insertTweetService;
-  }
-
-  @GET
-  public String test() {
-
-    insertTweetService.insertTweet(1000L, "Hello, this is a text", 2);
-
-    return "Sweet";
+    this.handleProcessedTweetService = handleProcessedTweetService;
   }
 
   @POST
@@ -52,8 +45,16 @@ public class ClassificationResource {
   public ClassificationModel getClassificationForTweet(PreProcessedItem preProcessedItem) {
 
     try {
+
       logger.debug("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(preProcessedItem));
+
+      ProcessedTweetModel processedTweetModel = new ProcessedTweetModel(preProcessedItem);
+      processedTweetModel.setClassificationValue(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()).toString());
+
+      handleProcessedTweetService.handleProcessedTweet(processedTweetModel);
+
     } catch (JsonProcessingException e) {
+
       e.printStackTrace();
     }
 

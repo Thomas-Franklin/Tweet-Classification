@@ -11,3 +11,4 @@ configuration.txt
 */configuration.txt
 *.txt
 ~$*
+classes/

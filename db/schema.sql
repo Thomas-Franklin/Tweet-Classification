@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS tweets
 (
   id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   tweet_id BIGINT,
-  tweet_text VARCHAR(300),
+  original_tweet_text VARCHAR(300),
+  processed_tweet_text VARCHAR(300),
   classification_id TINYINT,
   created_on TIMESTAMP NOT NULL DEFAULT now(),
   FOREIGN KEY (classification_id)
