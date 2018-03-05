@@ -1,6 +1,6 @@
 package twitter.classification.classifier.persist.jdbc.queries;
 
-public class InsertTweetsDbQuery {
+public class InsertTweetsDbQuery implements DbQuery {
 
   public String buildQuery() {
 

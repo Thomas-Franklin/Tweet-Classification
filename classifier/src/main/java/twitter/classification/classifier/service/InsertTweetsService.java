@@ -14,8 +14,8 @@ public class InsertTweetsService {
     this.insertTweetsDao = insertTweetsDao;
   }
 
-  public void insertTweet(Long tweetId, String originalTweetText, String processedTweetText, String classificationCode) {
+  public void insert(Long tweetId, String originalTweetText, String processedTweetText, String classificationCode) {
 
-    insertTweetsDao.insertTweet(tweetId, originalTweetText, processedTweetText, classificationCode);
+    insertTweetsDao.insert(tweetId, originalTweetText, processedTweetText, classificationCode);
   }
 }

@@ -6,24 +6,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import twitter.classification.classifier.persist.ConnectionManager;
-import twitter.classification.classifier.persist.jdbc.queries.InsertTweetsDbQuery;
+import twitter.classification.classifier.persist.jdbc.queries.InsertUsersDbQuery;
 import twitter.classification.classifier.persist.jdbc.utils.DbQueryRunner;
 
-public class InsertTweetsDao {
+public class InsertUsersDao {
 
   public static final Logger logger = LoggerFactory.getLogger(InsertTweetsDao.class);
 
   private ConnectionManager connectionManager;
 
   @Inject
-  public InsertTweetsDao(ConnectionManager connectionManager) {
+  public InsertUsersDao(ConnectionManager connectionManager) {
 
     this.connectionManager = connectionManager;
   }
 
-  public void insert(Long tweetId, String originalTweetText, String processedTweetText, String classificationCode) {
+  public void insert(String username, Long twitterUsernameId) {
 
     DbQueryRunner runner = new DbQueryRunner(connectionManager.getConnection());
-    runner.executeUpdate(new InsertTweetsDbQuery().buildQuery(), tweetId, originalTweetText, processedTweetText, classificationCode);
+    runner.executeUpdate(new InsertUsersDbQuery().buildQuery(), username, twitterUsernameId);
   }
 }

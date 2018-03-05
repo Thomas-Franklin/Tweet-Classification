@@ -7,14 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import twitter.classification.common.tweetdetails.model.ProcessedStatusResponse;
 import twitter.classification.queuereader.tweetdetails.TweetDetailsClient;
-import twitter4j.TwitterObjectFactory;
 
 public class TweetConsumer extends DefaultConsumer {
 

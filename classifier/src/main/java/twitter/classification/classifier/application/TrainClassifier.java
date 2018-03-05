@@ -50,7 +50,7 @@ public class TrainClassifier {
 
     InstanceList trainingInstanceList = new InstanceList(pipe);
 
-    trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(.*), (.*)", 2, 1, -1));
+    trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(non-rumour|rumour), (.*)", 2, 1, -1));
 
     ClassifierTrainer trainer = new NaiveBayesTrainer();
     Classifier classifier = trainer.train(trainingInstanceList);

@@ -3,7 +3,6 @@ package twitter.classification.classifier.resource;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -51,7 +50,7 @@ public class ClassificationResource {
       ProcessedTweetModel processedTweetModel = new ProcessedTweetModel(preProcessedItem);
       processedTweetModel.setClassificationValue(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()).toString());
 
-      handleProcessedTweetService.handleProcessedTweet(processedTweetModel);
+      handleProcessedTweetService.handle(processedTweetModel);
 
     } catch (JsonProcessingException e) {
 

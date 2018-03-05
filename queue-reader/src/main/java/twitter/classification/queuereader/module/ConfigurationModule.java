@@ -3,11 +3,6 @@ package twitter.classification.queuereader.module;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.glassfish.jersey.apache.connector.ApacheClientProperties;
-import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +13,6 @@ import com.google.inject.name.Names;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Consumer;
 import twitter.classification.common.system.helper.FileVariables;
 import twitter.classification.queuereader.consumer.TweetConsumer;
 import twitter.classification.queuereader.reader.QueueReader;

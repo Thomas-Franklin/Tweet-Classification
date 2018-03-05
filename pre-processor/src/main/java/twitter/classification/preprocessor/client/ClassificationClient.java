@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import twitter.classification.common.exceptions.PreProcessingClientException;
-import twitter.classification.common.exceptions.PreProcessingResponseException;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.processing.ProcessResponse;
 
