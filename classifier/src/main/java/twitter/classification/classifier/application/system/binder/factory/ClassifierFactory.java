@@ -13,11 +13,12 @@ public class ClassifierFactory implements BaseFactory<NaiveBayesClassifier> {
   public ClassifierFactory() {
 
     classifier = new NaiveBayesClassifier();
+    classifier.trainTheClassifier();
   }
 
   @Override
   public NaiveBayesClassifier provide() {
 
-    return classifier.getTrainedClassifier();
+    return classifier;
   }
 }

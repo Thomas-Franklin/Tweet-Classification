@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 buildscript {
 
@@ -73,6 +75,7 @@ subprojects {
         testCompile "com.tngtech.junit.dataprovider:junit4-dataprovider:${junit4DataProviderVersion}"
         testCompile "junit:junit:${junitVersion}"
         testCompile "org.mockito:mockito-all:${mockitoVersion}"
+        testCompile "com.thedeanda:lorem:2.1"
     }
 
     sourceSets {
@@ -104,6 +107,29 @@ subprojects {
         classpath = sourceSets.integrationTest.runtimeClasspath
 
         systemProperties = (Map<String, String>) System.getProperties().findAll { it.key.startsWith("test.") }
+    }
+
+    tasks.withType(Test) {
+        testLogging {
+            events = [TestLogEvent.PASSED,
+                      TestLogEvent.SKIPPED,
+                      TestLogEvent.FAILED,
+                      TestLogEvent.STANDARD_OUT]
+            showStandardStreams = true
+            exceptionFormat = TestExceptionFormat.FULL
+            showExceptions = true
+            showStackTraces = true
+            showCauses = true
+
+            afterSuite { desc, result ->
+                if (!desc.parent) { // will match the outermost suite
+                    def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                    def startItem = '|    ', endItem = '    |'
+                    def repeatLength = startItem.length() + output.length() + endItem.length()
+                    println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                }
+            }
+        }
     }
 
     task fatJar(type: Jar) {

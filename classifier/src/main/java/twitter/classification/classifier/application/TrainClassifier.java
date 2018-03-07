@@ -36,9 +36,7 @@ public class TrainClassifier {
 
   private void trainClassifier() throws IOException, URISyntaxException {
 
-    TrainClassifier testClassifier = new TrainClassifier();
-
-    FileReader fileReader = testClassifier.getFileReader();
+    FileReader fileReader = getFileReader();
 
     ArrayList<Pipe> pipes = new ArrayList<>();
 
@@ -50,6 +48,7 @@ public class TrainClassifier {
 
     InstanceList trainingInstanceList = new InstanceList(pipe);
 
+    // file is format of non-rumour|rumour, data
     trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(non-rumour|rumour), (.*)", 2, 1, -1));
 
     ClassifierTrainer trainer = new NaiveBayesTrainer();

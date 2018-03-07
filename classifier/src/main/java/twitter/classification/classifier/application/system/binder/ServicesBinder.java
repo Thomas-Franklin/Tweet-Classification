@@ -5,8 +5,8 @@ import javax.inject.Singleton;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import twitter.classification.classifier.application.system.binder.factory.ClassifierFactory;
-import twitter.classification.classifier.persist.ConnectionManager;
-import twitter.classification.classifier.persist.DbConnectionResolver;
+import twitter.classification.common.persist.ConnectionManager;
+import twitter.classification.common.persist.DbConnectionResolver;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagTweetClassificationDao;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagsDao;
 import twitter.classification.classifier.persist.jdbc.InsertTweetsDao;

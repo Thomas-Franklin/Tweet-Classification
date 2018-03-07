@@ -13,15 +13,19 @@ public class ClassificationCodeFromValue {
 
   public static String getClassificationCodeFromValue(String classificationValue) {
 
-    switch (classificationValue) {
+    if (classificationValue != null) {
+      switch (classificationValue) {
 
-      case "non-rumour" :
-        return NON_RUMOUR_CODE;
-      case "rumour" :
-        return RUMOUR_CODE;
-      default:
-        logger.info("Logging an undefined code for classification value of: {}", classificationValue);
-        return UNDEFINED_CODE;
+        case "non-rumour":
+          return NON_RUMOUR_CODE;
+        case "rumour":
+          return RUMOUR_CODE;
+        default:
+          logger.info("Logging an undefined code for classification value of: {}", classificationValue);
+          return UNDEFINED_CODE;
+      }
+    } else {
+      return UNDEFINED_CODE;
     }
   }
 }

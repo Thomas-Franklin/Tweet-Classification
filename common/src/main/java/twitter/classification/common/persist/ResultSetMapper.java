@@ -39,7 +39,7 @@ public class ResultSetMapper<T> {
           for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
 
             String columnName = resultSetMetaData.getColumnName(i);
-
+            
             Object columnValue = resultSet.getObject(i);
 
             for (Field field : classToMap.getDeclaredFields()) {

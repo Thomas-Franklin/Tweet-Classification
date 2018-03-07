@@ -5,9 +5,9 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.classifier.persist.ConnectionManager;
+import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.classifier.persist.jdbc.queries.InsertTweetsDbQuery;
-import twitter.classification.classifier.persist.jdbc.utils.DbQueryRunner;
+import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
 public class InsertTweetsDao {
 

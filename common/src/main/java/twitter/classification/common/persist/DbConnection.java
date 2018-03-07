@@ -1,4 +1,4 @@
-package twitter.classification.classifier.persist;
+package twitter.classification.common.persist;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

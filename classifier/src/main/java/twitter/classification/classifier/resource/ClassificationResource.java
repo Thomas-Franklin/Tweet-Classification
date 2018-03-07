@@ -48,7 +48,7 @@ public class ClassificationResource {
       logger.debug("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(preProcessedItem));
 
       ProcessedTweetModel processedTweetModel = new ProcessedTweetModel(preProcessedItem);
-      processedTweetModel.setClassificationValue(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()).toString());
+      processedTweetModel.setClassificationValue(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()));
 
       handleProcessedTweetService.handle(processedTweetModel);
 
@@ -57,6 +57,6 @@ public class ClassificationResource {
       e.printStackTrace();
     }
 
-    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()).toString());
+    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()));
   }
 }

@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cc.mallet.classify.Classification;
 import cc.mallet.classify.Classifier;
 import cc.mallet.types.Label;
 
@@ -14,7 +15,15 @@ public class NaiveBayesClassifier {
 
   private static final Logger logger = LoggerFactory.getLogger(NaiveBayesClassifier.class);
 
-  private cc.mallet.classify.Classifier classifier;
+  private Classifier classifier;
+
+  public NaiveBayesClassifier() {
+  }
+
+  public NaiveBayesClassifier(Classifier classifier) {
+
+    this.classifier = classifier;
+  }
 
   /**
    * Assumes that a classifier has been trained and
@@ -24,7 +33,7 @@ public class NaiveBayesClassifier {
    *
    * @return NaiveBayesClassifier
    */
-  public NaiveBayesClassifier getTrainedClassifier() {
+  public Classifier trainTheClassifier() {
 
     ObjectInputStream objectInputStream = null;
     try {
@@ -46,7 +55,7 @@ public class NaiveBayesClassifier {
       logger.error("Issue closing the object");
     }
 
-    return this;
+    return classifier;
   }
 
   /**
@@ -56,8 +65,10 @@ public class NaiveBayesClassifier {
    * @param tweet String
    * @return Label
    */
-  public Label classifyTweet(String tweet) {
+  public String classifyTweet(String tweet) {
 
-    return classifier.classify(tweet).getLabeling().getBestLabel();
+    Classification classification = classifier.classify(tweet);
+
+    return classification.getLabeling().getBestLabel().toString();
   }
 }

@@ -3,7 +3,7 @@ package twitter.classification.classifier.service;
 import javax.inject.Inject;
 
 import twitter.classification.classifier.helper.ClassificationCodeFromValue;
-import twitter.classification.classifier.persist.DbConnection;
+import twitter.classification.common.persist.DbConnection;
 import twitter.classification.common.tweetdetails.model.ProcessedTweetModel;
 
 public class HandleProcessedTweetService {

@@ -1,4 +1,4 @@
-package twitter.classification.classifier.persist;
+package twitter.classification.common.persist;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.classifier.persist.jdbc.MySqlConnectionFactory;
+import twitter.classification.common.persist.jdbc.MySqlConnectionFactory;
 import twitter.classification.common.system.ConfigurationVariable;
 import twitter.classification.common.system.helper.ConfigurationVariableParam;
 
