@@ -1,4 +1,0 @@
-DB_USERNAME=twitter
-DB_PASSWORD=password
-DB_URL=jdbc:mysql://db:3306/twitter_classification?autoReconnect=true&useSSL=false
-TWITTER_STREAM_STATUS_URI=http://stream:8080/stream/running

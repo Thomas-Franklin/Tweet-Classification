@@ -1,2 +1,0 @@
-DASHBOARD_OVERVIEW_URI=http://api:8080/dashboard/overview
-DASHBOARD_SERVICE_STATUS_URI=http://api:8080/dashboard/services/status
