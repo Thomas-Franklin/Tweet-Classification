@@ -1,5 +1,6 @@
 package twitter.classification.api.persist.jdbc;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,8 +28,12 @@ public class SelectTopHashtagsClassificationCountDao {
   public List<TopHashtagsClassificationModel> select() {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());
-    List<TopHashtagsClassificationModel> topHashtagsClassificationModelList = dbQueryRunner.executeQuery(new SelectTopHashtagsClassificationCountDbQuery().buildQuery(), TopHashtagsClassificationModel.class);
 
-    return topHashtagsClassificationModelList;
+    try {
+      return dbQueryRunner.executeQuery(new SelectTopHashtagsClassificationCountDbQuery().buildQuery(), TopHashtagsClassificationModel.class);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

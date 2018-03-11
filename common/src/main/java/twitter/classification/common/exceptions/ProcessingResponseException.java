@@ -2,12 +2,12 @@ package twitter.classification.common.exceptions;
 
 import static java.lang.String.format;
 
-public class PreProcessingResponseException extends PreProcessingClientException {
+public class ProcessingResponseException extends ProcessingClientException {
 
   private int statusCode;
   private String responseContent;
 
-  public PreProcessingResponseException(int statusCode, String responseContent) {
+  public ProcessingResponseException(int statusCode, String responseContent) {
 
     super(format("Status code: %d, response responseContent: %s", statusCode, responseContent));
 

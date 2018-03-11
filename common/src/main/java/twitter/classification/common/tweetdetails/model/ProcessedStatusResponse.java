@@ -6,7 +6,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedStatusResponse implements Serializable {
 
   @JsonProperty("tweet_body")

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import twitter.classification.common.exceptions.PreProcessingClientException;
+import twitter.classification.common.exceptions.ProcessingClientException;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
 import twitter.classification.common.tweetdetails.model.ProcessedStatusResponse;
 import twitter.classification.common.tweetdetails.processing.TweetBodyProcessor;
@@ -77,7 +77,7 @@ public class ReceiveTweetStatusResource {
 
     } catch (TwitterException e) {
       logger.error("Issue creating status from tweet details", e);
-    } catch (PreProcessingClientException | JsonProcessingException e) {
+    } catch (ProcessingClientException | JsonProcessingException e) {
       logger.info("Issue processing object", e);
     }
 

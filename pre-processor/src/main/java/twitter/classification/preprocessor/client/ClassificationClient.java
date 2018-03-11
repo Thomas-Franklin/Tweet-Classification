@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import twitter.classification.common.exceptions.PreProcessingClientException;
+import twitter.classification.common.exceptions.ProcessingClientException;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.processing.ProcessResponse;
 
@@ -32,7 +32,7 @@ public class ClassificationClient {
     this.uri = uri;
   }
 
-  public Optional<ClassificationModel> postProcessedTweetItem(String processedItem) throws PreProcessingClientException {
+  public Optional<ClassificationModel> postProcessedTweetItem(String processedItem) throws ProcessingClientException {
 
     Response response;
 
@@ -46,7 +46,7 @@ public class ClassificationClient {
 
     } catch (ProcessingException exception) {
 
-      throw new PreProcessingClientException(exception);
+      throw new ProcessingClientException(exception);
     }
 
     return ProcessResponse.processResponse(response, ClassificationModel.class);

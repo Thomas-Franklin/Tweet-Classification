@@ -5,7 +5,7 @@ services:
     build:
       ./tomcat
     ports:
-      - "8000:8080"
+      - "80:8080"
     volumes:
       - ./frontend/build/libs/frontend.war:/usr/local/tomcat/webapps/ROOT.war
 

@@ -4,6 +4,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import twitter.classification.common.system.binder.ConfigurationVariableBinder;
 import twitter.classification.common.system.helper.FileVariables;
+import twitter.classification.web.application.system.ClientBinder;
 import twitter.classification.web.application.system.binder.TemplateRenderBinder;
 
 public class WebApplication extends ResourceConfig {
@@ -16,6 +17,7 @@ public class WebApplication extends ResourceConfig {
 
     register(new ConfigurationVariableBinder());
     register(new TemplateRenderBinder());
+    register(new ClientBinder());
   }
 
   private void loadConfigurationValues() {

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+
+    <title>Tweet Classification</title>
+</head>
+<body>
+
+<!--
+  Navbar will be consistent throughout
+ -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark navbar-fixed">
+    <div class="container">
+        <a class="navbar-brand" href="#">Tweet Classification</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Hashtags</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navDropDown" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">More</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDropDown">
+                        <a class="dropdown-item" href="#">Terms</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top: 50px;">
+    <main>
+        {{#block "content"}}{{/block}}
+    </main>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="assets/js/jquery/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="assets/js/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

@@ -41,7 +41,7 @@ public class DbQueryRunner {
     }
   }
 
-  public <T> List<T> executeQuery(String sql, Class classToMap, Object... params) {
+  public <T> List<T> executeQuery(String sql, Class classToMap, Object... params) throws SQLException {
 
     try (PreparedStatement preparedStatement = preparedStatement(sql, params)) {
 
@@ -51,9 +51,8 @@ public class DbQueryRunner {
     } catch (SQLException exception) {
 
       logger.error("Issue executing query, " + sql, exception);
+      throw new SQLException(exception);
     }
-
-    return null;
   }
 
   /**

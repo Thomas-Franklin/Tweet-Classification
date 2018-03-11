@@ -4,6 +4,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import twitter.classification.common.models.TwitterStreamResponse;
 import twitter.classification.common.system.ConfigurationVariable;
 import twitter.classification.common.system.helper.ConfigurationVariableParam;
 import twitter.classification.stream.listener.NewTweetListener;
@@ -72,7 +75,8 @@ public class StreamTweetsResource {
 
   @GET
   @Path("/start")
-  public String startStream() {
+  @Produces(MediaType.APPLICATION_JSON)
+  public TwitterStreamResponse startStream() {
 
     if (!isRunning) {
       String[] filterList = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
@@ -82,22 +86,31 @@ public class StreamTweetsResource {
 
       isRunning = true;
 
-      return "Stream is running";
+      return new TwitterStreamResponse().setRunning(isRunning);
 
     } else {
 
-      return "Stream is already running";
+      return new TwitterStreamResponse().setRunning(isRunning);
     }
   }
 
   @GET
+  @Path("/running")
+  @Produces(MediaType.APPLICATION_JSON)
+  public TwitterStreamResponse isRunning() {
+
+    return new TwitterStreamResponse().setRunning(isRunning);
+  }
+
+  @GET
   @Path("/stop")
-  public String stopStream() {
+  @Produces(MediaType.APPLICATION_JSON)
+  public TwitterStreamResponse stopStream() {
 
     twitterStream.shutdown();
 
     isRunning = false;
 
-    return "Stream is stopped";
+    return new TwitterStreamResponse().setRunning(isRunning);
   }
 }

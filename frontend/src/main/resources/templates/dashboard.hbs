@@ -1,0 +1,90 @@
+{{#partial "content"}}
+
+<div class="row">
+    <div class="col-md-9 mb-1">
+        <div class="overview-board">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Overview</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Tweets</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalTweets}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Hashtags</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalHashtags}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Usernames</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalUsernames}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Rumour Classifications</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalRumours}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Non-Rumour Classifications</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalNonRumours}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title text-center">Total Classifications</p>
+                                    <hr>
+                                    <h1 class="card-text text-center">{{totalClassifications}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="service-board">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Service Status</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">Frontend</li>
+                        <li class="list-group-item list-group-item-success">API</li>
+                        <li class="list-group-item list-group-item-success">Database</li>
+                        <li class="list-group-item list-group-item-success">Twitter Stream</li>
+                        <li class="list-group-item list-group-item-success">Message Queue</li>
+                        <li class="list-group-item list-group-item-success">Classifier</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{> master}}
