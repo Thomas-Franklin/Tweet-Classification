@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Generic mapper to map database result sets to a Java object
- *
+ * <p>
  * Reference: https://oprsteny.com/?p=900
  *
  * @param <T>

@@ -81,4 +81,15 @@ public class DashBoardOverviewResponse implements Serializable {
 
     this.totalTweets = totalTweets;
   }
+
+  public DashBoardOverviewResponse setAllToZero() {
+
+    this.totalClassifications = 0;
+    this.totalHashtags = 0;
+    this.totalNonRumours = 0;
+    this.totalRumours = 0;
+    this.totalTweets = 0;
+    this.totalUsernames = 0;
+    return this;
+  }
 }

@@ -20,6 +20,9 @@ import com.github.jknack.handlebars.io.TemplateLoader;
 public class HandleBarsTemplateRender implements TemplateRender {
 
   private static final Logger logger = LoggerFactory.getLogger(HandleBarsTemplateRender.class);
+  private static final String LIST_GROUP_COLOUR = "listGroupColour";
+  private static final String INCREMENT_INDEX = "increment";
+
 
   private final Handlebars handlebars;
 
@@ -28,6 +31,8 @@ public class HandleBarsTemplateRender implements TemplateRender {
     TemplateLoader loader = new ClassPathTemplateLoader("/templates", ".hbs");
 
     handlebars = new Handlebars(loader)
+        .registerHelper(LIST_GROUP_COLOUR, listGroupColourHelper())
+        .registerHelper(INCREMENT_INDEX, indexIncreaseHelper())
         .with(new ConcurrentMapTemplateCache());
   }
 
@@ -39,5 +44,15 @@ public class HandleBarsTemplateRender implements TemplateRender {
     } catch (IOException exception) {
       throw new RuntimeException(exception);
     }
+  }
+
+  private static Helper<Object> listGroupColourHelper() {
+
+    return ((context, options) -> options.param(0) ? "list-group-item-success" : "list-group-item-danger");
+  }
+
+  private static Helper<Object> indexIncreaseHelper() {
+
+    return (context, options) -> ((Integer) context + 1);
   }
 }

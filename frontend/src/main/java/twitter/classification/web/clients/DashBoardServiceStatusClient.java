@@ -47,6 +47,6 @@ public class DashBoardServiceStatusClient {
 
     Optional<DashBoardServiceStatusResponse> dashBoardServiceStatusResponseOptional = ProcessResponse.processResponse(response, DashBoardServiceStatusResponse.class);
 
-    return dashBoardServiceStatusResponseOptional.orElseGet(() -> new DashBoardServiceStatusResponse().setTwitterStreamIsRunning(false));
+    return dashBoardServiceStatusResponseOptional.orElseGet(DashBoardServiceStatusResponse::new);
   }
 }

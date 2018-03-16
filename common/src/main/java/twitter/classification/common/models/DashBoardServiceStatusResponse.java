@@ -1,25 +1,33 @@
 package twitter.classification.common.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class DashBoardServiceStatusResponse implements Serializable {
 
-  @JsonProperty("twitterStreamIsRunning")
-  private Boolean twitterStreamIsRunning;
+  @JsonProperty("serviceList")
+  private List<ServiceItem> serviceList;
 
   public DashBoardServiceStatusResponse() {
+
+    this.serviceList = new ArrayList<>();
   }
 
-  public Boolean getTwitterStreamIsRunning() {
+  public List<ServiceItem> getServiceList() {
 
-    return twitterStreamIsRunning;
+    return serviceList;
   }
 
-  public DashBoardServiceStatusResponse setTwitterStreamIsRunning(Boolean twitterStreamIsRunning) {
+  public void setServiceList(List<ServiceItem> serviceList) {
 
-    this.twitterStreamIsRunning = twitterStreamIsRunning;
-    return this;
+    this.serviceList = serviceList;
+  }
+
+  public void addServiceItem(ServiceItem serviceItem) {
+
+    this.serviceList.add(serviceItem);
   }
 }

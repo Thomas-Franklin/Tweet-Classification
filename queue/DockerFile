@@ -1,3 +1,1 @@
 FROM rabbitmq:3.7-management
-
-HEALTHCHECK --interval=15s --timeout=5s CMD bash -lc "rabbitmqctl node_health_check | grep -q '^Health check passed' || exit 1"

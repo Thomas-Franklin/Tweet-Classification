@@ -31,13 +31,11 @@ public class MySqlConnectionFactory implements ConnectionFactory {
 
       Class.forName("com.mysql.cj.jdbc.Driver");
       return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-    } catch (SQLException exception) {
+    } catch (Exception exception) {
 
       logger.error("Issue getting DB connection", exception);
-      throw new RuntimeException(exception);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
     }
+
+    return null;
   }
 }

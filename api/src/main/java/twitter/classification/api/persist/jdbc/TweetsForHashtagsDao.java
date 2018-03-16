@@ -1,32 +1,31 @@
 package twitter.classification.api.persist.jdbc;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import twitter.classification.api.persist.jdbc.models.DashBoardOverviewModel;
-import twitter.classification.api.persist.jdbc.queries.SelectDashBoardOverviewValuesDbQuery;
+import twitter.classification.api.persist.jdbc.models.HashTagsProcessedTweetsModel;
+import twitter.classification.api.persist.jdbc.queries.TweetsForHashtagDbQuery;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
-public class SelectDashBoardOverviewValuesDao {
+public class TweetsForHashtagsDao {
 
   private ConnectionManager connectionManager;
 
   @Inject
-  public SelectDashBoardOverviewValuesDao(ConnectionManager connectionManager) {
+  public TweetsForHashtagsDao(ConnectionManager connectionManager) {
 
     this.connectionManager = connectionManager;
   }
 
-  public List<DashBoardOverviewModel> select() {
+  public List<HashTagsProcessedTweetsModel> get(String hashtag) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());
 
     try {
 
-      return dbQueryRunner.executeQuery(new SelectDashBoardOverviewValuesDbQuery().buildQuery(), DashBoardOverviewModel.class);
+      return dbQueryRunner.executeQuery(new TweetsForHashtagDbQuery().buildQuery(), HashTagsProcessedTweetsModel.class, hashtag);
     } catch (Exception e) {
 
       e.printStackTrace();

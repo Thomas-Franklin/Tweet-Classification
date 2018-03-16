@@ -34,8 +34,10 @@ public class DbQueryRunner {
 
     try (PreparedStatement preparedStatement = preparedStatement(sql, params)) {
 
-      preparedStatement.executeUpdate();
-    } catch (SQLException exception) {
+      if (preparedStatement != null)
+        preparedStatement.executeUpdate();
+
+    } catch (Exception exception) {
 
       logger.error("Issue executing query, " + sql, exception);
     }
@@ -45,14 +47,17 @@ public class DbQueryRunner {
 
     try (PreparedStatement preparedStatement = preparedStatement(sql, params)) {
 
-      ResultSetMapper<T> resultSetMapper = new ResultSetMapper<>();
+      if (preparedStatement != null) {
+        ResultSetMapper<T> resultSetMapper = new ResultSetMapper<>();
 
-      return resultSetMapper.mapResultSetToClass(preparedStatement.executeQuery(), classToMap);
-    } catch (SQLException exception) {
+        return resultSetMapper.mapResultSetToClass(preparedStatement.executeQuery(), classToMap);
+      }
+    } catch (Exception exception) {
 
       logger.error("Issue executing query, " + sql, exception);
-      throw new SQLException(exception);
     }
+
+    return null;
   }
 
   /**
@@ -65,18 +70,22 @@ public class DbQueryRunner {
    */
   private PreparedStatement preparedStatement(String sql, Object... params) throws SQLException {
 
-    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    if (connection != null) {
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-    if (params != null) {
+      if (params != null) {
 
-      for (int param = 0; param < params.length; param++) {
+        for (int param = 0; param < params.length; param++) {
 
-        if (params[param] != null) {
-          preparedStatement.setObject(param + 1, params[param]);
+          if (params[param] != null) {
+            preparedStatement.setObject(param + 1, params[param]);
+          }
         }
       }
+
+      return preparedStatement;
     }
 
-    return preparedStatement;
+    return null;
   }
 }

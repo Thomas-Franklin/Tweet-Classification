@@ -9,11 +9,11 @@ import twitter.classification.common.persist.Entity;
 public class DashBoardOverviewModel {
 
   @Column(name = "count_of_rumours")
-  private BigDecimal countOfRumours;
+  private Long countOfRumours;
   @Column(name = "count_of_non_rumours")
-  private BigDecimal countOfNonRumours;
+  private Long countOfNonRumours;
   @Column(name = "total_count_of_classifications")
-  private BigDecimal totalCountOfClassifications;
+  private Long totalCountOfClassifications;
   @Column(name = "count_of_users")
   private Long countOfUsers;
   @Column(name = "count_of_hashtags")
@@ -21,17 +21,17 @@ public class DashBoardOverviewModel {
   @Column(name = "count_of_tweets")
   private Long countOfTweets;
 
-  public BigDecimal getCountOfRumours() {
+  public Long getCountOfRumours() {
 
     return countOfRumours;
   }
 
-  public BigDecimal getCountOfNonRumours() {
+  public Long getCountOfNonRumours() {
 
     return countOfNonRumours;
   }
 
-  public BigDecimal getTotalCountOfClassifications() {
+  public Long getTotalCountOfClassifications() {
 
     return totalCountOfClassifications;
   }

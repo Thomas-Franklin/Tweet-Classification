@@ -53,11 +53,16 @@ services:
       ./queue
     hostname: "queue"
     ports:
-      - "15672:15672"
-      - "5672:5672"
+      - "9004:15672"
+      - "9005:5672"
     environment:
       RABBITMQ_DEFAULT_USER: twitter
       RABBITMQ_DEFAULT_PASS: password
+    healthcheck:
+      test: "rabbitmqctl node_health_check | grep -q '^Health check passed' || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
   queue-reader:
     image: frolvlad/alpine-oraclejdk8:slim

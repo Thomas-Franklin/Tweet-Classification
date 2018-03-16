@@ -10,7 +10,6 @@ buildscript {
     }
 
     dependencies {
-        classpath 'gradle.plugin.aspectj:gradle-aspectj:0.1.6'
         classpath 'io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE'
     }
 }
@@ -21,7 +20,6 @@ allprojects {
     ext {
 
         // Dependencies versions
-        aspectjVersion = '1.8.12'
         handlebarsVersion = '4.0.6'
         guiceVersion = '4.1.0'
         jerseyMediaVersion = '2.6'
@@ -41,7 +39,6 @@ allprojects {
 subprojects {
     version null
 
-    apply plugin: 'aspectj.gradle'
     apply plugin: 'java'
     apply plugin: 'idea'
 

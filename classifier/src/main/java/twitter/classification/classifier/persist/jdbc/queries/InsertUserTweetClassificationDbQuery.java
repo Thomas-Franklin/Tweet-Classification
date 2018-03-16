@@ -4,6 +4,7 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class InsertUserTweetClassificationDbQuery implements DbQuery {
 
+  @Override
   public String buildQuery() {
 
     return "INSERT IGNORE INTO users_tweet_classifications " +

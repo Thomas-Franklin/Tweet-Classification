@@ -43,9 +43,9 @@ public class TwitterStreamClient {
           .request()
           .get();
 
-    } catch (Exception e) {
+    } catch (Exception exception) {
 
-      throw new ProcessingClientException(e);
+      return new TwitterStreamResponse().setRunning(false);
     }
 
     Optional<TwitterStreamResponse> twitterStreamOptional = ProcessResponse.processResponse(response, TwitterStreamResponse.class);

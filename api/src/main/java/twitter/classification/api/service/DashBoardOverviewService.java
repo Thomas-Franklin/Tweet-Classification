@@ -24,7 +24,7 @@ public class DashBoardOverviewService {
 
     List<DashBoardOverviewModel> dashBoardOverviewModels = selectDashBoardOverviewValuesDao.select();
 
-    if (!dashBoardOverviewModels.isEmpty()) {
+    if (dashBoardOverviewModels != null && !dashBoardOverviewModels.isEmpty()) {
 
       DashBoardOverviewModel dashBoardOverviewModel = dashBoardOverviewModels.get(0);
 
@@ -40,6 +40,6 @@ public class DashBoardOverviewService {
       return dashBoardOverviewResponse;
     }
 
-    return null;
+    return new DashBoardOverviewResponse().setAllToZero();
   }
 }

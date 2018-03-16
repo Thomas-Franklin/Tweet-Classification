@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import twitter.classification.common.exceptions.ProcessingClientException;
 import twitter.classification.common.models.DashBoardOverviewResponse;
+import twitter.classification.common.models.DashBoardServiceStatusResponse;
 import twitter.classification.web.clients.DashBoardOverviewClient;
 import twitter.classification.web.clients.DashBoardServiceStatusClient;
 import twitter.classification.web.render.TemplateRender;
@@ -32,6 +33,7 @@ public class DashBoardResource {
   private static String TOTAL_NON_RUMOURS = "totalNonRumours";
   private static String TOTAL_USERNAMES = "totalUsernames";
   private static String TOTAL_CLASSIFICATIONS = "totalClassifications";
+  private static String SERVICES_LIST = "serviceList";
 
   private TemplateRender templateRender;
   private DashBoardOverviewClient dashBoardOverviewClient;
@@ -67,9 +69,11 @@ public class DashBoardResource {
       map.put(TOTAL_RUMOURS, dashBoardOverviewResponse.getTotalRumours());
       map.put(TOTAL_TWEETS, dashBoardOverviewResponse.getTotalTweets());
       map.put(TOTAL_USERNAMES, dashBoardOverviewResponse.getTotalUsernames());
-
-      logger.info("Twitter stream is: {}", dashBoardServiceStatusClient.get().getTwitterStreamIsRunning());
     }
+
+    DashBoardServiceStatusResponse dashBoardServiceStatusResponseOptional = dashBoardServiceStatusClient.get();
+
+    map.put(SERVICES_LIST, dashBoardServiceStatusResponseOptional.getServiceList());
 
     return templateRender.render("dashboard", map);
   }

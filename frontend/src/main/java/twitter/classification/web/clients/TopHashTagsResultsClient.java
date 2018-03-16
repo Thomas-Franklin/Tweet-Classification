@@ -9,33 +9,27 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import twitter.classification.common.exceptions.ProcessingClientException;
-import twitter.classification.common.models.DashBoardOverviewResponse;
+import twitter.classification.common.models.TopHashtagsResponse;
 import twitter.classification.common.system.ConfigurationVariable;
 import twitter.classification.common.system.helper.ConfigurationVariableParam;
 import twitter.classification.common.tweetdetails.processing.ProcessResponse;
 
-public class DashBoardOverviewClient {
-
-  private static final Logger logger = LoggerFactory.getLogger(DashBoardOverviewClient.class);
+public class TopHashTagsResultsClient {
 
   private Client client;
   private String uri;
 
   @Inject
-  public DashBoardOverviewClient(
-      @ConfigurationVariableParam(variable = ConfigurationVariable.DASHBOARD_OVERVIEW_URI) String uri
-  ) {
+  public TopHashTagsResultsClient(@ConfigurationVariableParam(variable = ConfigurationVariable.TOP_HASHTAGS_RESULTS_URI) String uri) {
 
     this.uri = uri;
-    this.client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
+    this.client = ClientBuilder.newClient(new ClientConfig(new JacksonJsonProvider()));
   }
 
-  public Optional<DashBoardOverviewResponse> fetch() throws ProcessingClientException {
+  public TopHashtagsResponse get() throws ProcessingClientException {
 
     Response response;
 
@@ -46,11 +40,13 @@ public class DashBoardOverviewClient {
       response = client.target(webTarget.getUri())
           .request()
           .get();
-    } catch (Exception exception) {
+    } catch (Exception e) {
 
-      throw new ProcessingClientException(exception);
+      throw new ProcessingClientException(e);
     }
 
-    return ProcessResponse.processResponse(response, DashBoardOverviewResponse.class);
+    Optional<TopHashtagsResponse> topHashtagsResponseOptional = ProcessResponse.processResponse(response, TopHashtagsResponse.class);
+
+    return topHashtagsResponseOptional.orElseGet(TopHashtagsResponse::new);
   }
 }

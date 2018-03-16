@@ -2,6 +2,7 @@ package twitter.classification.preprocessor.resource;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.common.exceptions.ProcessingClientException;
+import twitter.classification.common.models.PreProcessorStatusResponse;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
 import twitter.classification.common.tweetdetails.model.ProcessedStatusResponse;
 import twitter.classification.common.tweetdetails.processing.TweetBodyProcessor;
@@ -82,5 +84,13 @@ public class ReceiveTweetStatusResource {
     }
 
     return processedStatusResponse;
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/status")
+  public PreProcessorStatusResponse getPreProcessorStatus() {
+
+    return new PreProcessorStatusResponse().setRunning(true);
   }
 }

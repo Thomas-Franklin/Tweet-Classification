@@ -1,4 +1,4 @@
-package twitter.classification.web.clients;
+package twitter.classification.api.client;
 
 import java.util.Optional;
 
@@ -9,48 +9,47 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import twitter.classification.common.exceptions.ProcessingClientException;
-import twitter.classification.common.models.DashBoardOverviewResponse;
+import twitter.classification.common.models.PreProcessorStatusResponse;
 import twitter.classification.common.system.ConfigurationVariable;
 import twitter.classification.common.system.helper.ConfigurationVariableParam;
 import twitter.classification.common.tweetdetails.processing.ProcessResponse;
 
-public class DashBoardOverviewClient {
-
-  private static final Logger logger = LoggerFactory.getLogger(DashBoardOverviewClient.class);
+public class PreProcessorStatusClient {
 
   private Client client;
   private String uri;
 
   @Inject
-  public DashBoardOverviewClient(
-      @ConfigurationVariableParam(variable = ConfigurationVariable.DASHBOARD_OVERVIEW_URI) String uri
+  public PreProcessorStatusClient(
+      @ConfigurationVariableParam(variable = ConfigurationVariable.PRE_PROCESSOR_STATUS_URI) String uri
   ) {
 
-    this.uri = uri;
     this.client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
+    this.uri = uri;
   }
 
-  public Optional<DashBoardOverviewResponse> fetch() throws ProcessingClientException {
+  public PreProcessorStatusResponse isRunning() throws ProcessingClientException {
 
     Response response;
 
     try {
 
-      WebTarget webTarget = client.target(uri);
+      WebTarget target = client.target(uri);
 
-      response = client.target(webTarget.getUri())
+      response = client.target(target.getUri())
           .request()
           .get();
+
     } catch (Exception exception) {
 
-      throw new ProcessingClientException(exception);
+      return new PreProcessorStatusResponse().setRunning(false);
     }
 
-    return ProcessResponse.processResponse(response, DashBoardOverviewResponse.class);
+    Optional<PreProcessorStatusResponse> preProcessorStatusResponseOptional = ProcessResponse.processResponse(response, PreProcessorStatusResponse.class);
+
+    return preProcessorStatusResponseOptional.orElseGet(() -> new PreProcessorStatusResponse().setRunning(false));
   }
 }

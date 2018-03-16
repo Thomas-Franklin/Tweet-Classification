@@ -72,13 +72,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Service Status</h5>
+                    <hr>
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-success">Frontend</li>
-                        <li class="list-group-item list-group-item-success">API</li>
-                        <li class="list-group-item list-group-item-success">Database</li>
-                        <li class="list-group-item list-group-item-success">Twitter Stream</li>
-                        <li class="list-group-item list-group-item-success">Message Queue</li>
-                        <li class="list-group-item list-group-item-success">Classifier</li>
+                        {{#each serviceList}}
+                            <li class="list-group-item {{{listGroupColour this this.running}}}">{{this.serviceName}}</li>
+                        {{/each}}
                     </ul>
                 </div>
             </div>
