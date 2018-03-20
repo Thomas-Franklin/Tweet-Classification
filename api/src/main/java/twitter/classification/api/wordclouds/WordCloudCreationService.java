@@ -18,24 +18,26 @@ import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
 
-public class WordCloudCreation {
+public class WordCloudCreationService {
 
   private FrequencyAnalyzer frequencyAnalyzer;
   private Dimension dimension;
   private WordCloud wordCloud;
 
-  public WordCloudCreation() {
+  public WordCloudCreationService() {
+
+    dimension = new Dimension(200, 200);
+    wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
+    wordCloud.setPadding(1);
+    wordCloud.setBackground(new CircleBackground(100));
+    wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFFFFFF)));
+    wordCloud.setFontScalar(new SqrtFontScalar(10, 40));
   }
 
   public String base64String(List<String> tweets) throws IOException {
 
     frequencyAnalyzer = new FrequencyAnalyzer();
-    dimension = new Dimension(300, 300);
-    wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
-    wordCloud.setPadding(1);
-    wordCloud.setBackground(new CircleBackground(150));
-    wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFFFFFF)));
-    wordCloud.setFontScalar(new SqrtFontScalar(10, 40));    List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(tweets);
+    List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(tweets);
     wordCloud.build(wordFrequencies);
 
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

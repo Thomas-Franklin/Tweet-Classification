@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
-import com.kennycason.kumo.WordCloud;
 import twitter.classification.api.client.ClassifierStatusClient;
 import twitter.classification.api.client.PreProcessorStatusClient;
 import twitter.classification.api.client.TwitterStreamClient;
@@ -15,7 +14,6 @@ import twitter.classification.api.persist.jdbc.TweetsForHashtagsDao;
 import twitter.classification.api.service.DashBoardOverviewService;
 import twitter.classification.api.service.DashBoardServicesStatusService;
 import twitter.classification.api.service.TopHashTagResultService;
-import twitter.classification.api.wordclouds.WordCloudCreation;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.DbConnectionResolver;
 
@@ -25,8 +23,6 @@ public class ServicesBinder extends AbstractBinder {
   protected void configure() {
 
     bind(ConnectionManager.class).to(ConnectionManager.class).in(Singleton.class);
-
-    bind(WordCloudCreation.class).to(WordCloudCreation.class);
 
     bind(TwitterStreamClient.class).to(TwitterStreamClient.class);
     bind(ClassifierStatusClient.class).to(ClassifierStatusClient.class);

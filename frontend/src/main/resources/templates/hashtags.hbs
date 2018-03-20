@@ -5,21 +5,48 @@
         <div class="visualisation-boards">
             <ul class="nav nav-tabs mr-auto d-none" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" role="tab" data-toggle="tab" href="#default">default</a>
+                    <a class="nav-link" role="tab" data-toggle="tab"
+                       href="#default">Default Tab</a>
                 </li>
                 {{#each hashtagResultsList}}
                 <li class="nav-item">
-                    <a class="nav-link" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}">{{this.hashtagValue}}</a>
+                    <a class="nav-link" role="tab" data-toggle="tab"
+                       href="#{{this.hashtagValue}}">{{this.hashtagValue}}</a>
                 </li>
                 {{/each}}
             </ul>
             <div class="tab-content">
                 <div id="default" class="container tab-pane active"><br>
-                    <p>Please select a hashtag</p>
+                    <h5>Top Hashtags</h5>
+                    <p>The hashtags classifications will be displayed using various techniques, such as word clouds,
+                        charts etc.</p>
+                    <p>In the table on the right, please select the one you wish to view.</p>
                 </div>
                 {{#each hashtagResultsList}}
                 <div id="{{this.hashtagValue}}" class="container tab-pane fade"><br>
-                    <img src='data:image/png;base64,{{this.base64WordCloudImage}}' />
+                    <div class="tabs-x align-center tabs-above tab-bordered">
+                        <ul class="nav nav-tabs mr-auto" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="{{this.hashtagValue}}WordCloudTab" role="tab"
+                                   data-toggle="tab" href="#{{this.hashtagValue}}WordCloud"
+                                   aria-controls="{{this.hashtagValue}}WordCloud" aria-expanded="true">Word Cloud</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="{{this.hashtagValue}}ChartTab" role="tab" data-toggle="tab"
+                                   href="#{{this.hashtagValue}}Chart"
+                                   data-target="#{{this.hashtagValue}}Chart">Chart</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="{{this.hashtagValue}}WordCloud" class="container tab-pane fade show active"><br>
+                                <img width="100%" src='data:image/png;base64,{{this.base64WordCloudImage}}'/>
+                            </div>
+                            <div id="{{this.hashtagValue}}Chart" class="container tab-pane fade"
+                                 aria-labelledby="{{this.hashtagValue}}ChartTab"><br>
+                                <h2>Chart for {{this.hashtagValue}}</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {{/each}}
             </div>
@@ -34,9 +61,8 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Rank</th>
                             <th scope="col">Hashtag</th>
-                            <th scope="col">%</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -49,11 +75,11 @@
                                     <label for="{{this.hashtagValue}}RadioInput">{{this.hashtagValue}}</label>
                                 </div>
                             </td>
-                            <td></td>
                             <td>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" id="{{this.hashtagValue}}RadioInput" name="hashtagRadioGroup"
+                                        <input type="radio" id="{{this.hashtagValue}}RadioInput"
+                                               name="hashtagRadioGroup"
                                                data-target="#{{this.hashtagValue}}">
                                     </label>
                                 </div>
@@ -71,10 +97,9 @@
 <script>
     $('input[name="hashtagRadioGroup"]').click(function () {
         var target = $(this).data("target");
-        console.log($("a[href='"+target+"']"));
-        $("a[href='"+target+"']").tab('show');
+        $("a[href='" + target + "']").tab('show');
     });
 </script>
 
 {{/partial}}
-{{> master}}
+{{> master path="hashtags"}}

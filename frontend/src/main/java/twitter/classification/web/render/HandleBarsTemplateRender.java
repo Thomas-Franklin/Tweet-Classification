@@ -1,11 +1,6 @@
 package twitter.classification.web.render;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +15,10 @@ import com.github.jknack.handlebars.io.TemplateLoader;
 public class HandleBarsTemplateRender implements TemplateRender {
 
   private static final Logger logger = LoggerFactory.getLogger(HandleBarsTemplateRender.class);
+
   private static final String LIST_GROUP_COLOUR = "listGroupColour";
   private static final String INCREMENT_INDEX = "increment";
-
+  private static final String PATH_IS_ACTIVE = "pathIsActive";
 
   private final Handlebars handlebars;
 
@@ -32,7 +28,8 @@ public class HandleBarsTemplateRender implements TemplateRender {
 
     handlebars = new Handlebars(loader)
         .registerHelper(LIST_GROUP_COLOUR, listGroupColourHelper())
-        .registerHelper(INCREMENT_INDEX, indexIncreaseHelper())
+        .registerHelper(INCREMENT_INDEX, rankIncreaseHelper())
+        .registerHelper(PATH_IS_ACTIVE, HandleBarsTemplateRender::pathEqualsHelper)
         .with(new ConcurrentMapTemplateCache());
   }
 
@@ -51,8 +48,31 @@ public class HandleBarsTemplateRender implements TemplateRender {
     return ((context, options) -> options.param(0) ? "list-group-item-success" : "list-group-item-danger");
   }
 
-  private static Helper<Object> indexIncreaseHelper() {
+  private static Helper<Object> rankIncreaseHelper() {
 
     return (context, options) -> ((Integer) context + 1);
+  }
+
+  /**
+   * Helper to highlight which navigation tab
+   * is highlighted depending on users paths
+   *
+   * @param context {@link Object} this is the context of the handlebars page
+   * @param options {@link Options} Options that are passed to the helper such as current path and comparator
+   * @return {@link String} either active or nothing to highlight the tabs
+   */
+  private static String pathEqualsHelper(Object context, Options options) {
+
+    if (options.param(0) == null) {
+
+      return "";
+    }
+
+    if (options.param(0).equals(options.param(1))) {
+
+      return "active";
+    }
+
+    return "";
   }
 }
