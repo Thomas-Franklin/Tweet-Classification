@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import cc.mallet.classify.Classification;
 import cc.mallet.classify.Classifier;
-import cc.mallet.types.Label;
 
 public class NaiveBayesClassifier {
 
@@ -20,15 +19,10 @@ public class NaiveBayesClassifier {
   public NaiveBayesClassifier() {
   }
 
-  public NaiveBayesClassifier(Classifier classifier) {
-
-    this.classifier = classifier;
-  }
-
   /**
    * Assumes that a classifier has been trained and
    * serialised to disk and stored in WEB-INF/classes/trained-classifier/classifier.txt
-   *
+   * <p>
    * Can use TrainClassifier to train and serialise a classifier to disk
    *
    * @return NaiveBayesClassifier
@@ -62,8 +56,8 @@ public class NaiveBayesClassifier {
    * Uses the trained classifier to return the
    * label for the passed tweet body
    *
-   * @param tweet String
-   * @return Label
+   * @param tweet {@link String}
+   * @return {@link String} Label
    */
   public String classifyTweet(String tweet) {
 

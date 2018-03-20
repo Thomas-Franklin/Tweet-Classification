@@ -2,6 +2,8 @@ package twitter.classification.classifier.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -11,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cc.mallet.classify.Classifier;
-import cc.mallet.classify.ClassifierTrainer;
 import cc.mallet.classify.NaiveBayesTrainer;
 import cc.mallet.classify.Trial;
 import cc.mallet.pipe.CharSequence2TokenSequence;
@@ -23,6 +24,7 @@ import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.pipe.iterator.CsvIterator;
 import cc.mallet.types.InstanceList;
 import cc.mallet.util.Randoms;
+import twitter.classification.classifier.application.TrainClassifier;
 
 public class NaiveBayesClassifierTest {
 
@@ -31,15 +33,16 @@ public class NaiveBayesClassifierTest {
   private static int N_FOLD_AMOUNT = 10;
 
   private Classifier classifier;
-  InstanceList trainingInstanceList;
+  private InstanceList trainingInstanceList;
 
 
   @Before
-  public void setup() throws FileNotFoundException {
+  public void setup() throws IOException, URISyntaxException {
 
-
-    // Due to the loading of files etc. have to mimic the behaviour rather than calling the trained classifier.
+    TrainClassifier trainClassifier = new TrainClassifier(true);
     FileReader fileReader = getFileReader();
+
+    classifier = trainClassifier.trainNaiveBayesClassifier();
 
     ArrayList<Pipe> pipes = new ArrayList<>();
 
@@ -54,11 +57,18 @@ public class NaiveBayesClassifierTest {
     // file is format of non-rumour|rumour, data
     trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(non-rumour|rumour), (.*)", 2, 1, -1));
 
-    ClassifierTrainer trainer = new NaiveBayesTrainer();
-    classifier = trainer.train(trainingInstanceList);
   }
 
   @Test
+  public void testThatRumourAndNonRumour_areTheOnlyLabels() {
+
+    Assert.assertEquals("Possible labels is not 2",2, classifier.getLabelAlphabet().size());
+    Assert.assertTrue(classifier.getLabelAlphabet().lookupLabel(0).toString().equals("rumour"));
+    Assert.assertTrue(classifier.getLabelAlphabet().lookupLabel(1).toString().equals("non-rumour"));
+  }
+
+  @Test
+  @SuppressWarnings("Duplicates")
   public void evaluateClassifier() throws FileNotFoundException {
 
     InstanceList testInstances = new InstanceList(classifier.getInstancePipe());
