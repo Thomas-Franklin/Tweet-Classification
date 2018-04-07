@@ -27,7 +27,7 @@ public class NaiveBayesClassifier {
    *
    * @return NaiveBayesClassifier
    */
-  public Classifier trainTheClassifier() {
+  public Classifier assignClassifierFromDisc() {
 
     ObjectInputStream objectInputStream = null;
     try {

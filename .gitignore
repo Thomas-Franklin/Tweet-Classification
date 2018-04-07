@@ -12,3 +12,4 @@ configuration.txt
 *.txt
 ~$*
 classes/
+*.model

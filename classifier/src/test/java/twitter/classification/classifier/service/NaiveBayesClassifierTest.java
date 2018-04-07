@@ -56,7 +56,6 @@ public class NaiveBayesClassifierTest {
 
     // file is format of non-rumour|rumour, data
     trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(non-rumour|rumour), (.*)", 2, 1, -1));
-
   }
 
   @Test

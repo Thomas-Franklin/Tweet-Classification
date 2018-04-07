@@ -24,12 +24,18 @@ import cc.mallet.pipe.iterator.CsvIterator;
 import cc.mallet.types.InstanceList;
 
 /**
- * For training a new classifier and serialising to disk
+ * For training a new classifier and serialising to disk using Mallet
  */
 public class TrainClassifier {
 
   private static boolean isTestingMode = false;
 
+  /**
+   * Main method to manually train the classifiers
+   *
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
 
     TrainClassifier testClassifier = new TrainClassifier(false);
@@ -38,6 +44,10 @@ public class TrainClassifier {
     testClassifier.trainMaxEntClassifier();
   }
 
+  /**
+   * @param testing param to signify if the class is used for testing mode, as no need to serialise a new object
+   *                to disc if testing the classifier
+   */
   public TrainClassifier(boolean testing) {
 
     isTestingMode = testing;
@@ -77,6 +87,7 @@ public class TrainClassifier {
 
     File classifierFile = new File(Paths.get("classifier/src/main/webapp/WEB-INF/classes/trained-classifier/max-ent-classifier.txt").toUri());
 
+    // safety to only have one file
     if (!classifierFile.exists()) {
       classifierFile.createNewFile();
     } else {
@@ -126,6 +137,7 @@ public class TrainClassifier {
 
     File classifierFile = new File(Paths.get("classifier/src/main/webapp/WEB-INF/classes/trained-classifier/classifier.txt").toUri());
 
+    // safety to only have one file
     if (!classifierFile.exists()) {
       classifierFile.createNewFile();
     } else {

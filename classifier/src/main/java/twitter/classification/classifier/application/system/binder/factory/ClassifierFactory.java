@@ -13,7 +13,7 @@ public class ClassifierFactory implements BaseFactory<NaiveBayesClassifier> {
   public ClassifierFactory() {
 
     classifier = new NaiveBayesClassifier();
-    classifier.trainTheClassifier();
+    classifier.assignClassifierFromDisc();
   }
 
   @Override
