@@ -13,10 +13,6 @@ public class DatasetLoader {
 
   public Instances getInstancesFromFileDirectory() throws IOException {
 
-    File datasetFile = Paths.get(DATASET_FILE_LOCATION).toFile();
-
-    System.out.println("Dataset file is: " + datasetFile.exists());
-
     TextDirectoryLoader textDirectoryLoader = new TextDirectoryLoader();
     textDirectoryLoader.setDirectory(Paths.get(DATASET_FILE_LOCATION).toFile());
 

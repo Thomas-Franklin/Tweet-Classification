@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import twitter.classification.classifier.application.system.binder.factory.ClassifierFactory;
+import twitter.classification.classifier.service.TrainedClassifier;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.DbConnectionResolver;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagTweetClassificationDao;
@@ -17,14 +18,14 @@ import twitter.classification.classifier.service.InsertHashtagEntitiesService;
 import twitter.classification.classifier.service.InsertTweetsService;
 import twitter.classification.classifier.service.InsertUserTweetClassificationService;
 import twitter.classification.classifier.service.InsertUsersService;
-import twitter.classification.classifier.service.NaiveBayesClassifier;
+import twitter.classification.classifier.service.mallet.NaiveBayesClassifier;
 
 public class ServicesBinder extends AbstractBinder {
 
   @Override
   protected void configure() {
 
-    bindFactory(ClassifierFactory.class).to(NaiveBayesClassifier.class);
+    bindFactory(ClassifierFactory.class).to(TrainedClassifier.class);
 
     bind(ConnectionManager.class).to(ConnectionManager.class).in(Singleton.class);
 

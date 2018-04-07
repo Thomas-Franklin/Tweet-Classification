@@ -1,4 +1,4 @@
-package twitter.classification.classifier.service;
+package twitter.classification.classifier.service.mallet;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,7 +24,7 @@ import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.pipe.iterator.CsvIterator;
 import cc.mallet.types.InstanceList;
 import cc.mallet.util.Randoms;
-import twitter.classification.classifier.application.TrainClassifier;
+import twitter.classification.classifier.mallet.classifier.TrainClassifier;
 
 public class NaiveBayesClassifierTest {
 

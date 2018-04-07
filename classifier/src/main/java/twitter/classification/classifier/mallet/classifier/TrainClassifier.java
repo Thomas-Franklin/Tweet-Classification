@@ -1,4 +1,4 @@
-package twitter.classification.classifier.application;
+package twitter.classification.classifier.mallet.classifier;
 
 import java.io.File;
 import java.io.FileNotFoundException;

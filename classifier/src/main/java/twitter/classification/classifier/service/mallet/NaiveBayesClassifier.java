@@ -1,4 +1,4 @@
-package twitter.classification.classifier.service;
+package twitter.classification.classifier.service.mallet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,8 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import cc.mallet.classify.Classification;
 import cc.mallet.classify.Classifier;
+import twitter.classification.classifier.service.TrainedClassifier;
 
-public class NaiveBayesClassifier {
+/**
+ * A NaiveBayes classifier using the Mallet library
+ */
+public class NaiveBayesClassifier implements TrainedClassifier {
 
   private static final Logger logger = LoggerFactory.getLogger(NaiveBayesClassifier.class);
 
@@ -27,6 +31,7 @@ public class NaiveBayesClassifier {
    *
    * @return NaiveBayesClassifier
    */
+  @Override
   public Classifier assignClassifierFromDisc() {
 
     ObjectInputStream objectInputStream = null;
@@ -59,6 +64,7 @@ public class NaiveBayesClassifier {
    * @param tweet {@link String}
    * @return {@link String} Label
    */
+  @Override
   public String classifyTweet(String tweet) {
 
     Classification classification = classifier.classify(tweet);

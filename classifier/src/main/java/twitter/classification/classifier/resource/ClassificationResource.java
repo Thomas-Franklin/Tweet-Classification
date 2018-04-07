@@ -15,7 +15,8 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.classifier.service.HandleProcessedTweetService;
-import twitter.classification.classifier.service.NaiveBayesClassifier;
+import twitter.classification.classifier.service.TrainedClassifier;
+import twitter.classification.classifier.service.mallet.NaiveBayesClassifier;
 import twitter.classification.common.models.ClassifierStatusResponse;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
@@ -27,12 +28,12 @@ public class ClassificationResource {
 
   private static final Logger logger = LoggerFactory.getLogger(ClassificationResource.class);
 
-  private NaiveBayesClassifier classifier;
+  private TrainedClassifier classifier;
   private HandleProcessedTweetService handleProcessedTweetService;
 
   @Inject
   public ClassificationResource(
-      NaiveBayesClassifier classifier,
+      TrainedClassifier classifier,
       HandleProcessedTweetService handleProcessedTweetService
   ) {
 
