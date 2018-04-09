@@ -76,7 +76,6 @@ public class ReceiveTweetStatusResource {
 
       classificationClient.postProcessedTweetItem(new ObjectMapper().writeValueAsString(preProcessedItem));
 
-
     } catch (TwitterException e) {
       logger.error("Issue creating status from tweet details", e);
     } catch (ProcessingClientException | JsonProcessingException e) {

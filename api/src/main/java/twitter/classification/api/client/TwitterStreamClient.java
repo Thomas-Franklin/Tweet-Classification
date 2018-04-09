@@ -50,6 +50,6 @@ public class TwitterStreamClient {
 
     Optional<TwitterStreamResponse> twitterStreamOptional = ProcessResponse.processResponse(response, TwitterStreamResponse.class);
 
-    return twitterStreamOptional.orElseGet(() -> new TwitterStreamResponse().setRunning(false));
+    return twitterStreamOptional.orElseGet(() -> new TwitterStreamResponse().setRunning(false).setFilterList(null));
   }
 }

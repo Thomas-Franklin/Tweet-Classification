@@ -32,6 +32,13 @@ public class ClassificationClient {
     this.uri = uri;
   }
 
+  /**
+   * Method to post the processed item to the classifier for classification purposes
+   *
+   * @param processedItem
+   * @return {@link Optional<ClassificationModel>}
+   * @throws ProcessingClientException
+   */
   public Optional<ClassificationModel> postProcessedTweetItem(String processedItem) throws ProcessingClientException {
 
     Response response;

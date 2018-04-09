@@ -21,7 +21,7 @@ public class ClassificationCodeFromValueTest {
   @DataProvider
   public static Object[][] dataProviderValueAndCodes() {
 
-    return new Object[][] {
+    return new Object[][]{
         {"RMR", "rumour", "When value is rumour, RMR should be returned"},
         {"NOR", "non-rumour", "When value is non-rumour, NOR should be returned"},
         {"UDF", "n-rumour", "When value is neither, UFD should be returned"},

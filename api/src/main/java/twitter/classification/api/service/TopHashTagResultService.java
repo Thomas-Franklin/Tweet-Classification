@@ -35,7 +35,7 @@ public class TopHashTagResultService {
    * Will return the top hashtags results where it will
    * contain the Word Cloud image, Chart etc. as Base64 strings
    * which will be rendered in the HTML.
-   *
+   * <p>
    * Will also contain data about the count of rumours etc.
    *
    * @return {@link TopHashtagsResponse}

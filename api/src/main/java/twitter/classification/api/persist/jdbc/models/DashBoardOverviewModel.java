@@ -1,7 +1,5 @@
 package twitter.classification.api.persist.jdbc.models;
 
-import java.math.BigDecimal;
-
 import twitter.classification.common.persist.Column;
 import twitter.classification.common.persist.Entity;
 

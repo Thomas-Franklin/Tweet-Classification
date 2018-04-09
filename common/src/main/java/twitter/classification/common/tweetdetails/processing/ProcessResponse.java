@@ -11,13 +11,13 @@ public class ProcessResponse {
 
   /**
    * Generic response processor for processing http responses, used
-   * by my clients in the various clients, as the only thing
+   * by clients in the various services, as the only thing
    * that changes in processing is the type of class which needs to
    * be read
    *
    * @param response Response
-   * @param clazz genericClazz
-   * @param <T> genericClazz
+   * @param clazz    genericClazz
+   * @param <T>      genericClazz
    * @return <T>
    * @throws ProcessingClientException When processing fails
    */

@@ -61,7 +61,7 @@ public class NaiveBayesClassifierTest {
   @Test
   public void testThatRumourAndNonRumour_areTheOnlyLabels() {
 
-    Assert.assertEquals("Possible labels is not 2",2, classifier.getLabelAlphabet().size());
+    Assert.assertEquals("Possible labels is not 2", 2, classifier.getLabelAlphabet().size());
     Assert.assertTrue(classifier.getLabelAlphabet().lookupLabel(0).toString().equals("rumour"));
     Assert.assertTrue(classifier.getLabelAlphabet().lookupLabel(1).toString().equals("non-rumour"));
   }

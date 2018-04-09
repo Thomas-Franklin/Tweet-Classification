@@ -14,9 +14,12 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.common.exceptions.ProcessingClientException;
 import twitter.classification.common.models.DashBoardOverviewResponse;
 import twitter.classification.common.models.DashBoardServiceStatusResponse;
+import twitter.classification.common.models.ServiceItem;
 import twitter.classification.web.clients.DashBoardOverviewClient;
 import twitter.classification.web.clients.DashBoardServiceStatusClient;
 import twitter.classification.web.render.TemplateRender;
@@ -27,6 +30,7 @@ public class DashBoardResource {
 
   private static final Logger logger = LoggerFactory.getLogger(DashBoardResource.class);
 
+  private static final String FILTER_LIST = "filterList";
   private static String TOTAL_TWEETS = "totalTweets";
   private static String TOTAL_HASHTAGS = "totalHashtags";
   private static String TOTAL_RUMOURS = "totalRumours";
@@ -53,7 +57,7 @@ public class DashBoardResource {
 
   @GET
   @Produces(MediaType.TEXT_HTML)
-  public String homePage() throws ProcessingClientException {
+  public String homePage() throws ProcessingClientException, JsonProcessingException {
 
     Optional<DashBoardOverviewResponse> dashBoardOverviewOptional = dashBoardOverviewClient.fetch();
 
@@ -74,6 +78,14 @@ public class DashBoardResource {
     DashBoardServiceStatusResponse dashBoardServiceStatusResponseOptional = dashBoardServiceStatusClient.get();
 
     map.put(SERVICES_LIST, dashBoardServiceStatusResponseOptional.getServiceList());
+
+    for (ServiceItem serviceItem : dashBoardServiceStatusResponseOptional.getServiceList()) {
+
+      if (serviceItem.getFilterList() != null && !serviceItem.getFilterList().isEmpty()) {
+        map.put(FILTER_LIST, serviceItem.getFilterList().split(","));
+        break;
+      }
+    }
 
     return templateRender.render("dashboard", map);
   }

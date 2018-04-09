@@ -9,20 +9,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import twitter.classification.classifier.integration.DbIntegrationHelper;
-import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagTweetClassificationDao;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagsDao;
 import twitter.classification.classifier.persist.jdbc.InsertTweetsDao;
 import twitter.classification.classifier.persist.jdbc.InsertUserTweetClassificationDao;
 import twitter.classification.classifier.persist.jdbc.InsertUsersDao;
+import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
 import twitter.classification.common.tweetdetails.model.ProcessedTweetModel;
 import twitter.classification.common.tweetdetails.processing.TweetBodyProcessor;
 
 import static twitter.classification.classifier.util.RandomDataUtil.randomClassificationValue;
 import static twitter.classification.classifier.util.RandomDataUtil.randomHashtagList;
-import static twitter.classification.classifier.util.RandomDataUtil.randomTweetBody;
 import static twitter.classification.classifier.util.RandomDataUtil.randomId;
+import static twitter.classification.classifier.util.RandomDataUtil.randomTweetBody;
 import static twitter.classification.classifier.util.RandomDataUtil.randomUsername;
 
 public class HandleProcessedTweetServiceTest {

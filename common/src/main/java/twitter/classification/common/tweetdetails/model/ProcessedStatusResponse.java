@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 public class ProcessedStatusResponse implements Serializable {
 
   @JsonProperty("tweet_body")

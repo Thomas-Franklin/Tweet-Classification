@@ -1,6 +1,5 @@
 package twitter.classification.api.persist.jdbc;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;

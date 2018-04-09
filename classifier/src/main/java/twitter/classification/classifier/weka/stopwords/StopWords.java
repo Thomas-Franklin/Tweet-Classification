@@ -7,7 +7,7 @@ import weka.core.stopwords.WordsFromFile;
 
 /**
  * Using a list of stop words gathered from the following source:
- *
+ * <p>
  * https://github.com/igorbrigadir/stopwords/blob/master/en/weka.txt
  */
 public class StopWords {

@@ -12,55 +12,37 @@ import org.slf4j.LoggerFactory;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import twitter.classification.common.models.TwitterStreamResponse;
 import twitter.classification.common.system.ConfigurationVariable;
 import twitter.classification.common.system.helper.ConfigurationVariableParam;
 import twitter.classification.stream.listener.NewTweetListener;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
-import twitter4j.TwitterStreamFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 @Singleton
 @Path("/stream")
 public class StreamTweetsResource {
 
-  public static Channel channel;
-
   private static final Logger logger = LoggerFactory.getLogger(StreamTweetsResource.class);
 
   private static boolean isRunning = false;
-  private static TwitterStream twitterStream;
+
+  private TwitterStream twitterStream;
+  private String filterList;
+
+  public static Channel channel;
 
   @Inject
   public StreamTweetsResource(
-      @ConfigurationVariableParam(variable = ConfigurationVariable.TWITTER_OAUTH_ACCESS_KEY) String oauthAccessKey,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.TWITTER_OAUTH_ACCESS_SECRET) String oauthAccessSecret,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.TWITTER_OAUTH_CONSUMER_KEY) String oauthConsumerKey,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.TWITTER_OAUTH_CONSUMER_SECRET) String oauthConsumerSecret,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_HOST) String queueHost,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_USER) String queueUser,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_PASSWORD) String queuePassword,
-      @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_NAME) String queueName
+      @ConfigurationVariableParam(variable = ConfigurationVariable.QUEUE_NAME) String queueName,
+      @ConfigurationVariableParam(variable = ConfigurationVariable.TWITTER_FILTER_LIST) String filterList,
+      TwitterStream twitterStream,
+      Connection connection
   ) {
 
-    twitterStream = new TwitterStreamFactory(new ConfigurationBuilder()
-        .setOAuthConsumerKey(oauthConsumerKey)
-        .setOAuthConsumerSecret(oauthConsumerSecret)
-        .setOAuthAccessToken(oauthAccessKey)
-        .setOAuthAccessTokenSecret(oauthAccessSecret)
-        .setJSONStoreEnabled(true)
-        .build()
-    ).getInstance();
-
-    ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost(queueHost);
-    factory.setUsername(queueUser);
-    factory.setPassword(queuePassword);
+    this.twitterStream = twitterStream;
 
     try {
-      Connection connection = factory.newConnection();
 
       channel = connection.createChannel();
 
@@ -71,6 +53,8 @@ public class StreamTweetsResource {
     }
 
     twitterStream.addListener(new NewTweetListener());
+
+    this.filterList = filterList;
   }
 
   @GET
@@ -79,27 +63,20 @@ public class StreamTweetsResource {
   public TwitterStreamResponse startStream() {
 
     if (!isRunning) {
-      String[] filterList = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-          "s", "t", "u", "v", "w", "x", "y", "z"};
+      String[] filter = filterList.split(",");
 
-      twitterStream.filter(new FilterQuery(filterList).language("en"));
+      twitterStream.filter(new FilterQuery(filter).language("en"));
 
       isRunning = true;
 
-      return new TwitterStreamResponse().setRunning(isRunning);
+      logger.info("Running with filter list: {}", filterList);
+
+      return new TwitterStreamResponse().setRunning(isRunning).setFilterList(filterList);
 
     } else {
 
-      return new TwitterStreamResponse().setRunning(isRunning);
+      return new TwitterStreamResponse().setRunning(isRunning).setFilterList(filterList);
     }
-  }
-
-  @GET
-  @Path("/running")
-  @Produces(MediaType.APPLICATION_JSON)
-  public TwitterStreamResponse isRunning() {
-
-    return new TwitterStreamResponse().setRunning(isRunning);
   }
 
   @GET
@@ -111,6 +88,14 @@ public class StreamTweetsResource {
 
     isRunning = false;
 
-    return new TwitterStreamResponse().setRunning(isRunning);
+    return new TwitterStreamResponse().setRunning(isRunning).setFilterList(filterList);
+  }
+
+  @GET
+  @Path("/running")
+  @Produces(MediaType.APPLICATION_JSON)
+  public TwitterStreamResponse isRunning() {
+
+    return new TwitterStreamResponse().setRunning(isRunning).setFilterList(filterList);
   }
 }

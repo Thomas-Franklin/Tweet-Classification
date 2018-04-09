@@ -66,7 +66,7 @@ subprojects {
         compile "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyServletVersion}"
         compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${jerseyJaxrsJsonVersion}"
         compile "com.google.code.gson:gson:2.8.2"
-        compile "org.twitter4j:twitter4j-stream:4.0.4"
+        compile "org.twitter4j:twitter4j-stream:4.0.6"
         compile 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
 
         testCompile "com.tngtech.junit.dataprovider:junit4-dataprovider:${junit4DataProviderVersion}"

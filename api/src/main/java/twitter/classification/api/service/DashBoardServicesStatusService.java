@@ -43,7 +43,7 @@ public class DashBoardServicesStatusService {
     ClassifierStatusResponse classifierStatusResponse = classifierStatusClient.isRunning();
     PreProcessorStatusResponse preProcessorStatusResponse = preProcessorStatusClient.isRunning();
 
-    ServiceItem twitterService = new ServiceItem("Stream", twitterStreamResponse.getRunning());
+    ServiceItem twitterService = new ServiceItem("Stream", twitterStreamResponse.getRunning(), twitterStreamResponse.getFilterList());
     ServiceItem databaseService = new ServiceItem("Database", isDatabaseRunning);
     // queue performs a healthcheck which if it fails, no service can start - so it always will be running
     ServiceItem queueService = new ServiceItem("Queue", true);

@@ -2,7 +2,6 @@ package twitter.classification.classifier.weka.classifier;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

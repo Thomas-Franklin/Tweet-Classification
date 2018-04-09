@@ -31,7 +31,7 @@ public class NaiveBayesClassifier implements TrainedClassifier {
   /**
    * Assumes that a classifier has been trained and
    * serialised to disk and stored in WEB-INF/classes/trained-classifier/weka-nb-classifier.model
-   *
+   * <p>
    * Can use {@link twitter.classification.classifier.weka.classifier.NaiveBayesClassifier} to train and serialise a classifier to disk
    *
    * @return NaiveBayesClassifier
@@ -64,7 +64,7 @@ public class NaiveBayesClassifier implements TrainedClassifier {
 
     try {
 
-      return dataset.classAttribute().value( (int) classifier.classifyInstance(new WekaInstanceFromString().getInstanceFromString(tweet, dataset)));
+      return dataset.classAttribute().value((int) classifier.classifyInstance(new WekaInstanceFromString().getInstanceFromString(tweet, dataset)));
     } catch (Exception e) {
 
       e.printStackTrace();

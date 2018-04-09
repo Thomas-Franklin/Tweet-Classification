@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-9 mb-1">
-        <div class="overview-board">
+        <div class="overview-board mb-1">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Overview</h5>
@@ -66,6 +66,27 @@
                 </div>
             </div>
         </div>
+        <div class="filter-list-board mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Filter List</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 mt-1 mb-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="filter">
+                                        {{#each filterList}}
+                                        <a class="text-light">{{this}}</a>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-3">
         <div class="service-board">
@@ -75,7 +96,7 @@
                     <hr>
                     <ul class="list-group">
                         {{#each serviceList}}
-                            <li class="list-group-item {{{listGroupColour this this.running}}}">{{this.serviceName}}</li>
+                        <li class="list-group-item {{{listGroupColour this this.running}}}">{{this.serviceName}}</li>
                         {{/each}}
                     </ul>
                 </div>

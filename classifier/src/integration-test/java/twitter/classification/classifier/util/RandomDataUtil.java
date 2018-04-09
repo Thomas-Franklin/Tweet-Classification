@@ -2,7 +2,6 @@ package twitter.classification.classifier.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.thedeanda.lorem.Lorem;

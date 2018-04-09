@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.classifier.persist.jdbc.queries.InsertHashtagsDbQuery;
+import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
 public class InsertHashtagsDao {

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.classifier.service.HandleProcessedTweetService;
 import twitter.classification.classifier.service.TrainedClassifier;
-import twitter.classification.classifier.service.mallet.NaiveBayesClassifier;
 import twitter.classification.common.models.ClassifierStatusResponse;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;

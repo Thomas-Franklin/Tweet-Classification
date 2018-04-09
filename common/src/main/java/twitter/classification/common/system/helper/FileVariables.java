@@ -13,7 +13,7 @@ public class FileVariables {
 
   public static Properties properties = new Properties();
 
-  public  void setValuesFromConfigurationFile() {
+  public void setValuesFromConfigurationFile() {
 
     InputStream inputStream = getClass().getClassLoader().getResourceAsStream("configuration.txt");
 

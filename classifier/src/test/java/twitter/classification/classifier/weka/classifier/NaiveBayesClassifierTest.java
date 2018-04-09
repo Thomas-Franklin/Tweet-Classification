@@ -61,7 +61,7 @@ public class NaiveBayesClassifierTest {
   @Test
   public void testThatRumourAndNonRumour_areTheOnlyLabels() {
 
-    Assert.assertEquals("Possible labels is not 2",2, dataset.numClasses());
+    Assert.assertEquals("Possible labels is not 2", 2, dataset.numClasses());
     Assert.assertTrue(dataset.classAttribute().value(1).equals("rumour"));
     Assert.assertTrue(dataset.classAttribute().value(0).equals("non-rumour"));
   }
@@ -91,7 +91,6 @@ public class NaiveBayesClassifierTest {
   }
 
   /**
-   *
    * Train the classifier using 80% of the dataset, then evaluate it against
    * the remain 20%.
    *

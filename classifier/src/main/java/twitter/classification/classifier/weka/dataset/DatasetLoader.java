@@ -1,6 +1,5 @@
 package twitter.classification.classifier.weka.dataset;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
