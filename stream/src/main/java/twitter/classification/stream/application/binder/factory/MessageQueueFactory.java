@@ -1,4 +1,4 @@
-package twitter.classification.stream.application.system.binder.factory;
+package twitter.classification.stream.application.binder.factory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

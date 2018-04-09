@@ -1,4 +1,4 @@
-package twitter.classification.web.application.system.binder;
+package twitter.classification.web.application.binder;
 
 import javax.inject.Singleton;
 

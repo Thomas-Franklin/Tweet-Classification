@@ -1,10 +1,11 @@
-package twitter.classification.classifier.application.system.binder;
+package twitter.classification.classifier.application.binder;
 
 import javax.inject.Singleton;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
-import twitter.classification.classifier.application.system.binder.factory.ClassifierFactory;
+import twitter.classification.classifier.application.binder.factory.ClassifierFactory;
+import twitter.classification.classifier.application.binder.factory.VerificationClassifierFactory;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagTweetClassificationDao;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagsDao;
 import twitter.classification.classifier.persist.jdbc.InsertTweetsDao;
@@ -16,6 +17,7 @@ import twitter.classification.classifier.service.InsertTweetsService;
 import twitter.classification.classifier.service.InsertUserTweetClassificationService;
 import twitter.classification.classifier.service.InsertUsersService;
 import twitter.classification.classifier.service.TrainedClassifier;
+import twitter.classification.classifier.service.VerificationClassifier;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.DbConnectionResolver;
 
@@ -25,6 +27,7 @@ public class ServicesBinder extends AbstractBinder {
   protected void configure() {
 
     bindFactory(ClassifierFactory.class).to(TrainedClassifier.class);
+    bindFactory(VerificationClassifierFactory.class).to(VerificationClassifier.class);
 
     bind(ConnectionManager.class).to(ConnectionManager.class).in(Singleton.class);
 

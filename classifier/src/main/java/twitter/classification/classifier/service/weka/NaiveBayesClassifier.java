@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import twitter.classification.classifier.service.TrainedClassifier;
+import twitter.classification.classifier.service.VerificationClassifier;
 import twitter.classification.classifier.weka.converter.WekaInstanceFromString;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
@@ -16,7 +17,7 @@ import weka.core.converters.TextDirectoryLoader;
 /**
  * A NaiveBayes Classifier using the Weka library
  */
-public class NaiveBayesClassifier implements TrainedClassifier {
+public class NaiveBayesClassifier implements VerificationClassifier {
 
   private static final String DATASET_FILE_LOCATION = "dataset-weka/";
 

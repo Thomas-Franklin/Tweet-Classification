@@ -14,8 +14,10 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import twitter.classification.classifier.helper.ClassificationFromVerificationCheck;
 import twitter.classification.classifier.service.HandleProcessedTweetService;
 import twitter.classification.classifier.service.TrainedClassifier;
+import twitter.classification.classifier.service.VerificationClassifier;
 import twitter.classification.common.models.ClassifierStatusResponse;
 import twitter.classification.common.tweetdetails.model.ClassificationModel;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
@@ -28,15 +30,18 @@ public class ClassificationResource {
   private static final Logger logger = LoggerFactory.getLogger(ClassificationResource.class);
 
   private TrainedClassifier classifier;
+  private VerificationClassifier verificationClassifier;
   private HandleProcessedTweetService handleProcessedTweetService;
 
   @Inject
   public ClassificationResource(
       TrainedClassifier classifier,
+      VerificationClassifier verificationClassifier,
       HandleProcessedTweetService handleProcessedTweetService
   ) {
 
     this.classifier = classifier;
+    this.verificationClassifier = verificationClassifier;
     this.handleProcessedTweetService = handleProcessedTweetService;
   }
 
@@ -50,7 +55,11 @@ public class ClassificationResource {
       logger.debug("PreprocessedItem is {}", new ObjectMapper().writeValueAsString(preProcessedItem));
 
       ProcessedTweetModel processedTweetModel = new ProcessedTweetModel(preProcessedItem);
-      processedTweetModel.setClassificationValue(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()));
+
+      String classification = classifier.classifyTweet(preProcessedItem.getProcessedTweetBody());
+      String verificationClassification = verificationClassifier.classifyTweet(preProcessedItem.getProcessedTweetBody());
+
+      processedTweetModel.setClassificationValue(ClassificationFromVerificationCheck.consolidateClassificationWithVerification(classification, verificationClassification));
 
       handleProcessedTweetService.handle(processedTweetModel);
 

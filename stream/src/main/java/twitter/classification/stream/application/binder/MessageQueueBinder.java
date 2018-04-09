@@ -1,9 +1,9 @@
-package twitter.classification.stream.application.system.binder;
+package twitter.classification.stream.application.binder;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import com.rabbitmq.client.Connection;
-import twitter.classification.stream.application.system.binder.factory.MessageQueueFactory;
+import twitter.classification.stream.application.binder.factory.MessageQueueFactory;
 
 public class MessageQueueBinder extends AbstractBinder {
 

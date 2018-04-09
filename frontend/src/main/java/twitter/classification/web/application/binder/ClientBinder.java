@@ -1,4 +1,4 @@
-package twitter.classification.web.application.system;
+package twitter.classification.web.application.binder;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 

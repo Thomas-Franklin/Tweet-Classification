@@ -4,8 +4,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import twitter.classification.common.system.binder.ConfigurationVariableBinder;
 import twitter.classification.common.system.helper.FileVariables;
-import twitter.classification.stream.application.system.binder.MessageQueueBinder;
-import twitter.classification.stream.application.system.binder.TwitterStreamBinder;
+import twitter.classification.stream.application.binder.MessageQueueBinder;
+import twitter.classification.stream.application.binder.TwitterStreamBinder;
 
 public class WebApplication extends ResourceConfig {
 

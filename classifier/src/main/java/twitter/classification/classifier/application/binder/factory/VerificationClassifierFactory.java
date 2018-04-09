@@ -1,24 +1,24 @@
-package twitter.classification.classifier.application.system.binder.factory;
+package twitter.classification.classifier.application.binder.factory;
 
 import javax.inject.Inject;
 
-import twitter.classification.classifier.service.TrainedClassifier;
+import twitter.classification.classifier.service.VerificationClassifier;
 import twitter.classification.classifier.service.weka.NaiveBayesClassifier;
 import twitter.classification.common.system.binder.factory.BaseFactory;
 
-public class ClassifierFactory implements BaseFactory<TrainedClassifier> {
+public class VerificationClassifierFactory implements BaseFactory<VerificationClassifier> {
 
   private final NaiveBayesClassifier classifier;
 
   @Inject
-  public ClassifierFactory() {
+  public VerificationClassifierFactory() {
 
     classifier = new NaiveBayesClassifier();
     classifier.assignClassifierFromDisc();
   }
 
   @Override
-  public TrainedClassifier provide() {
+  public VerificationClassifier provide() {
 
     return classifier;
   }

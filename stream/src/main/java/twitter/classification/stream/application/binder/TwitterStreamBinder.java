@@ -1,8 +1,8 @@
-package twitter.classification.stream.application.system.binder;
+package twitter.classification.stream.application.binder;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
-import twitter.classification.stream.application.system.binder.factory.TwitterStreamFactory;
+import twitter.classification.stream.application.binder.factory.TwitterStreamFactory;
 import twitter4j.TwitterStream;
 
 public class TwitterStreamBinder extends AbstractBinder {
