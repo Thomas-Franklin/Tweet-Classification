@@ -110,7 +110,7 @@ public class NaiveBayesClassifierTest {
 
     double accuracy = evaluation.correct() / evaluation.numInstances();
 
-    logger.info("Accuracy of {} validation is {}", "Eighty/Forty Split", String.format("%.2f", accuracy));
+    logger.info("Accuracy of {} validation is {}", "Eighty/Twenty Split", String.format("%.2f", accuracy));
 
     Assert.assertTrue("Classifier accuracy is not above 50%", accuracy > 0.5);
   }

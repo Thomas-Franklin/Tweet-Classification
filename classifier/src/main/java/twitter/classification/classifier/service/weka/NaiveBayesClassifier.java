@@ -6,9 +6,11 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import twitter.classification.classifier.classification.LabelWeight;
 import twitter.classification.classifier.service.TrainedClassifier;
 import twitter.classification.classifier.service.VerificationClassifier;
 import twitter.classification.classifier.weka.converter.WekaInstanceFromString;
+import weka.classifiers.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.core.SerializationHelper;

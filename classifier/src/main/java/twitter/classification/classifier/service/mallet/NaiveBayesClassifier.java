@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import cc.mallet.classify.Classification;
 import cc.mallet.classify.Classifier;
+import cc.mallet.types.Label;
+import twitter.classification.classifier.classification.LabelWeight;
 import twitter.classification.classifier.service.TrainedClassifier;
 
 /**
@@ -65,10 +67,12 @@ public class NaiveBayesClassifier implements TrainedClassifier {
    * @return {@link String} Label
    */
   @Override
-  public String classifyTweet(String tweet) {
+  public LabelWeight classifyTweet(String tweet) {
 
     Classification classification = classifier.classify(tweet);
 
-    return classification.getLabeling().getBestLabel().toString();
+    Label label = classification.getLabeling().getBestLabel();
+
+    return new LabelWeight(label.toString(), classification.getLabeling().value(label));
   }
 }

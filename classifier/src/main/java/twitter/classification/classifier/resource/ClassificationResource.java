@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import twitter.classification.classifier.classification.LabelWeight;
 import twitter.classification.classifier.helper.ClassificationFromVerificationCheck;
 import twitter.classification.classifier.service.HandleProcessedTweetService;
 import twitter.classification.classifier.service.TrainedClassifier;
@@ -32,17 +33,20 @@ public class ClassificationResource {
   private TrainedClassifier classifier;
   private VerificationClassifier verificationClassifier;
   private HandleProcessedTweetService handleProcessedTweetService;
+  private ClassificationFromVerificationCheck classificationFromVerificationCheck;
 
   @Inject
   public ClassificationResource(
       TrainedClassifier classifier,
       VerificationClassifier verificationClassifier,
-      HandleProcessedTweetService handleProcessedTweetService
+      HandleProcessedTweetService handleProcessedTweetService,
+      ClassificationFromVerificationCheck classificationFromVerificationCheck
   ) {
 
     this.classifier = classifier;
     this.verificationClassifier = verificationClassifier;
     this.handleProcessedTweetService = handleProcessedTweetService;
+    this.classificationFromVerificationCheck = classificationFromVerificationCheck;
   }
 
   @POST
@@ -56,10 +60,10 @@ public class ClassificationResource {
 
       ProcessedTweetModel processedTweetModel = new ProcessedTweetModel(preProcessedItem);
 
-      String classification = classifier.classifyTweet(preProcessedItem.getProcessedTweetBody());
+      LabelWeight originalClassification = classifier.classifyTweet(preProcessedItem.getProcessedTweetBody());
       String verificationClassification = verificationClassifier.classifyTweet(preProcessedItem.getProcessedTweetBody());
 
-      processedTweetModel.setClassificationValue(ClassificationFromVerificationCheck.consolidateClassificationWithVerification(classification, verificationClassification));
+      processedTweetModel.setClassificationValue(classificationFromVerificationCheck.consolidateClassificationWithVerification(originalClassification, verificationClassification));
 
       handleProcessedTweetService.handle(processedTweetModel);
 
@@ -68,7 +72,7 @@ public class ClassificationResource {
       e.printStackTrace();
     }
 
-    return new ClassificationModel().setClassificationLabel(classifier.classifyTweet(preProcessedItem.getProcessedTweetBody()));
+    return new ClassificationModel().setClassificationLabel("return");
   }
 
   @GET

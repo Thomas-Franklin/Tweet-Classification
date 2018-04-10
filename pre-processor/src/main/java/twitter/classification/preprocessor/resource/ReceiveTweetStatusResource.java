@@ -15,6 +15,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.common.exceptions.ProcessingClientException;
 import twitter.classification.common.models.PreProcessorStatusResponse;
+import twitter.classification.common.system.ConfigurationVariable;
+import twitter.classification.common.system.helper.ConfigurationVariableParam;
 import twitter.classification.common.tweetdetails.model.PreProcessedItem;
 import twitter.classification.common.tweetdetails.model.ProcessedStatusResponse;
 import twitter.classification.common.tweetdetails.processing.TweetBodyProcessor;
@@ -31,11 +33,16 @@ public class ReceiveTweetStatusResource {
   private static final Logger logger = LoggerFactory.getLogger(ReceiveTweetStatusResource.class);
 
   private ClassificationClient classificationClient;
+  private boolean usePreProcessing;
 
   @Inject
-  public ReceiveTweetStatusResource(ClassificationClient classificationClient) {
+  public ReceiveTweetStatusResource(
+      ClassificationClient classificationClient,
+      @ConfigurationVariableParam(variable = ConfigurationVariable.USE_PRE_PROCESSING) String usePreProcessing
+  ) {
 
     this.classificationClient = classificationClient;
+    this.usePreProcessing = Boolean.parseBoolean(usePreProcessing);
   }
 
   @POST
@@ -63,8 +70,12 @@ public class ReceiveTweetStatusResource {
       preProcessedItem.setUserId(status.getUser().getId());
       preProcessedItem.setOriginalTweetBody(status.getText());
 
-      // this is where the pre processing will occur
-      preProcessedItem.setProcessedTweetBody(TweetBodyProcessor.processTweetBody(status.getText()));
+      // this is where the pre processing will occur if the configuration value is set
+      if (usePreProcessing) {
+        preProcessedItem.setProcessedTweetBody(TweetBodyProcessor.processTweetBody(status.getText()));
+      } else {
+        preProcessedItem.setProcessedTweetBody(status.getText());
+      }
 
       logger.debug("Tweet body is: {}", preProcessedItem.getProcessedTweetBody());
 

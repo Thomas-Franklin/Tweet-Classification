@@ -6,6 +6,7 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import twitter.classification.classifier.application.binder.factory.ClassifierFactory;
 import twitter.classification.classifier.application.binder.factory.VerificationClassifierFactory;
+import twitter.classification.classifier.helper.ClassificationFromVerificationCheck;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagTweetClassificationDao;
 import twitter.classification.classifier.persist.jdbc.InsertHashtagsDao;
 import twitter.classification.classifier.persist.jdbc.InsertTweetsDao;
@@ -44,5 +45,7 @@ public class ServicesBinder extends AbstractBinder {
     bind(HandleProcessedTweetService.class).to(HandleProcessedTweetService.class);
 
     bind(DbConnectionResolver.class).to(DbConnectionResolver.class).in(Singleton.class);
+
+    bind(ClassificationFromVerificationCheck.class).to(ClassificationFromVerificationCheck.class);
   }
 }

@@ -1,8 +1,10 @@
 package twitter.classification.classifier.service;
 
+import twitter.classification.classifier.classification.LabelWeight;
+
 public interface TrainedClassifier {
 
   Object assignClassifierFromDisc();
 
-  String classifyTweet(String tweet);
+  LabelWeight classifyTweet(String tweet);
 }
