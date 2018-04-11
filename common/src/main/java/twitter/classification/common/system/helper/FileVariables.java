@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.apache.log4j.Logger.getRootLogger;
 
 public class FileVariables {
 
@@ -25,5 +28,12 @@ public class FileVariables {
         logger.error("Issue reading configuration values", exception);
       }
     }
+  }
+
+  public static void setLogLevel() {
+
+    String logLevel = FileVariables.properties.getProperty("LOG_LEVEL");
+
+    getRootLogger().setLevel(logLevel != null ? Level.toLevel(logLevel) : Level.toLevel("info"));
   }
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import twitter.classification.classifier.weka.dataset.DatasetLoader;
 import twitter.classification.classifier.weka.filter.StringToWordVectorFilter;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.bayes.NaiveBayesMultinomial;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.core.SerializationHelper;
@@ -32,7 +33,7 @@ public class NaiveBayesClassifier {
 
       Instances dataset = new DatasetLoader().getInstancesFromFileDirectory();
 
-      NaiveBayes naiveBayes = new NaiveBayes();
+      NaiveBayesMultinomial naiveBayes = new NaiveBayesMultinomial();
       FilteredClassifier filteredClassifier = new FilteredClassifier();
       filteredClassifier.setFilter(StringToWordVectorFilter.getStringToWordVector());
       filteredClassifier.setClassifier(naiveBayes);

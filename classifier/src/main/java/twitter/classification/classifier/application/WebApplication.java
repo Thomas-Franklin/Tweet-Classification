@@ -6,6 +6,8 @@ import twitter.classification.classifier.application.binder.ServicesBinder;
 import twitter.classification.common.system.binder.ConfigurationVariableBinder;
 import twitter.classification.common.system.helper.FileVariables;
 
+import static twitter.classification.common.system.helper.FileVariables.setLogLevel;
+
 public class WebApplication extends ResourceConfig {
 
   public WebApplication() {
@@ -13,6 +15,7 @@ public class WebApplication extends ResourceConfig {
     packages("twitter.classification.classifier.application");
 
     loadConfigurationValues();
+    setLogLevel();
     register(new ConfigurationVariableBinder());
     register(new ServicesBinder());
   }

@@ -1,6 +1,7 @@
 package twitter.classification.classifier.mallet.classifier;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -16,11 +17,14 @@ import cc.mallet.classify.MaxEntTrainer;
 import cc.mallet.classify.NaiveBayesTrainer;
 import cc.mallet.pipe.CharSequence2TokenSequence;
 import cc.mallet.pipe.FeatureSequence2FeatureVector;
+import cc.mallet.pipe.Input2CharSequence;
 import cc.mallet.pipe.Pipe;
 import cc.mallet.pipe.SerialPipes;
 import cc.mallet.pipe.Target2Label;
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
+import cc.mallet.pipe.TokenSequenceRemoveStopwords;
 import cc.mallet.pipe.iterator.CsvIterator;
+import cc.mallet.pipe.iterator.FileIterator;
 import cc.mallet.types.InstanceList;
 
 /**
@@ -29,6 +33,8 @@ import cc.mallet.types.InstanceList;
 public class TrainClassifier {
 
   private static boolean isTestingMode = false;
+
+  private String stopWordsPath = "classifier/src/main/resources/stopwords/stopwords.txt";
 
   /**
    * Main method to manually train the classifiers
@@ -51,6 +57,11 @@ public class TrainClassifier {
   public TrainClassifier(boolean testing) {
 
     isTestingMode = testing;
+
+    if (isTestingMode) {
+
+      stopWordsPath = "src/main/resources/stopwords/stopwords.txt";
+    }
   }
 
   /**
@@ -119,6 +130,7 @@ public class TrainClassifier {
 
     pipes.add(new Target2Label());
     pipes.add(new CharSequence2TokenSequence());
+    pipes.add(new TokenSequenceRemoveStopwords().addStopWords(Paths.get(stopWordsPath).toFile()).setCaseSensitive(false));
     pipes.add(new TokenSequence2FeatureSequence());
     pipes.add(new FeatureSequence2FeatureVector());
     SerialPipes pipe = new SerialPipes(pipes);
@@ -152,7 +164,6 @@ public class TrainClassifier {
 
     return classifier;
   }
-
 
   private FileReader getFileReader() throws FileNotFoundException {
 
