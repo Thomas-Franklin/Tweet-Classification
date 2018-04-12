@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 
 import cc.mallet.classify.Classifier;
 import cc.mallet.classify.ClassifierTrainer;
@@ -139,6 +140,8 @@ public class TrainClassifier {
 
     // file is format of non-rumour|rumour, data
     trainingInstanceList.addThruPipe(new CsvIterator(fileReader, "(non-rumour|rumour), (.*)", 2, 1, -1));
+
+    trainingInstanceList.shuffle(new Random(new ThreadLocal().hashCode()));
 
     ClassifierTrainer trainer = new NaiveBayesTrainer();
     Classifier classifier = trainer.train(trainingInstanceList);

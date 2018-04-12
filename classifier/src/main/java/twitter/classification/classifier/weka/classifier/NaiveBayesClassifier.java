@@ -2,6 +2,7 @@ package twitter.classification.classifier.weka.classifier;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,8 @@ public class NaiveBayesClassifier {
       FilteredClassifier filteredClassifier = new FilteredClassifier();
       filteredClassifier.setFilter(StringToWordVectorFilter.getStringToWordVector());
       filteredClassifier.setClassifier(naiveBayes);
+
+      dataset.randomize(new Random(new ThreadLocal().hashCode()));
 
       filteredClassifier.buildClassifier(dataset);
 
