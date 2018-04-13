@@ -68,6 +68,7 @@ subprojects {
         compile "com.google.code.gson:gson:2.8.2"
         compile "org.twitter4j:twitter4j-stream:4.0.6"
         compile 'com.amazonaws:aws-lambda-java-log4j:1.0.0'
+        compile 'org.apache.tomcat:tomcat-catalina:9.0.7'
 
         testCompile "com.tngtech.junit.dataprovider:junit4-dataprovider:${junit4DataProviderVersion}"
         testCompile "junit:junit:${junitVersion}"

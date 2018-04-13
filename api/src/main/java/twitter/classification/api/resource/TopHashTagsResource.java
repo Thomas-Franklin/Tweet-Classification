@@ -13,7 +13,7 @@ import twitter.classification.api.service.TopHashTagResultService;
 import twitter.classification.common.models.TopHashtagsResponse;
 
 @Singleton
-@Path("/hashtags")
+@Path("/top/hashtags")
 public class TopHashTagsResource {
 
   private TopHashTagResultService topHashTagResultService;
@@ -27,7 +27,6 @@ public class TopHashTagsResource {
   }
 
   @GET
-  @Path("/top")
   @Produces(MediaType.APPLICATION_JSON)
   public TopHashtagsResponse getTopHashtagResults() throws IOException {
 

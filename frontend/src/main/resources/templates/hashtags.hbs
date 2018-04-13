@@ -27,22 +27,17 @@
                     <div class="tabs-x align-center tabs-above tab-bordered">
                         <ul class="nav nav-tabs mr-auto" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" id="{{this.hashtagValue}}WordCloudTab" role="tab"
-                                   data-toggle="tab" href="#{{this.hashtagValue}}WordCloud"
-                                   aria-controls="{{this.hashtagValue}}WordCloud" aria-expanded="true">Word Cloud</a>
+                                <a class="nav-link active show" id="{{this.hashtagValue}}WordCloudTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}WordCloud" aria-controls="{{this.hashtagValue}}WordCloud" aria-expanded="true">Word Cloud</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="{{this.hashtagValue}}ChartTab" role="tab" data-toggle="tab"
-                                   href="#{{this.hashtagValue}}Chart"
-                                   data-target="#{{this.hashtagValue}}Chart">Chart</a>
+                                <a class="nav-link" id="{{this.hashtagValue}}ChartTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}Chart" data-target="#{{this.hashtagValue}}Chart">Chart</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="{{this.hashtagValue}}WordCloud" class="container tab-pane fade show active"><br>
+                            <div id="{{this.hashtagValue}}WordCloud" class="container tab-pane fade show active" aria-labelledby="{{this.hashtagValue}}WordCloud"><br>
                                 <img width="100%" src='data:image/png;base64,{{this.base64WordCloudImage}}'/>
                             </div>
-                            <div id="{{this.hashtagValue}}Chart" class="container tab-pane fade"
-                                 aria-labelledby="{{this.hashtagValue}}ChartTab"><br>
+                            <div id="{{this.hashtagValue}}Chart" class="container tab-pane fade" aria-labelledby="{{this.hashtagValue}}ChartTab"><br>
                                 <h2>Chart for {{this.hashtagValue}}</h2>
                             </div>
                         </div>
@@ -92,13 +87,104 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 mb-1 mt-1">
+        <div class="raw-row-data">
+            <ul class="nav nav-tabs mr-auto d-none" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" role="tab" data-toggle="tab" href="#none">Default Tab</a>
+                </li>
+                {{#each hashtagResultsList}}
+                <li class="nav-item">
+                    <a class="nav-link" role="tab" data-toggle="tab"
+                       href="#{{this.hashtagValue}}RawData">{{this.hashtagValue}} Raw Data</a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="tab-content">
+                <div id="none" class="container tab-pane active"><br>
+                </div>
+
+                {{#each hashtagResultsList}}
+                <div id="{{this.hashtagValue}}RawData" class="container tab-pane fade"
+                     data-size="{{this.totalCountOfClassifications}}"><br>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Raw Data for #{{this.hashtagValue}}</h5>
+                            <hr>
+                            <div id="{{this.hashtagValue}}Table"></div>
+                            <div class="justify-content-center">
+                                <nav>
+                                    <ul class="pagination justify-content-center" id="potusPagination">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <script>
     $('input[name="hashtagRadioGroup"]').click(function () {
         var target = $(this).data("target");
         $("a[href='" + target + "']").tab('show');
+        $("a[href='" + target + "RawData']").tab('show');
+
+        getHashtagTable(target, 0);
     });
+
+    function getHashtagTable(target, page) {
+
+        $.ajax({
+            url: 'http://localhost:9000/hashtags/' + target.substring(1, target.length) + '/' + page + '/10',
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+
+                $("div" + target + "Table").empty();
+
+                var table = "<table class=\"table table-striped\">" +
+                    "<thead>" +
+                    "<tr>" +
+                    "<th scope=\"col\">Tweet ID</th>" +
+                    "<th scope=\"col\">Classification Value</th>" +
+                    "<th scope=\"col\">Tweet Text</th>" +
+                    "</tr>" +
+                    "</thead>" +
+                    "<tbody>";
+
+                data.forEach(function (tweet) {
+                    table += '<tr><th scope="row">' + tweet.id + '</th><td><p>' + tweet.classificationValue + '</p></td><td>' + tweet.tweetText + '</td></tr>'
+                });
+
+                table += "</tbody></table>";
+
+                $("div" + target + "Table").append(table);
+
+                $(target + "Pagination").twbsPagination({
+                    totalPages: $("div" + target + "RawData").data("size") / 10,
+                    visiblePages: 4,
+                    onPageClick: function (event, page) {
+
+                        var dbPage;
+
+                        if (page === 1) {
+                            // page 1 on pagination should relate to offset 0 on DB
+                            dbPage = 0;
+                        } else {
+                            dbPage = page * 10;
+                        }
+
+                        getHashtagTable(target, dbPage);
+                    }
+                });
+            }
+        })
+    }
 </script>
 
 {{/partial}}

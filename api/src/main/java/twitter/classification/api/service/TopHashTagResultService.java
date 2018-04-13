@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.SelectTopHashtagsClassificationCountDao;
 import twitter.classification.api.persist.jdbc.TweetsForHashtagsDao;
-import twitter.classification.api.persist.jdbc.models.HashTagsProcessedTweetsModel;
+import twitter.classification.api.persist.jdbc.models.ProcessedHashtagTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.models.TopHashtagsClassificationModel;
 import twitter.classification.api.wordclouds.WordCloudCreationService;
 import twitter.classification.common.models.HashtagResults;
@@ -56,11 +56,11 @@ public class TopHashTagResultService {
       hashtagResults.setCountOfRumours(topHashtagsClassificationModel.getCountOfRumours().intValue());
       hashtagResults.setTotalCountOfClassifications(topHashtagsClassificationModel.getTotalClassificationCount().intValue());
 
-      List<HashTagsProcessedTweetsModel> hashTagsProcessedTweetsModelList = tweetsForHashtagsDao.get(topHashtagsClassificationModel.getHashtagValue());
+      List<ProcessedHashtagTweetsForWordCloudModel> processedHashtagTweetsForWordCloudModelList = tweetsForHashtagsDao.get(topHashtagsClassificationModel.getHashtagValue());
       List<String> wordCloudList = new ArrayList<>();
 
-      for (HashTagsProcessedTweetsModel hashTagsProcessedTweetsModel : hashTagsProcessedTweetsModelList) {
-        wordCloudList.add(hashTagsProcessedTweetsModel.getOriginalTextList());
+      for (ProcessedHashtagTweetsForWordCloudModel processedHashtagTweetsForWordCloudModel : processedHashtagTweetsForWordCloudModelList) {
+        wordCloudList.add(processedHashtagTweetsForWordCloudModel.getOriginalTextList());
       }
 
       hashtagResults.setBase64WordCloudImage(new WordCloudCreationService().base64String(wordCloudList));
