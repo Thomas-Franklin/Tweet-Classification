@@ -5,27 +5,29 @@ import java.util.List;
 import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.models.ProcessedHashtagTweetsForWordCloudModel;
+import twitter.classification.api.persist.jdbc.models.ProcessedUserTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.queries.TweetsForHashtagWordCloudDbQuery;
+import twitter.classification.api.persist.jdbc.queries.TweetsForUserWordCloudDbQuery;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
-public class TweetsForHashtagsDao {
+public class TweetsForUsersDao {
 
   private ConnectionManager connectionManager;
 
   @Inject
-  public TweetsForHashtagsDao(ConnectionManager connectionManager) {
+  public TweetsForUsersDao(ConnectionManager connectionManager) {
 
     this.connectionManager = connectionManager;
   }
 
-  public List<ProcessedHashtagTweetsForWordCloudModel> get(String hashtag) {
+  public List<ProcessedUserTweetsForWordCloudModel> get(String username) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());
 
     try {
 
-      return dbQueryRunner.executeQuery(new TweetsForHashtagWordCloudDbQuery().buildQuery(), ProcessedHashtagTweetsForWordCloudModel.class, hashtag);
+      return dbQueryRunner.executeQuery(new TweetsForUserWordCloudDbQuery().buildQuery(), ProcessedUserTweetsForWordCloudModel.class, username);
     } catch (Exception e) {
 
       e.printStackTrace();

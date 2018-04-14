@@ -2,7 +2,7 @@ package twitter.classification.api.persist.jdbc.queries;
 
 import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
-public class TweetsForWordCloudDbQuery implements DbQuery {
+public class TweetsForHashtagWordCloudDbQuery implements DbQuery {
 
   @Override
   public String buildQuery() {

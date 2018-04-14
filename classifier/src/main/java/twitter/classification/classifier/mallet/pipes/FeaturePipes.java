@@ -10,7 +10,6 @@ import cc.mallet.pipe.SerialPipes;
 import cc.mallet.pipe.Target2Label;
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.pipe.TokenSequenceRemoveStopwords;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class FeaturePipes {
 
