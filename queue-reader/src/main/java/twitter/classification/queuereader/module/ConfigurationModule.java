@@ -32,7 +32,9 @@ public class ConfigurationModule extends AbstractModule {
   public QueueReader provideQueueReader(
       @Named("QUEUE_USER") String queueUsername,
       @Named("QUEUE_PASSWORD") String queuePassword,
-      @Named("QUEUE_HOST") String queueHost) throws IOException, TimeoutException {
+      @Named("QUEUE_HOST") String queueHost,
+      @Named("QUEUE_URI") String queueUri,
+      @Named("HASHTAG_IGNORE_LIST") String hashtagIgnoreList) throws IOException, TimeoutException {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
     connectionFactory.setUsername(queueUsername);
@@ -45,6 +47,6 @@ public class ConfigurationModule extends AbstractModule {
 
     channel.queueDeclare("tweets", false, false, false, null);
 
-    return new QueueReader(channel, new TweetConsumer(channel, new TweetDetailsClient("http://pre-processor:8080/process")));
+    return new QueueReader(channel, new TweetConsumer(channel, new TweetDetailsClient(queueUri), hashtagIgnoreList));
   }
 }

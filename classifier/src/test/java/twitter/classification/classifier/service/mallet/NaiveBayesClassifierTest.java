@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cc.mallet.classify.Classifier;
+import cc.mallet.classify.ClassifierTrainer;
 import cc.mallet.classify.NaiveBayesTrainer;
 import cc.mallet.classify.Trial;
 import cc.mallet.pipe.CharSequence2TokenSequence;
@@ -25,6 +26,7 @@ import cc.mallet.pipe.iterator.CsvIterator;
 import cc.mallet.types.InstanceList;
 import cc.mallet.util.Randoms;
 import twitter.classification.classifier.mallet.classifier.TrainClassifier;
+import twitter.classification.classifier.mallet.pipes.FeaturePipes;
 
 public class NaiveBayesClassifierTest {
 
@@ -44,13 +46,7 @@ public class NaiveBayesClassifierTest {
 
     classifier = trainClassifier.trainNaiveBayesClassifier();
 
-    ArrayList<Pipe> pipes = new ArrayList<>();
-
-    pipes.add(new Target2Label());
-    pipes.add(new CharSequence2TokenSequence());
-    pipes.add(new TokenSequence2FeatureSequence());
-    pipes.add(new FeatureSequence2FeatureVector());
-    SerialPipes pipe = new SerialPipes(pipes);
+    SerialPipes pipe = new FeaturePipes(true).getFeaturePipes();
 
     trainingInstanceList = new InstanceList(pipe);
 
@@ -70,17 +66,19 @@ public class NaiveBayesClassifierTest {
   @SuppressWarnings("Duplicates")
   public void evaluateClassifier() throws FileNotFoundException {
 
-    InstanceList testInstances = new InstanceList(classifier.getInstancePipe());
+    InstanceList[] instanceLists = trainingInstanceList.split(new double[] {7, 3});
+    InstanceList trainInstances = instanceLists[0];
+    InstanceList testInstances = instanceLists[1];
 
-    CsvIterator reader = new CsvIterator(new FileReader(getClass().getResource("/test-data/100-split-results.csv").getFile()), "(non-rumour|rumour), (.*)", 2, 1, -1);
+    ClassifierTrainer classifierTrainer = new NaiveBayesTrainer();
 
-    testInstances.addThruPipe(reader);
+    classifier = classifierTrainer.train(trainInstances);
 
     Trial trial = new Trial(classifier, testInstances);
 
     logger.info("Accuracy of evaluation is {}", String.format("%.2f", trial.getAccuracy()));
-
-    Assert.assertTrue("Accuracy is not above 50%", trial.getAccuracy() > 0.5);
+    logger.info("F1 score for {} is {}", classifier.getLabelAlphabet().lookupLabel(0), trial.getF1(0));
+    logger.info("F1 score for {} is {}", classifier.getLabelAlphabet().lookupLabel(1), trial.getF1(1));
   }
 
   @Test

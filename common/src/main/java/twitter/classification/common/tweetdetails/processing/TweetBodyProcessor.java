@@ -18,6 +18,9 @@ public class TweetBodyProcessor {
     // to fix up any double/triple white spaces
     tweetBody = tweetBody.replaceAll(" {2,}", " ");
 
+    // to fix up any character returns/new lines in the Tweet
+    tweetBody = tweetBody.replaceAll("\r\n", " ");
+
     // will trim any leading white spaces
     tweetBody = tweetBody.trim();
 

@@ -90,7 +90,7 @@ public class ReceiveTweetStatusResource {
     } catch (TwitterException e) {
       logger.error("Issue creating status from tweet details", e);
     } catch (ProcessingClientException | JsonProcessingException e) {
-      logger.info("Issue processing object", e);
+      logger.error("Issue processing object", e);
     }
 
     return processedStatusResponse;

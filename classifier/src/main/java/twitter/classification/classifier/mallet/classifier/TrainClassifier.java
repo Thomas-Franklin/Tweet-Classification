@@ -27,6 +27,7 @@ import cc.mallet.pipe.TokenSequenceRemoveStopwords;
 import cc.mallet.pipe.iterator.CsvIterator;
 import cc.mallet.pipe.iterator.FileIterator;
 import cc.mallet.types.InstanceList;
+import twitter.classification.classifier.mallet.pipes.FeaturePipes;
 
 /**
  * For training a new classifier and serialising to disk using Mallet
@@ -34,8 +35,6 @@ import cc.mallet.types.InstanceList;
 public class TrainClassifier {
 
   private static boolean isTestingMode = false;
-
-  private String stopWordsPath = "classifier/src/main/resources/stopwords/stopwords.txt";
 
   /**
    * Main method to manually train the classifiers
@@ -58,11 +57,6 @@ public class TrainClassifier {
   public TrainClassifier(boolean testing) {
 
     isTestingMode = testing;
-
-    if (isTestingMode) {
-
-      stopWordsPath = "src/main/resources/stopwords/stopwords.txt";
-    }
   }
 
   /**
@@ -127,14 +121,7 @@ public class TrainClassifier {
 
     FileReader fileReader = getFileReader();
 
-    ArrayList<Pipe> pipes = new ArrayList<>();
-
-    pipes.add(new Target2Label());
-    pipes.add(new CharSequence2TokenSequence());
-    pipes.add(new TokenSequenceRemoveStopwords().addStopWords(Paths.get(stopWordsPath).toFile()).setCaseSensitive(false));
-    pipes.add(new TokenSequence2FeatureSequence());
-    pipes.add(new FeatureSequence2FeatureVector());
-    SerialPipes pipe = new SerialPipes(pipes);
+    SerialPipes pipe = new FeaturePipes(isTestingMode).getFeaturePipes();
 
     InstanceList trainingInstanceList = new InstanceList(pipe);
 

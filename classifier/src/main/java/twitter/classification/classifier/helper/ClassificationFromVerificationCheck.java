@@ -35,7 +35,12 @@ public class ClassificationFromVerificationCheck {
    */
   public String consolidateClassificationWithVerification(LabelWeight originalClassification, String verificationClassification) {
 
-    logger.debug("Original classification is {}, verification classification {}, is same: {}", originalClassification.getLabel(), verificationClassification, originalClassification.getLabel().equals(verificationClassification));
+    logger.debug(
+        "Original classification is {}, verification classification {}, is same: {}",
+        originalClassification.getLabel(),
+        verificationClassification,
+        originalClassification.getLabel().equals(verificationClassification)
+    );
 
     if (originalClassification.getLabel().equals(verificationClassification)) {
 
@@ -44,7 +49,12 @@ public class ClassificationFromVerificationCheck {
 
       if (originalClassification.getWeight() < classificationWeightThreshold) {
 
-        logger.debug("Storing the verification classification of {}, as original classification weight was {} which is below the threshold of {}", verificationClassification, originalClassification.getWeight(), classificationWeightThreshold);
+        logger.debug(
+            "Storing the verification classification of {}, as original classification weight was {} which is below the threshold of {}",
+            verificationClassification,
+            originalClassification.getWeight(),
+            classificationWeightThreshold
+        );
 
         return verificationClassification;
       } else {

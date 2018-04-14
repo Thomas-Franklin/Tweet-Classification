@@ -30,6 +30,7 @@ public class TweetBodyProcessorTest {
         {"this sentence shouldn't have a url", "this sentence shouldn't have a url www.url.com"},
         {"the username shouldn't have an @ symbol", "the @username shouldn't have an @ symbol"},
         {"the hashtag shouldn't have a # symbol", "the #hashtag shouldn't have a # symbol"},
+        {"the hashtag shouldn't have any character returns", "the hashtag shouldn't have any\r\ncharacter\r\nreturns"},
         {"this sentence should follow the rules and usernames and hashtags shouldn't have their respective symbols, and additional spaces etc. should be removed along with urls",
             "This sentence should  follow the rules and @usernames and #hashtags shouldn't have their respective symbols, and additional   spaces etc. should be removed along with urls https://url.com"}
     };
