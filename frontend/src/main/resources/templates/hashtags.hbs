@@ -8,10 +8,10 @@
                     <a class="nav-link" role="tab" data-toggle="tab"
                        href="#default">Default Tab</a>
                 </li>
-                {{#each userResultsList}}
+                {{#each hashtagResultsList}}
                 <li class="nav-item">
                     <a class="nav-link" role="tab" data-toggle="tab"
-                       href="#{{this.username}}">{{this.username}}</a>
+                       href="#{{this.hashtagValue}}">{{this.hashtagValue}}</a>
                 </li>
                 {{/each}}
             </ul>
@@ -22,32 +22,32 @@
                         charts etc.</p>
                     <p>In the table on the right, please select the one you wish to view.</p>
                 </div>
-                {{#each userResultsList}}
-                <div id="{{this.username}}" class="container tab-pane fade" data-rumour="{{this.countOfRumours}}" data-non-rumour="{{this.countOfNonRumours}}"><br>
+                {{#each hashtagResultsList}}
+                <div id="{{this.hashtagValue}}" class="container tab-pane fade" data-rumour="{{this.countOfRumours}}" data-non-rumour="{{this.countOfNonRumours}}"><br>
                     <div class="tabs-x align-center tabs-above tab-bordered">
                         <ul class="nav nav-tabs mr-auto" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" id="{{this.username}}WordCloudTab" role="tab" data-toggle="tab" href="#{{this.username}}WordCloud" aria-controls="{{this.username}}WordCloud" aria-expanded="true">Word Cloud</a>
+                                <a class="nav-link active show" id="{{this.hashtagValue}}WordCloudTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}WordCloud" aria-controls="{{this.hashtagValue}}WordCloud" aria-expanded="true">Word Cloud</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="{{this.username}}PieChartTab" role="tab" data-toggle="tab" href="#{{this.username}}PieChart" data-target="#{{this.username}}PieChart">Pie Chart</a>
+                                <a class="nav-link" id="{{this.hashtagValue}}PieChartTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}PieChart" data-target="#{{this.hashtagValue}}PieChart">Pie Chart</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="{{this.username}}BarChartTab" role="tab" data-toggle="tab" href="#{{this.username}}BarChart" data-target="#{{this.username}}BarChart">Bar Chart</a>
+                                <a class="nav-link" id="{{this.hashtagValue}}BarChartTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}BarChart" data-target="#{{this.hashtagValue}}BarChart">Bar Chart</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="{{this.username}}WordCloud" class="container tab-pane fade show active" aria-labelledby="{{this.username}}WordCloud"><br>
+                            <div id="{{this.hashtagValue}}WordCloud" class="container tab-pane fade show active" aria-labelledby="{{this.hashtagValue}}WordCloud"><br>
                                 <img width="100%" src='data:image/png;base64,{{this.base64WordCloudImage}}'/>
                             </div>
-                            <div id="{{this.username}}PieChart" class="container tab-pane fade" aria-labelledby="{{this.username}}PieChartTab"><br>
+                            <div id="{{this.hashtagValue}}PieChart" class="container tab-pane fade" aria-labelledby="{{this.hashtagValue}}PieChartTab"><br>
                                 <div class="chart-container">
-                                    <canvas id="{{this.username}}PieChartCanvas"></canvas>
+                                    <canvas id="{{this.hashtagValue}}PieChartCanvas"></canvas>
                                 </div>
                             </div>
-                            <div id="{{this.username}}BarChart" class="container tab-pane fade" aria-labelledby="{{this.username}}BarChartTab"><br>
+                            <div id="{{this.hashtagValue}}BarChart" class="container tab-pane fade" aria-labelledby="{{this.hashtagValue}}BarChartTab"><br>
                                 <div class="chart-container">
-                                    <canvas id="{{this.username}}BarChartCanvas"></canvas>
+                                    <canvas id="{{this.hashtagValue}}BarChartCanvas"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -72,20 +72,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each userResultsList}}
+                        {{#each hashtagResultsList}}
                         <tr>
                             <th scope="row">{{increment @index}}</th>
                             <td>
                                 <div class="radiotext">
-                                    <label for="{{this.username}}RadioInput">{{this.username}}</label>
+                                    <label for="{{this.hashtagValue}}RadioInput">{{this.hashtagValue}}</label>
                                 </div>
                             </td>
                             <td>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" id="{{this.username}}RadioInput"
+                                        <input type="radio" id="{{this.hashtagValue}}RadioInput"
                                                name="hashtagRadioGroup"
-                                               data-target="#{{this.username}}">
+                                               data-target="#{{this.hashtagValue}}">
                                     </label>
                                 </div>
                             </td>
@@ -103,10 +103,10 @@
                 <li class="nav-item">
                     <a class="nav-link" role="tab" data-toggle="tab" href="#none">Default Tab</a>
                 </li>
-                {{#each userResultsList}}
+                {{#each hashtagResultsList}}
                 <li class="nav-item">
                     <a class="nav-link" role="tab" data-toggle="tab"
-                       href="#{{this.username}}RawData">{{this.username}} Raw Data</a>
+                       href="#{{this.hashtagValue}}RawData">{{this.hashtagValue}} Raw Data</a>
                 </li>
                 {{/each}}
             </ul>
@@ -114,17 +114,17 @@
                 <div id="none" class="container tab-pane active"><br>
                 </div>
 
-                {{#each userResultsList}}
-                <div id="{{this.username}}RawData" class="container tab-pane fade"
+                {{#each hashtagResultsList}}
+                <div id="{{this.hashtagValue}}RawData" class="container tab-pane fade"
                      data-size="{{this.totalCountOfClassifications}}"><br>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Raw Data for #{{this.username}}</h5>
+                            <h5 class="card-title text-center">Raw Data for #{{this.hashtagValue}}</h5>
                             <hr>
-                            <div id="{{this.username}}Table"></div>
+                            <div id="{{this.hashtagValue}}Table"></div>
                             <div class="justify-content-center">
                                 <nav>
-                                    <ul class="pagination justify-content-center" id="{{this.username}}Pagination"></ul>
+                                    <ul class="pagination justify-content-center" id="{{this.hashtagValue}}Pagination"></ul>
                                 </nav>
                             </div>
                         </div>
