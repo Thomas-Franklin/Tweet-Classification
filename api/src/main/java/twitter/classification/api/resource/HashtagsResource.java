@@ -11,12 +11,11 @@ import javax.ws.rs.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.api.persist.jdbc.models.HashtagTweetsModel;
 import twitter.classification.api.service.PaginatedHashtagResultsService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 
 @Singleton
-@Path("/hashtags/{value:[a-z0-9]+}")
+@Path("/hashtags/{value}")
 public class HashtagsResource {
 
   private static final Logger logger = LoggerFactory.getLogger(HashtagsResource.class);
@@ -40,12 +39,5 @@ public class HashtagsResource {
     logger.debug("Path params for value is {}, limit is {}, offset is {}", value, limit, offset);
 
     return paginatedHashtagResultsService.getPaginatedResultsHashtag(value, offset, limit);
-  }
-
-  @GET
-  @Path("/count")
-  public String getTotalCountOfResults() {
-
-    return "";
   }
 }
