@@ -15,7 +15,7 @@ public class TweetBodyProcessorTest {
   @UseDataProvider("dataProviderDifferentFormats")
   public void whenTweetHasX_preProcessWillProcessItAnd_returnX(String expectedReturn, String input) {
 
-    Assert.assertEquals(expectedReturn, TweetBodyProcessor.processTweetBody(input));
+    Assert.assertEquals(expectedReturn, new TweetBodyProcessor().processTweetBody(input));
   }
 
   @DataProvider

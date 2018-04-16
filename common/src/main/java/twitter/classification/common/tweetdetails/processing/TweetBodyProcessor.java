@@ -2,7 +2,7 @@ package twitter.classification.common.tweetdetails.processing;
 
 public class TweetBodyProcessor {
 
-  public static String processTweetBody(String tweetBody) {
+  public String processTweetBody(String tweetBody) {
 
     tweetBody = tweetBody.toLowerCase();
 

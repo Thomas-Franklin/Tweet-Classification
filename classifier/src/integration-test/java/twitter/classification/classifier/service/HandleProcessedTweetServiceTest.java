@@ -77,7 +77,7 @@ public class HandleProcessedTweetServiceTest {
     PreProcessedItem preProcessedItem = new PreProcessedItem();
 
     preProcessedItem.setOriginalTweetBody(randomTweetBody());
-    preProcessedItem.setProcessedTweetBody(TweetBodyProcessor.processTweetBody(preProcessedItem.getOriginalTweetBody()));
+    preProcessedItem.setProcessedTweetBody(new TweetBodyProcessor().processTweetBody(preProcessedItem.getOriginalTweetBody()));
     preProcessedItem.setUsername(randomUsername());
     preProcessedItem.setHashtags(randomHashtagList);
     preProcessedItem.setTweetId(randomTwitterTweetId);

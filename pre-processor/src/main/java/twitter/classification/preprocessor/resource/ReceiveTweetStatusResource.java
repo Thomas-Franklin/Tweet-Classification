@@ -72,7 +72,7 @@ public class ReceiveTweetStatusResource {
 
       // this is where the pre processing will occur if the configuration value is set
       if (usePreProcessing) {
-        preProcessedItem.setProcessedTweetBody(TweetBodyProcessor.processTweetBody(status.getText()));
+        preProcessedItem.setProcessedTweetBody(new TweetBodyProcessor().processTweetBody(status.getText()));
       } else {
         preProcessedItem.setProcessedTweetBody(status.getText());
       }
