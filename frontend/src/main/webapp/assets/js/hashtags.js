@@ -47,7 +47,7 @@ function getHashtagTable(target, page) {
                         // page 1 on pagination should relate to offset 0 on DB
                         dbPage = 0;
                     } else {
-                        dbPage = page * 10;
+                        dbPage = (page * 10) - 10;
                     }
 
                     getHashtagTable(target, dbPage);

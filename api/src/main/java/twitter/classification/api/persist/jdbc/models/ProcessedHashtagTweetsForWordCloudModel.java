@@ -6,12 +6,10 @@ import twitter.classification.common.persist.Column;
 import twitter.classification.common.persist.Entity;
 
 @Entity
-public class ProcessedHashtagTweetsForWordCloudModel {
+public class ProcessedHashtagTweetsForWordCloudModel extends ProcessedUserTweetsForWordCloudModel {
 
   @Column(name = "hashtag_value")
   private String hashtagValue;
-  @Column(name = "processed_tweet_text")
-  private String originalTextList;
 
   public ProcessedHashtagTweetsForWordCloudModel() {
   }
@@ -24,15 +22,5 @@ public class ProcessedHashtagTweetsForWordCloudModel {
   public void setHashtagValue(String hashtagValue) {
 
     this.hashtagValue = hashtagValue;
-  }
-
-  public String getOriginalTextList() {
-
-    return originalTextList;
-  }
-
-  public void setOriginalTextList(String originalTextList) {
-
-    this.originalTextList = originalTextList;
   }
 }

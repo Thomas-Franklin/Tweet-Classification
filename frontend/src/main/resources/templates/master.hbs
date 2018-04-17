@@ -44,6 +44,17 @@
 </head>
 <body>
 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/assets/js/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap/bootstrap-tabs-x.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap/jquery.twbsPagination.min.js" type="text/javascript"></script>
+<script src="/assets/js/chart/Chart.bundle.min.js" type="text/javascript"></script>
+
+<script src="/assets/js/navigation.js" type="text/javascript"></script>
+
 <!--
   Navbar will be consistent throughout
  -->
@@ -56,6 +67,12 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search hashtags/users" id="searchTermValue">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchTerm">Search</button>
+                </form>
+            </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link {{pathIsActive this path 'dashboard'}}" href="/">Dashboard</a>
                 </li>
@@ -74,14 +91,7 @@
     </div>
 </nav>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/assets/js/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
-<script src="/assets/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-<script src="/assets/js/bootstrap/bootstrap-tabs-x.min.js" type="text/javascript"></script>
-<script src="/assets/js/bootstrap/jquery.twbsPagination.min.js" type="text/javascript"></script>
-<script src="/assets/js/chart/Chart.bundle.min.js" type="text/javascript"></script>
+<section class="messages"></section>
 
 <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
     <main>
