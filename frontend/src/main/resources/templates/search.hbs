@@ -4,34 +4,7 @@
         <div class="visualisation-boards">
             <h1>Search results for: <span class="search-term">{{searchTerm}}</span></h1>
             <div id="{{searchTerm}}" class="container" data-rumour="{{countOfRumours}}" data-non-rumour="{{countOfNonRumours}}"><br>
-                <div class="tabs-x align-center tabs-above tab-bordered">
-                    <ul class="nav nav-tabs mr-auto" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active show" id="searchTermWordCloudTab" role="tab" data-toggle="tab" href="#searchTermWordCloud" aria-controls="searchTermWordCloud" aria-expanded="true">Word Cloud</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="searchTermPieChartTab" role="tab" data-toggle="tab" href="#searchTermPieChart" data-target="#searchTermPieChart">Pie Chart</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="searchTermBarChartTab" role="tab" data-toggle="tab" href="#searchTermBarChart" data-target="#searchTermBarChart">Bar Chart</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="searchTermWordCloud" class="container tab-pane fade show active" aria-labelledby="searchTermWordCloud"><br>
-                            <img width="100%" src='data:image/png;base64,{{base64WordCloudImage}}'/>
-                        </div>
-                        <div id="searchTermPieChart" class="container tab-pane fade" aria-labelledby="searchTermPieChartTab"><br>
-                            <div class="chart-container">
-                                <canvas id="searchTermPieChartCanvas"></canvas>
-                            </div>
-                        </div>
-                        <div id="searchTermBarChart" class="container tab-pane fade" aria-labelledby="searchTermBarChartTab"><br>
-                            <div class="chart-container">
-                                <canvas id="searchTermBarChartCanvas"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{> partials/visualisation-board value="searchTerm" base64WordCloudImage=base64WordCloudImage}}
             </div>
         </div>
     </div>

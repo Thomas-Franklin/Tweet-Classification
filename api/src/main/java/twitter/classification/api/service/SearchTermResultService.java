@@ -8,10 +8,7 @@ import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.PaginatedSearchTermTweetsDao;
 import twitter.classification.api.persist.jdbc.SelectSearchTermClassificationCountDao;
-import twitter.classification.api.persist.jdbc.TweetsForSearchTermDao;
 import twitter.classification.api.persist.jdbc.models.ClassificationCountModel;
-import twitter.classification.api.persist.jdbc.models.ProcessedTweetsForWordCloudModel;
-import twitter.classification.api.wordclouds.WordCloudCreationService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.SearchResultsResponse;
 import twitter.classification.common.persist.DbConnection;
@@ -19,19 +16,16 @@ import twitter.classification.common.persist.DbConnection;
 public class SearchTermResultService {
 
   private SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao;
-  private TweetsForSearchTermDao tweetsForSearchTermDao;
   private PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao;
 
   @Inject
   public SearchTermResultService(
       SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao,
-      TweetsForSearchTermDao tweetsForSearchTermDao,
       PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao
   ) {
 
 
     this.selectSearchTermClassificationCountDao = selectSearchTermClassificationCountDao;
-    this.tweetsForSearchTermDao = tweetsForSearchTermDao;
     this.paginatedSearchTermTweetsDao = paginatedSearchTermTweetsDao;
   }
 
@@ -58,13 +52,6 @@ public class SearchTermResultService {
     searchResultsResponse.setCountOfNonRumours(classificationCountModel.getCountOfNonRumours() != null ? classificationCountModel.getCountOfNonRumours().intValue() : null);
     searchResultsResponse.setTotalCountOfClassifications(classificationCountModel.getTotalClassificationCount() != null ? classificationCountModel.getTotalClassificationCount().intValue() : null);
 
-    List<String> wordCloudList = new ArrayList<>();
-
-    for (ProcessedTweetsForWordCloudModel processedTweetsForWordCloudModel : tweetsForSearchTermDao.get(searchTerm)) {
-      wordCloudList.add(processedTweetsForWordCloudModel.getOriginalTextList());
-    }
-
-    searchResultsResponse.setBase64WordCloudImage(new WordCloudCreationService().base64String(wordCloudList));
 
     return searchResultsResponse;
   }

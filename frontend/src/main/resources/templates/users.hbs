@@ -24,34 +24,7 @@
                 </div>
                 {{#each userResultsList}}
                 <div id="{{this.username}}" class="container tab-pane fade" data-rumour="{{this.countOfRumours}}" data-non-rumour="{{this.countOfNonRumours}}"><br>
-                    <div class="tabs-x align-center tabs-above tab-bordered">
-                        <ul class="nav nav-tabs mr-auto" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active show" id="{{this.username}}WordCloudTab" role="tab" data-toggle="tab" href="#{{this.username}}WordCloud" aria-controls="{{this.username}}WordCloud" aria-expanded="true">Word Cloud</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="{{this.username}}PieChartTab" role="tab" data-toggle="tab" href="#{{this.username}}PieChart" data-target="#{{this.username}}PieChart">Pie Chart</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="{{this.username}}BarChartTab" role="tab" data-toggle="tab" href="#{{this.username}}BarChart" data-target="#{{this.username}}BarChart">Bar Chart</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="{{this.username}}WordCloud" class="container tab-pane fade show active" aria-labelledby="{{this.username}}WordCloud"><br>
-                                <img width="100%" src='data:image/png;base64,{{this.base64WordCloudImage}}'/>
-                            </div>
-                            <div id="{{this.username}}PieChart" class="container tab-pane fade" aria-labelledby="{{this.username}}PieChartTab"><br>
-                                <div class="chart-container">
-                                    <canvas id="{{this.username}}PieChartCanvas"></canvas>
-                                </div>
-                            </div>
-                            <div id="{{this.username}}BarChart" class="container tab-pane fade" aria-labelledby="{{this.username}}BarChartTab"><br>
-                                <div class="chart-container">
-                                    <canvas id="{{this.username}}BarChartCanvas"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{> partials/visualisation-board value=this.username base64WordCloudImage=this.base64WordCloudImage}}
                 </div>
                 {{/each}}
             </div>

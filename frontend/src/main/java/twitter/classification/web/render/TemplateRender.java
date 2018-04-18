@@ -10,4 +10,11 @@ public interface TemplateRender {
    * @return template String
    */
   String render(String templateName, Object context);
+
+  /**
+   * Precompile templates based on template name
+   *
+   * @param templateName
+   */
+  void precompile(String templateName);
 }

@@ -43,6 +43,16 @@ public class HandleBarsTemplateRender implements TemplateRender {
     }
   }
 
+  @Override
+  public void precompile(String templateName) {
+
+    try {
+      handlebars.compile(templateName);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   private static Helper<Object> listGroupColourHelper() {
 
     return ((context, options) -> options.param(0) ? "list-group-item-success" : "list-group-item-danger");

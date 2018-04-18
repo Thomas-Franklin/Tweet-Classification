@@ -14,8 +14,6 @@ public class UserResults implements Serializable {
   private Integer countOfNonRumours;
   @JsonProperty("totalCountOfClassifications")
   private Integer totalCountOfClassifications;
-  @JsonProperty("base64WordCloudImage")
-  private String base64WordCloudImage;
 
   public UserResults() {
   }
@@ -58,15 +56,5 @@ public class UserResults implements Serializable {
   public void setTotalCountOfClassifications(Integer totalCountOfClassifications) {
 
     this.totalCountOfClassifications = totalCountOfClassifications;
-  }
-
-  public String getBase64WordCloudImage() {
-
-    return base64WordCloudImage;
-  }
-
-  public void setBase64WordCloudImage(String base64WordCloudImage) {
-
-    this.base64WordCloudImage = base64WordCloudImage;
   }
 }

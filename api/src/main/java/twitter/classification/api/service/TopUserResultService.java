@@ -1,16 +1,12 @@
 package twitter.classification.api.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.SelectTopUsersClassificationCountDao;
-import twitter.classification.api.persist.jdbc.TweetsForUsersDao;
-import twitter.classification.api.persist.jdbc.models.ProcessedUserTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.models.TopUsersClassificationModel;
-import twitter.classification.api.wordclouds.WordCloudCreationService;
 import twitter.classification.common.models.TopUsersResponse;
 import twitter.classification.common.models.UserResults;
 import twitter.classification.common.persist.DbConnection;
@@ -18,17 +14,14 @@ import twitter.classification.common.persist.DbConnection;
 public class TopUserResultService {
 
   private SelectTopUsersClassificationCountDao selectTopUsersClassificationCountDao;
-  private TweetsForUsersDao tweetsForUsersDao;
 
   @Inject
   public TopUserResultService(
-      SelectTopUsersClassificationCountDao selectTopUsersClassificationCountDao,
-      TweetsForUsersDao tweetsForUsersDao
+      SelectTopUsersClassificationCountDao selectTopUsersClassificationCountDao
   ) {
 
 
     this.selectTopUsersClassificationCountDao = selectTopUsersClassificationCountDao;
-    this.tweetsForUsersDao = tweetsForUsersDao;
   }
 
   /**
@@ -55,15 +48,6 @@ public class TopUserResultService {
       userResults.setCountOfNonRumours(topUsersClassificationModel.getCountOfNonRumours().intValue());
       userResults.setCountOfRumours(topUsersClassificationModel.getCountOfRumours().intValue());
       userResults.setTotalCountOfClassifications(topUsersClassificationModel.getTotalClassificationCount().intValue());
-
-      List<ProcessedUserTweetsForWordCloudModel> processedUserTweetsForWordCloudModels = tweetsForUsersDao.get(topUsersClassificationModel.getUsername());
-      List<String> wordCloudList = new ArrayList<>();
-
-      for (ProcessedUserTweetsForWordCloudModel processedUserTweetsForWordCloudModel : processedUserTweetsForWordCloudModels) {
-        wordCloudList.add(processedUserTweetsForWordCloudModel.getOriginalTextList());
-      }
-
-      userResults.setBase64WordCloudImage(new WordCloudCreationService().base64String(wordCloudList));
 
       topUsersResponse.addUserResult(userResults);
     }
