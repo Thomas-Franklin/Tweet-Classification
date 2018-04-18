@@ -8,32 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap-tabs-x.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap/footer.css" type="text/css">
 
     <title>Tweet Classification</title>
 
     <style>
-        .footer {
-            padding: 50px 0 20px 0;
-        }
-
-        .footer .title {
-            text-align: left;
-            color: #fff;
-            font-size: 25px;
-        }
-
-        .filter a {
-            text-decoration: none;
-            color: #fff;
-            display: inline-block;
-            padding: 5px 20px;
-            margin: 1px;
-            border-radius:4px;
-            margin-top: 6px;
-            background-color: black;
-            border: solid 1px #fff;
-        }
-
         .chart-container {
             position: relative;
             height: 40vh;
@@ -60,7 +39,7 @@
  -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark navbar-fixed">
     <div class="container">
-        <a class="navbar-brand" href="#">Tweet Classification</a>
+        <a class="navbar-brand" href="/">Tweet Classification</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -93,33 +72,41 @@
 
 <section class="messages"></section>
 
+<div class="content">
 <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
     <main>
         {{#block "content"}}{{/block}}
     </main>
 </div>
+</div>
 
-<footer class="footer bg-dark">
+<footer id="myFooter">
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h4 class="title">About</h4>
+                <h5>About</h5>
                 <p class="text-light">A Final Year Project for BEng in Software Engineering for Ulster University.</p>
             </div>
             <div class="col-sm-6">
-                <div class="text-center">
+                <div class="text-center" style="margin-top: 20px;">
                     <img src="https://www.aspenpeople.co.uk/UU/images/logo_white.png" style="width: 300px; height: 100px;">
                 </div>
             </div>
-            <div class="col-sm-3">
-                <h4 class="title">Contact</h4>
+            <div class="col-sm-3 info">
+                <h5>Contact</h5>
                 <p class="text-light">Thomas Franklin</p>
                 <p class="text-light">franklin-t@ulster.ac.uk</p>
             </div>
         </div>
-        <hr>
-
-        <div class="row text-center text-light"> © 2018. Tweet Classification.</div>
+    </div>
+    <div class="second-bar">
+        <div class="container">
+            <h2 class="logo"><a href="/">Tweet Classification</a></h2>
+            <div class="social-icons">
+                <a href="/users">Users</a>
+                <a href="/hashtags">Hashtags</a>
+            </div>
+        </div>
     </div>
 </footer>
 </body>

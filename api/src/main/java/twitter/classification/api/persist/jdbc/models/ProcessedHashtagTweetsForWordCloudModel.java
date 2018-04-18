@@ -6,7 +6,7 @@ import twitter.classification.common.persist.Column;
 import twitter.classification.common.persist.Entity;
 
 @Entity
-public class ProcessedHashtagTweetsForWordCloudModel extends ProcessedUserTweetsForWordCloudModel {
+public class ProcessedHashtagTweetsForWordCloudModel extends ProcessedTweetsForWordCloudModel {
 
   @Column(name = "hashtag_value")
   private String hashtagValue;

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ public class ResultSetMapper<T> {
   public List<T> mapResultSetToClass(ResultSet resultSet, Class classToMap) {
 
     List<T> outputList = new ArrayList<>();
+    List<Field> fields = getAllFields(new ArrayList<>(), classToMap);
 
     try {
 
@@ -42,7 +44,7 @@ public class ResultSetMapper<T> {
 
             Object columnValue = resultSet.getObject(i);
 
-            for (Field field : classToMap.getDeclaredFields()) {
+            for (Field field : fields) {
 
               // only want to map the fields which are related to database results
               if (field.isAnnotationPresent(Column.class)) {
@@ -74,6 +76,23 @@ public class ResultSetMapper<T> {
   }
 
   /**
+   * Method to get all possible fields including those in the super() class
+   *
+   * @param fields
+   * @param type
+   * @return
+   */
+  private List<Field> getAllFields(List<Field> fields, Class<?> type) {
+    fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+    if (type.getSuperclass() != null) {
+      getAllFields(fields, type.getSuperclass());
+    }
+
+    return fields;
+  }
+
+  /**
    * Method to set the field properties of the class
    *
    * @param clazz
@@ -82,8 +101,16 @@ public class ResultSetMapper<T> {
    */
   private void setProperty(Object clazz, String fieldName, Object columnValue) {
     try {
-
-      Field field = clazz.getClass().getDeclaredField(fieldName);
+      Field field;
+      if (clazz.getClass().getSuperclass() != null) {
+        try {
+          field = clazz.getClass().getSuperclass().getDeclaredField(fieldName);
+        } catch (NoSuchFieldException exception) {
+          field = clazz.getClass().getDeclaredField(fieldName);
+        }
+      } else {
+        field = clazz.getClass().getDeclaredField(fieldName);
+      }
       // as the fields are private need to alter it
       field.setAccessible(true);
       field.set(clazz, columnValue);

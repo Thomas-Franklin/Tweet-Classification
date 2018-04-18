@@ -52,7 +52,6 @@ public class SelectSearchTermClassificationCountDao {
     try {
       List<ClassificationCountModel> classificationCountModelList = dbQueryRunner.executeQuery(new SelectSearchTermClassificationCountDbQuery().buildQuery(), ClassificationCountModel.class, "xxxsdsds", "xxxsdsds");
 
-      System.out.println();
 
     } catch (SQLException e) {
       e.printStackTrace();

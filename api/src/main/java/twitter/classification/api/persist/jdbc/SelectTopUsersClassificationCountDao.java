@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import twitter.classification.api.persist.jdbc.models.TopUsersClassificationModel;
 import twitter.classification.api.persist.jdbc.queries.SelectTopUsersClassificationCountDbQuery;
+import twitter.classification.common.persist.ConnectionFactory;
 import twitter.classification.common.persist.ConnectionManager;
+import twitter.classification.common.persist.jdbc.MySqlConnectionFactory;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
 public class SelectTopUsersClassificationCountDao {
@@ -35,5 +37,21 @@ public class SelectTopUsersClassificationCountDao {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public static void main(String[] args) {
+
+    ConnectionFactory connectionFactory = new MySqlConnectionFactory("twitter", "password", "jdbc:mysql://localhost:3307/twitter_classification?autoReconnect=true&useSSL=false");
+
+    DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionFactory.getConnection());
+
+    try {
+      List<TopUsersClassificationModel> classificationCountModelList = dbQueryRunner.executeQuery(new SelectTopUsersClassificationCountDbQuery().buildQuery(), TopUsersClassificationModel.class);
+
+      System.out.println(classificationCountModelList.get(0).getCountOfNonRumours());
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
