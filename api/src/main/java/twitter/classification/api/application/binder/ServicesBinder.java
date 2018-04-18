@@ -16,13 +16,15 @@ import twitter.classification.api.persist.jdbc.SelectTopHashtagsClassificationCo
 import twitter.classification.api.persist.jdbc.SelectTopUsersClassificationCountDao;
 import twitter.classification.api.persist.jdbc.TestDatabaseConnectionDao;
 import twitter.classification.api.persist.jdbc.TimeLineForHashtagsDao;
+import twitter.classification.api.persist.jdbc.TimeLineForSearchTermDao;
+import twitter.classification.api.persist.jdbc.TimeLineForUsersDao;
 import twitter.classification.api.persist.jdbc.TweetsForHashtagsDao;
 import twitter.classification.api.persist.jdbc.TweetsForSearchTermDao;
 import twitter.classification.api.persist.jdbc.TweetsForUsersDao;
 import twitter.classification.api.service.DashBoardOverviewService;
 import twitter.classification.api.service.DashBoardServicesStatusService;
 import twitter.classification.api.service.HashtagResultsService;
-import twitter.classification.api.service.PaginatedUserResultsService;
+import twitter.classification.api.service.UserResultsService;
 import twitter.classification.api.service.SearchTermResultService;
 import twitter.classification.api.service.TopHashTagResultService;
 import twitter.classification.api.service.TopUserResultService;
@@ -52,13 +54,15 @@ public class ServicesBinder extends AbstractBinder {
     bind(TweetsForSearchTermDao.class).to(TweetsForSearchTermDao.class);
     bind(PaginatedSearchTermTweetsDao.class).to(PaginatedSearchTermTweetsDao.class);
     bind(TimeLineForHashtagsDao.class).to(TimeLineForHashtagsDao.class);
+    bind(TimeLineForUsersDao.class).to(TimeLineForUsersDao.class);
+    bind(TimeLineForSearchTermDao.class).to(TimeLineForSearchTermDao.class);
 
     bind(DashBoardOverviewService.class).to(DashBoardOverviewService.class);
     bind(DashBoardServicesStatusService.class).to(DashBoardServicesStatusService.class);
     bind(TopHashTagResultService.class).to(TopHashTagResultService.class);
     bind(TopUserResultService.class).to(TopUserResultService.class);
     bind(HashtagResultsService.class).to(HashtagResultsService.class);
-    bind(PaginatedUserResultsService.class).to(PaginatedUserResultsService.class);
+    bind(UserResultsService.class).to(UserResultsService.class);
     bind(SearchTermResultService.class).to(SearchTermResultService.class);
 
     bind(DbConnectionResolver.class).to(DbConnectionResolver.class).in(Singleton.class);

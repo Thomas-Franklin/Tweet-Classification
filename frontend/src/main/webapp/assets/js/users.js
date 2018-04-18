@@ -6,6 +6,7 @@ $('input[name="userRadioGroup"]').click(function () {
     getUsersTable(target, 0);
     getUsersPieChart(target);
     getUsersBarChart(target);
+    getUsersTimeLineChart(target);
 });
 
 function getUsersTable(target, page) {
@@ -18,7 +19,7 @@ function getUsersTable(target, page) {
 
             $("div" + target + "Table").empty();
 
-            var table = "<table class=\"table table-striped\">" +
+            var table = "<table class=\"table table-striped table-sm\">" +
                 "<thead>" +
                 "<tr>" +
                 "<th scope=\"col\">Tweet ID</th>" +
@@ -37,7 +38,7 @@ function getUsersTable(target, page) {
             $("div" + target + "Table").append(table);
 
             $(target + "Pagination").twbsPagination({
-                totalPages: $("div" + target + "RawData").data("size") / 10,
+                totalPages: Math.ceil($("div" + target + "RawData").data("size") / 10),
                 visiblePages: 4,
                 onPageClick: function (event, page) {
 
@@ -155,4 +156,54 @@ function getUsersBarChart(target) {
             }
         }
     }));
+}
+
+function getUsersTimeLineChart(target) {
+    $.ajax({
+        url: 'http://localhost:9000/users/'+target.substring(1, target.length)+'/timeline',
+        dataType: 'json',
+        async: true,
+        success: function (data) {
+            var canvas = $("canvas" + target + "TimeLineChartCanvas");
+
+            (new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: ["Within last hour", "1-2 hours ago", "2-3 hours ago", "3-4 hours ago", "4-5 hours ago"],
+                    datasets: [{
+                        label: "rumour",
+                        data: [data.rumoursLastHour, data.rumoursOverOneHour, data.rumoursOverTwoHour, data.rumoursOverThreeHour, data.rumoursOverFourHour],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        fill: false
+                    }, {
+                        label: "non-rumour",
+                        data: [data.nonRumoursLastHour, data.nonRumoursOverOneHour, data.nonRumoursOverTwoHour, data.nonRumoursOverThreeHour, data.nonRumoursOverFourHour],
+                        borderColor: 'rgb(75, 192, 192',
+                        backgroundColor: 'rgb(75, 192, 192',
+                        fill: false
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: "Timeline of Rumours and Non-Rumours for " + target.substring(1, target.length) + " within last 5 hours"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            }));
+        }
+    });
 }

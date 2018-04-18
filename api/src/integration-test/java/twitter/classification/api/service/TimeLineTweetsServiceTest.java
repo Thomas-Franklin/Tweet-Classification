@@ -7,9 +7,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.api.integration.DbIntegrationHelper;
 import twitter.classification.api.persist.jdbc.PaginatedHashtagTweetsDao;
+import twitter.classification.api.persist.jdbc.PaginatedSearchTermTweetsDao;
+import twitter.classification.api.persist.jdbc.SelectSearchTermClassificationCountDao;
 import twitter.classification.api.persist.jdbc.TimeLineForHashtagsDao;
+import twitter.classification.api.persist.jdbc.TimeLineForSearchTermDao;
 import twitter.classification.common.models.TimeLineForTweets;
 import twitter.classification.common.persist.ConnectionManager;
 

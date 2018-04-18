@@ -6,8 +6,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class SearchResultsResponse implements Serializable {
 
-  @JsonProperty("base64WordCloudImage")
-  private String base64WordCloudImage;
   @JsonProperty("countOfRumours")
   private Integer countOfRumours;
   @JsonProperty("countOfNonRumours")
@@ -16,16 +14,6 @@ public class SearchResultsResponse implements Serializable {
   private Integer totalCountOfClassifications;
 
   public SearchResultsResponse() {
-  }
-
-  public String getBase64WordCloudImage() {
-
-    return base64WordCloudImage;
-  }
-
-  public void setBase64WordCloudImage(String base64WordCloudImage) {
-
-    this.base64WordCloudImage = base64WordCloudImage;
   }
 
   public Integer getCountOfRumours() {

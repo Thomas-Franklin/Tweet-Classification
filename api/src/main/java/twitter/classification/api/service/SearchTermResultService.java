@@ -8,25 +8,31 @@ import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.PaginatedSearchTermTweetsDao;
 import twitter.classification.api.persist.jdbc.SelectSearchTermClassificationCountDao;
+import twitter.classification.api.persist.jdbc.TimeLineForSearchTermDao;
 import twitter.classification.api.persist.jdbc.models.ClassificationCountModel;
+import twitter.classification.api.persist.jdbc.models.TimeLineForTweetsModel;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.SearchResultsResponse;
+import twitter.classification.common.models.TimeLineForTweets;
 import twitter.classification.common.persist.DbConnection;
 
 public class SearchTermResultService {
 
   private SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao;
   private PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao;
+  private TimeLineForSearchTermDao timeLineForSearchTermDao;
 
   @Inject
   public SearchTermResultService(
       SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao,
-      PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao
+      PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao,
+      TimeLineForSearchTermDao timeLineForSearchTermDao
   ) {
 
 
     this.selectSearchTermClassificationCountDao = selectSearchTermClassificationCountDao;
     this.paginatedSearchTermTweetsDao = paginatedSearchTermTweetsDao;
+    this.timeLineForSearchTermDao = timeLineForSearchTermDao;
   }
 
   /**
@@ -66,5 +72,23 @@ public class SearchTermResultService {
   public List<ClassificationValueForTweets> getPaginatedResults(String searchTerm, int offset, int limit) {
 
     return new PaginatedResultsService().paginatedResults(new ArrayList<>(), paginatedSearchTermTweetsDao.get(searchTerm, offset, limit));
+  }
+
+  @DbConnection
+  public TimeLineForTweets getTimeLineForSearchTerm(String searchTerm) {
+
+    TimeLineForTweetsModel timeLineForTweetsModel = timeLineForSearchTermDao.get(searchTerm).get(0);
+
+    return new TimeLineForTweets()
+        .setNonRumoursLastHour(timeLineForTweetsModel.getCountOfNonRumoursLastHour())
+        .setRumoursLastHour(timeLineForTweetsModel.getCountOfRumoursLastHour())
+        .setNonRumoursOverOneHour(timeLineForTweetsModel.getCountOfNonRumoursOverAnHour())
+        .setRumoursOverOneHour(timeLineForTweetsModel.getCountOfRumoursOverAnHour())
+        .setNonRumoursOverTwoHour(timeLineForTweetsModel.getCountOfNonRumoursOverTwoHours())
+        .setRumoursOverTwoHour(timeLineForTweetsModel.getCountOfRumoursOverTwoHours())
+        .setNonRumoursOverThreeHour(timeLineForTweetsModel.getCountOfNonRumoursOverThreeHours())
+        .setRumoursOverThreeHour(timeLineForTweetsModel.getCountOfRumoursOverThreeHours())
+        .setNonRumoursOverFourHour(timeLineForTweetsModel.getCountOfNonRumoursOverFourHours())
+        .setRumoursOverFourHour(timeLineForTweetsModel.getCountOfRumoursOverFourHours());
   }
 }

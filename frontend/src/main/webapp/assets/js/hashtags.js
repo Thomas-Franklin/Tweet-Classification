@@ -6,7 +6,7 @@ $('input[name="hashtagRadioGroup"]').click(function () {
     getHashtagTable(target, 0);
     getHashtagPieChart(target);
     getHashtagBarChart(target);
-    getTimeLineChart(target);
+    getHashtagTimeLineChart(target);
 });
 
 function getHashtagTable(target, page) {
@@ -19,7 +19,7 @@ function getHashtagTable(target, page) {
 
             $("div" + target + "Table").empty();
 
-            var table = "<table class=\"table table-striped\">" +
+            var table = "<table class=\"table table-striped table-sm\">" +
                 "<thead>" +
                 "<tr>" +
                 "<th scope=\"col\">Tweet ID</th>" +
@@ -38,7 +38,7 @@ function getHashtagTable(target, page) {
             $("div" + target + "Table").append(table);
 
             $(target + "Pagination").twbsPagination({
-                totalPages: $("div" + target + "RawData").data("size") / 10,
+                totalPages: Math.ceil($("div" + target + "RawData").data("size") / 10),
                 visiblePages: 4,
                 onPageClick: function (event, page) {
 
@@ -158,7 +158,7 @@ function getHashtagBarChart(target) {
     }));
 }
 
-function getTimeLineChart(target) {
+function getHashtagTimeLineChart(target) {
     $.ajax({
         url: 'http://localhost:9000/hashtags/'+target.substring(1, target.length)+'/timeline',
         dataType: 'json',

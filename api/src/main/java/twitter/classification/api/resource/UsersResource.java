@@ -11,8 +11,9 @@ import javax.ws.rs.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.api.service.PaginatedUserResultsService;
+import twitter.classification.api.service.UserResultsService;
 import twitter.classification.common.models.ClassificationValueForTweets;
+import twitter.classification.common.models.TimeLineForTweets;
 
 @Singleton
 @Path("/users/{value}")
@@ -20,12 +21,12 @@ public class UsersResource {
 
   private static final Logger logger = LoggerFactory.getLogger(UsersResource.class);
 
-  private PaginatedUserResultsService paginatedUserResultsService;
+  private UserResultsService userResultsService;
 
   @Inject
-  public UsersResource(PaginatedUserResultsService paginatedUserResultsService) {
+  public UsersResource(UserResultsService userResultsService) {
 
-    this.paginatedUserResultsService = paginatedUserResultsService;
+    this.userResultsService = userResultsService;
   }
 
   @GET
@@ -38,6 +39,15 @@ public class UsersResource {
 
     logger.debug("Path params for value is {}, limit is {}, offset is {}", value, limit, offset);
 
-    return paginatedUserResultsService.getPaginatedUserResults(value, offset, limit);
+    return userResultsService.getPaginatedUserResults(value, offset, limit);
+  }
+
+  @GET
+  @Path("/timeline")
+  public TimeLineForTweets getTimeLineForUsername(
+      @PathParam("value") String value
+  ) {
+
+    return userResultsService.getTimeLineForUsername(value);
   }
 }

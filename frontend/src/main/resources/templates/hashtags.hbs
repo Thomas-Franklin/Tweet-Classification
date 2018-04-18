@@ -24,7 +24,7 @@
                 </div>
                 {{#each hashtagResultsList}}
                 <div id="{{this.hashtagValue}}" class="container tab-pane fade" data-rumour="{{this.countOfRumours}}" data-non-rumour="{{this.countOfNonRumours}}"><br>
-                    {{> partials/visualisation-board value=this.hashtagValue base64WordCloudImage=this.base64WordCloudImage}}
+                    {{> partials/visualisation-board value=this.hashtagValue }}
                 </div>
                 {{/each}}
             </div>
@@ -94,6 +94,9 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Raw Data for #{{this.hashtagValue}}</h5>
                             <hr>
+                            <div class="total-results-tip justify-content-center text-right" id="{{this.hashtagValue}}PaginationTip">
+                                <p>Total results: {{this.totalCountOfClassifications}}</p>
+                            </div>
                             <div id="{{this.hashtagValue}}Table"></div>
                             <div class="justify-content-center">
                                 <nav>

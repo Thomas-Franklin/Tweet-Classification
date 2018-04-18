@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import twitter.classification.api.service.SearchTermResultService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.SearchResultsResponse;
+import twitter.classification.common.models.TimeLineForTweets;
 
 @Singleton
 @Path("/search/{value}")
@@ -49,5 +50,14 @@ public class SearchResource {
     logger.debug("Path params for value is {}, limit is {}, offset is {}", searchValue, limit, offset);
 
     return searchTermResultService.getPaginatedResults(searchValue, offset, limit);
+  }
+
+  @GET
+  @Path("/timeline")
+  public TimeLineForTweets getTimeLineForSearchTerm(
+      @PathParam("value") String value
+  ) {
+
+    return searchTermResultService.getTimeLineForSearchTerm(value);
   }
 }

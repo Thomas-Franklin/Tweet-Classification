@@ -3,8 +3,8 @@
     <div class="col-md-8 mb-1">
         <div class="visualisation-boards">
             <h1>Search results for: <span class="search-term">{{searchTerm}}</span></h1>
-            <div id="{{searchTerm}}" class="container" data-rumour="{{countOfRumours}}" data-non-rumour="{{countOfNonRumours}}"><br>
-                {{> partials/visualisation-board value="searchTerm" base64WordCloudImage=base64WordCloudImage}}
+            <div id="searchTerm" class="container" data-rumour="{{countOfRumours}}" data-non-rumour="{{countOfNonRumours}}"><br>
+                {{> partials/visualisation-board value="searchTerm" }}
             </div>
         </div>
     </div>
@@ -16,6 +16,9 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Raw Data for {{searchTerm}}</h5>
                         <hr>
+                        <div class="total-results-tip justify-content-center text-right" id="searchTermPaginationTip">
+                            <p>Total results: {{totalCountOfClassifications}}</p>
+                        </div>
                         <div id="searchTermTable"></div>
                         <div class="justify-content-center">
                             <nav>

@@ -26,7 +26,6 @@ public class SearchResource {
   private static final Logger logger = LoggerFactory.getLogger(SearchResource.class);
 
   private static String SEARCH_TERM_VALUE = "searchTerm";
-  private static String BASE64_WORD_CLOUD = "base64WordCloudImage";
   private static String COUNT_OF_RUMOURS = "countOfRumours";
   private static String COUNT_OF_NON_RUMOURS = "countOfNonRumours";
   private static String TOTAL_COUNT_OF_CLASSIFICATIONS = "totalCountOfClassifications";
@@ -63,7 +62,6 @@ public class SearchResource {
     map.put(SEARCH_TERM_VALUE, searchTerm);
     map.put(COUNT_OF_RUMOURS, searchResultsResponse.getCountOfRumours());
     map.put(COUNT_OF_NON_RUMOURS, searchResultsResponse.getCountOfNonRumours());
-    map.put(BASE64_WORD_CLOUD, searchResultsResponse.getBase64WordCloudImage());
     map.put(TOTAL_COUNT_OF_CLASSIFICATIONS, searchResultsResponse.getTotalCountOfClassifications());
 
     return templateRender.render("search", map);

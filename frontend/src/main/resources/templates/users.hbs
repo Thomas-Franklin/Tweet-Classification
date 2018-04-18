@@ -24,7 +24,7 @@
                 </div>
                 {{#each userResultsList}}
                 <div id="{{this.username}}" class="container tab-pane fade" data-rumour="{{this.countOfRumours}}" data-non-rumour="{{this.countOfNonRumours}}"><br>
-                    {{> partials/visualisation-board value=this.username base64WordCloudImage=this.base64WordCloudImage}}
+                    {{> partials/visualisation-board value=this.username }}
                 </div>
                 {{/each}}
             </div>
@@ -94,6 +94,9 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Raw Data for {{this.username}}</h5>
                             <hr>
+                            <div class="total-results-tip justify-content-center text-right" id="{{this.username}}PaginationTip">
+                                <p>Total results: {{this.totalCountOfClassifications}}</p>
+                            </div>
                             <div id="{{this.username}}Table"></div>
                             <div class="justify-content-center">
                                 <nav>
