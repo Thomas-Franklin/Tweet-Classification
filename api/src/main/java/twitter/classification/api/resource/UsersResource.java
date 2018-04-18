@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import twitter.classification.api.service.PaginatedHashtagResultsService;
 import twitter.classification.api.service.PaginatedUserResultsService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 

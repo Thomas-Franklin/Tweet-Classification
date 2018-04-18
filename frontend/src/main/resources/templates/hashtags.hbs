@@ -35,6 +35,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="{{this.hashtagValue}}BarChartTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}BarChart" data-target="#{{this.hashtagValue}}BarChart">Bar Chart</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="{{this.hashtagValue}}TimeLineChartTab" role="tab" data-toggle="tab" href="#{{this.hashtagValue}}TimeLineChart" data-target="#{{this.hashtagValue}}TimeLineChart">Timeline</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div id="{{this.hashtagValue}}WordCloud" class="container tab-pane fade show active" aria-labelledby="{{this.hashtagValue}}WordCloud"><br>
@@ -48,6 +51,11 @@
                             <div id="{{this.hashtagValue}}BarChart" class="container tab-pane fade" aria-labelledby="{{this.hashtagValue}}BarChartTab"><br>
                                 <div class="chart-container">
                                     <canvas id="{{this.hashtagValue}}BarChartCanvas"></canvas>
+                                </div>
+                            </div>
+                            <div id="{{this.hashtagValue}}TimeLineChart" class="container tab-pane fade" aria-labelledby="{{this.hashtagValue}}TimeLineChartTab"><br>
+                                <div class="chart-container">
+                                    <canvas id="{{this.hashtagValue}}TimeLineChartCanvas"></canvas>
                                 </div>
                             </div>
                         </div>
