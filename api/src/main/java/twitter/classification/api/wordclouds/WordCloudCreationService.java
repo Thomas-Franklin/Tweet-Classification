@@ -34,6 +34,13 @@ public class WordCloudCreationService {
     wordCloud.setFontScalar(new SqrtFontScalar(10, 40));
   }
 
+  /**
+   * Returns a base64 string that can be rendered as an image in the frontend for a list of tweets
+   *
+   * @param tweets
+   * @return
+   * @throws IOException
+   */
   public String base64String(List<String> tweets) throws IOException {
 
     frequencyAnalyzer = new FrequencyAnalyzer();

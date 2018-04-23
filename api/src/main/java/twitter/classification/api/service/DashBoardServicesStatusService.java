@@ -35,6 +35,12 @@ public class DashBoardServicesStatusService {
     this.preProcessorStatusClient = preProcessorStatusClient;
   }
 
+  /**
+   * Status results of the running services
+   *
+   * @return status results
+   * @throws ProcessingClientException
+   */
   @DbConnection
   public DashBoardServiceStatusResponse status() throws ProcessingClientException {
 

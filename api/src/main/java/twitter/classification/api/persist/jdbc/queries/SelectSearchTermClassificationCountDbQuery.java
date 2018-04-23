@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectSearchTermClassificationCountDbQuery implements DbQuery {
 
+  /**
+   * Sql for the count results for a particular hashtag/user name search result
+   *
+   * @return sql
+   */
   @Override
   public String buildQuery() {
 

@@ -14,6 +14,11 @@ public class TestDatabaseConnectionDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Test the database for the status report on the homepage/dashboard
+   *
+   * @return results if the database is working
+   */
   public boolean test() {
 
     try {

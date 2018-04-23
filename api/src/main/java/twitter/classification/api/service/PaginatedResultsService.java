@@ -7,6 +7,13 @@ import twitter.classification.common.models.ClassificationValueForTweets;
 
 public class PaginatedResultsService {
 
+  /**
+   * Reusable method to return a paginated results list for the paginated tweets
+   *
+   * @param classificationValueForTweetsList
+   * @param paginatedTweetsModels
+   * @return paginated results
+   */
   public List<ClassificationValueForTweets> paginatedResults(List<ClassificationValueForTweets> classificationValueForTweetsList, List<PaginatedTweetsModel> paginatedTweetsModels) {
 
     for (PaginatedTweetsModel paginatedTweetsModel : paginatedTweetsModels) {

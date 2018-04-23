@@ -31,6 +31,12 @@ public class TwitterStreamClient {
     this.uri = uri;
   }
 
+  /**
+   * Returns the status of the twitter stream
+   *
+   * @return status of twitter stream
+   * @throws ProcessingClientException
+   */
   public TwitterStreamResponse isRunning() throws ProcessingClientException {
 
     Response response;

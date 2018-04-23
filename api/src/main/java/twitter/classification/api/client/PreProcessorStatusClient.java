@@ -31,6 +31,12 @@ public class PreProcessorStatusClient {
     this.uri = uri;
   }
 
+  /**
+   * Check to see if the preprocessor is running to display back to the user in status report
+   *
+   * @return pre processors status
+   * @throws ProcessingClientException
+   */
   public PreProcessorStatusResponse isRunning() throws ProcessingClientException {
 
     Response response;

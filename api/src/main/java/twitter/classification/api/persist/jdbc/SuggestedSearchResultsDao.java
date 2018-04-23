@@ -19,6 +19,11 @@ public class SuggestedSearchResultsDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return a list of suggested search terms which the user can perform
+   *
+   * @return suggested search terms
+   */
   public List<SuggestedSearchResultsModel> get() {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

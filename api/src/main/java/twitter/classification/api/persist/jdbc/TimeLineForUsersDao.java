@@ -20,6 +20,12 @@ public class TimeLineForUsersDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return the timeline for particular username term
+   *
+   * @param username
+   * @return timeline results
+   */
   public List<TimeLineForTweetsModel> get(String username) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

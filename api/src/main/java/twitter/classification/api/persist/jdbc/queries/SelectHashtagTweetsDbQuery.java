@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectHashtagTweetsDbQuery implements DbQuery {
 
+  /**
+   * Sql to return the classification value with the text for a particular hashtag
+   *
+   * @return sql for a particular hashtag result
+   */
   @Override
   public String buildQuery() {
 

@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectTopUsersClassificationCountDbQuery implements DbQuery {
 
+  /**
+   * The count of top users results and the classification stats
+   *
+   * @return sql for users results
+   */
   @Override
   public String buildQuery() {
 

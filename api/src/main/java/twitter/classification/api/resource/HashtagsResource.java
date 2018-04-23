@@ -29,6 +29,14 @@ public class HashtagsResource {
     this.hashtagResultsService = hashtagResultsService;
   }
 
+  /**
+   * Paginated results for a hashtag
+   *
+   * @param value
+   * @param limit
+   * @param offset
+   * @return paginated results
+   */
   @GET
   @Path("/{offset:[0-9]+}/{limit:[0-9]+}")
   public List<ClassificationValueForTweets> getPaginatedResults(
@@ -42,6 +50,12 @@ public class HashtagsResource {
     return hashtagResultsService.getPaginatedResultsHashtag(value, offset, limit);
   }
 
+  /**
+   * Get the time line for a hashtag
+   *
+   * @param value
+   * @return timeline results
+   */
   @GET
   @Path("/timeline")
   public TimeLineForTweets getTimeLineForHashtag(

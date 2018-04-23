@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class TimeLineForHashtagsDbQuery implements DbQuery {
 
+  /**
+   * Timeline DB query for a particular hashtag
+   *
+   * @return sql to fetch the results of classifications in last 5 hours
+   */
   @Override
   public String buildQuery() {
     

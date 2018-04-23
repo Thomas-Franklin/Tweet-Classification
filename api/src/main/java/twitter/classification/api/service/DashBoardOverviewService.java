@@ -19,6 +19,12 @@ public class DashBoardOverviewService {
     this.selectDashBoardOverviewValuesDao = selectDashBoardOverviewValuesDao;
   }
 
+  /**
+   * Retrieve the results for the dashboard overview information, such as total count of rumours, non-rumours
+   * etc.
+   *
+   * @return overview results
+   */
   @DbConnection
   public DashBoardOverviewResponse retrieve() {
 

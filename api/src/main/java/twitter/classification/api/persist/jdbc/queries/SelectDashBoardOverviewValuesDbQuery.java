@@ -4,6 +4,12 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectDashBoardOverviewValuesDbQuery implements DbQuery {
 
+  /**
+   * DB query to return the count of rumours, non-rumours, total classifications etc.
+   * for the dashboard results page
+   *
+   * @return sql for dashboard overview results
+   */
   @Override
   public String buildQuery() {
 

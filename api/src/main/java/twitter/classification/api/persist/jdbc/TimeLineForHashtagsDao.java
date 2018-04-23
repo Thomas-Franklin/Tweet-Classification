@@ -25,6 +25,12 @@ public class TimeLineForHashtagsDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return the timeline for particular hashtag term
+   *
+   * @param hashtag
+   * @return timeline results
+   */
   public List<TimeLineForTweetsModel> get(String hashtag) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());
@@ -38,25 +44,5 @@ public class TimeLineForHashtagsDao {
     }
 
     return null;
-  }
-
-  public static void main(String[] args) {
-
-    ConnectionFactory connectionFactory = new MySqlConnectionFactory("twitter", "password", "jdbc:mysql://localhost:3307/twitter_classification?autoReconnect=true&useSSL=false");
-
-    DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionFactory.getConnection());
-
-    String hashtag = "news";
-
-    try {
-      List<TimeLineForTweetsModel> classificationCountModelList = dbQueryRunner.executeQuery(new TimeLineForHashtagsDbQuery().buildQuery(), TimeLineForTweetsModel.class, hashtag, hashtag, hashtag, hashtag, hashtag, hashtag, hashtag, hashtag, hashtag, hashtag);
-
-      System.out.println(new ObjectMapper().writeValueAsString(classificationCountModelList.get(0)));
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-    }
   }
 }

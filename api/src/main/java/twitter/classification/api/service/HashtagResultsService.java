@@ -27,12 +27,26 @@ public class HashtagResultsService {
     this.timeLineForHashtagsDao = timeLineForHashtagsDao;
   }
 
+  /**
+   * Retrieve the paginated table results for a hashtag
+   *
+   * @param hashtag
+   * @param offset
+   * @param limit
+   * @return paginated results
+   */
   @DbConnection
   public List<ClassificationValueForTweets> getPaginatedResultsHashtag(String hashtag, int offset, int limit) {
 
     return new PaginatedResultsService().paginatedResults(new ArrayList<>(), paginatedHashtagTweetsDao.get(hashtag, offset, limit));
   }
 
+  /**
+   * Retrieve the timeline for a hashtag
+   *
+   * @param hashtag
+   * @return timeline
+   */
   @DbConnection
   public TimeLineForTweets getTimeLineForHashtag(String hashtag) {
 

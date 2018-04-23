@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectUserTweetsDbQuery implements DbQuery {
 
+  /**
+   * Sql for a particular users results including the classification values
+   *
+   * @return sql table results for a user
+   */
   @Override
   public String buildQuery() {
 

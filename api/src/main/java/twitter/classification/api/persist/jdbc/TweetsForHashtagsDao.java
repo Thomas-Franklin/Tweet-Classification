@@ -19,6 +19,12 @@ public class TweetsForHashtagsDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return the word cloud results for a hashtag
+   *
+   * @param hashtag
+   * @return wordcloud results
+   */
   public List<ProcessedHashtagTweetsForWordCloudModel> get(String hashtag) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

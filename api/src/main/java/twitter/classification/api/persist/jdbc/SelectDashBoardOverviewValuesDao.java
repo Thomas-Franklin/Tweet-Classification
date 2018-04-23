@@ -19,6 +19,11 @@ public class SelectDashBoardOverviewValuesDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Returns the overview results for the dashboard
+   *
+   * @return overview results
+   */
   public List<DashBoardOverviewModel> select() {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

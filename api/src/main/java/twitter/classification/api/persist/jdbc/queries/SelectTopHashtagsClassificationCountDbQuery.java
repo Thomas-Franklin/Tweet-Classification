@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectTopHashtagsClassificationCountDbQuery implements DbQuery {
 
+  /**
+   * The count of top hashtags results and the classification stats
+   *
+   * @return sql for hashtag results
+   */
   @Override
   public String buildQuery() {
 

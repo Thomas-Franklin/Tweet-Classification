@@ -27,12 +27,26 @@ public class UserResultsService {
     this.timeLineForUsersDao = timeLineForUsersDao;
   }
 
+  /**
+   * Paginated table results for a particular user
+   *
+   * @param username
+   * @param offset
+   * @param limit
+   * @return
+   */
   @DbConnection
   public List<ClassificationValueForTweets> getPaginatedUserResults(String username, int offset, int limit) {
 
     return new PaginatedResultsService().paginatedResults(new ArrayList<>(), paginatedUserTweetsDao.get(username, offset, limit));
   }
 
+  /**
+   * Timeline of classification results over 5 hours for a username
+   *
+   * @param username
+   * @return
+   */
   @DbConnection
   public TimeLineForTweets getTimeLineForUsername(String username) {
 

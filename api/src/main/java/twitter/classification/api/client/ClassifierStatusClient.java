@@ -31,6 +31,13 @@ public class ClassifierStatusClient {
     this.uri = uri;
   }
 
+  /**
+   * Checks to see if the classifier is running in order for the status
+   * to be displayed to the user
+   *
+   * @return classifiers status
+   * @throws ProcessingClientException
+   */
   public ClassifierStatusResponse isRunning() throws ProcessingClientException {
 
     Response response;

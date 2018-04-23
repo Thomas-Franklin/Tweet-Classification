@@ -30,6 +30,11 @@ public class DashBoardOverviewDataResource {
     this.dashBoardServicesStatusService = dashBoardServicesStatusService;
   }
 
+  /**
+   * For retrieving the results for the dashboard overview
+   *
+   * @return json of the dashboard overview results
+   */
   @GET
   @Path("/overview")
   @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +43,12 @@ public class DashBoardOverviewDataResource {
     return dashBoardOverviewService.retrieve();
   }
 
+  /**
+   * For retrieving the status of the running services
+   *
+   * @return status of the running services
+   * @throws ProcessingClientException
+   */
   @GET
   @Path("/services/status")
   @Produces(MediaType.APPLICATION_JSON)

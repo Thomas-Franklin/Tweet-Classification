@@ -20,7 +20,7 @@ import static java.util.Collections.emptyMap;
 public class InternalServerExceptionMapper implements ExceptionMapper<Throwable> {
 
   private static final Logger logger = LoggerFactory.getLogger(InternalServerExceptionMapper.class);
-  
+
   private TemplateRender templateRender;
 
   @Inject

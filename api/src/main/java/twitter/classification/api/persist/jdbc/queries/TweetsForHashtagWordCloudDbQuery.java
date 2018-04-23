@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class TweetsForHashtagWordCloudDbQuery implements DbQuery {
 
+  /**
+   * Fetch the tweet text for a hashtag to present in a word cloud
+   *
+   * @return sql for wordcloud results
+   */
   @Override
   public String buildQuery() {
 

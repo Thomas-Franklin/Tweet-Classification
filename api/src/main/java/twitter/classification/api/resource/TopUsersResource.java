@@ -27,6 +27,12 @@ public class TopUsersResource {
     this.topUserResultService = topUserResultService;
   }
 
+  /**
+   * Top users results
+   *
+   * @return top users results
+   * @throws IOException
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public TopUsersResponse getTopHashtagResults() throws IOException {

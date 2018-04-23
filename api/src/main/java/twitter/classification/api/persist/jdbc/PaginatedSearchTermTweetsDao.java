@@ -19,6 +19,14 @@ public class PaginatedSearchTermTweetsDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Returns the paginated tweet results for a search term
+   *
+   * @param searchTerm
+   * @param offset
+   * @param limit
+   * @return paginated results
+   */
   public List<PaginatedTweetsModel> get(String searchTerm, int offset, int limit) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

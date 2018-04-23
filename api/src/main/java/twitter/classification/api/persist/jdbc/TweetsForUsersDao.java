@@ -21,6 +21,12 @@ public class TweetsForUsersDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return the word cloud results for a username
+   *
+   * @param username
+   * @return wordcloud results
+   */
   public List<ProcessedUserTweetsForWordCloudModel> get(String username) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

@@ -26,6 +26,12 @@ public class TopHashTagsResource {
     this.topHashTagResultService = topHashTagResultService;
   }
 
+  /**
+   * Top hashtag results for the hashtag page
+   *
+   * @return top hashtags
+   * @throws IOException
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public TopHashtagsResponse getTopHashtagResults() throws IOException {

@@ -19,6 +19,12 @@ public class TweetsForSearchTermDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Return the word cloud results for a search term
+   *
+   * @param searchTerm
+   * @return wordcloud results
+   */
   public List<ProcessedTweetsForWordCloudModel> get(String searchTerm) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

@@ -4,6 +4,11 @@ import twitter.classification.common.persist.jdbc.queries.DbQuery;
 
 public class SelectSearchTermTweetsDbQuery implements DbQuery {
 
+  /**
+   * Sql for the tweets for a particular search term
+   *
+   * @return sql for search term results
+   */
   @Override
   public String buildQuery() {
 

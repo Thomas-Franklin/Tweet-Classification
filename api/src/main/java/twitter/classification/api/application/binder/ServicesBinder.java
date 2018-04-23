@@ -35,6 +35,10 @@ import twitter.classification.common.persist.DbConnectionResolver;
 
 public class ServicesBinder extends AbstractBinder {
 
+  /**
+   * Services binder for the api, which binds the various
+   * DAOs, Services and clients which are required by the APIs resources
+   */
   @Override
   protected void configure() {
 

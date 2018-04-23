@@ -25,6 +25,11 @@ public class SelectTopHashtagsClassificationCountDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Classification count results for top hashtags
+   *
+   * @return classification count results
+   */
   public List<TopHashtagsClassificationModel> select() {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

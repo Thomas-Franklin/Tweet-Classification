@@ -39,6 +39,13 @@ public class SearchResource {
     this.suggestedSearchResultsService = suggestedSearchResultsService;
   }
 
+  /**
+   * Search results for a certain search term
+   *
+   * @param searchTerm
+   * @return search results
+   * @throws IOException
+   */
   @GET
   @Path("/{value}")
   public SearchResultsResponse get(
@@ -48,6 +55,14 @@ public class SearchResource {
     return searchTermResultService.get(searchTerm);
   }
 
+  /**
+   * Paginated table results for a particular search term
+   *
+   * @param searchValue
+   * @param limit
+   * @param offset
+   * @return paginated results
+   */
   @GET
   @Path("/{value}/{offset:[0-9]+}/{limit:[0-9]+}")
   public List<ClassificationValueForTweets> getPaginatedResults(
@@ -61,6 +76,11 @@ public class SearchResource {
     return searchTermResultService.getPaginatedResults(searchValue, offset, limit);
   }
 
+  /**
+   * Return the suggestions for search terms
+   *
+   * @return search term suggestions
+   */
   @GET
   @Path("/suggestions")
   public SuggestedSearchTermsResponse getSuggestedSearchResults() {
@@ -68,6 +88,12 @@ public class SearchResource {
     return suggestedSearchResultsService.get();
   }
 
+  /**
+   * Timeline for a particular search term
+   *
+   * @param value
+   * @return timeline results
+   */
   @GET
   @Path("/{value}/timeline")
   public TimeLineForTweets getTimeLineForSearchTerm(

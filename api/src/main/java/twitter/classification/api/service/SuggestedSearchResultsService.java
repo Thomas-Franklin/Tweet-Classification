@@ -21,6 +21,11 @@ public class SuggestedSearchResultsService {
     this.suggestedSearchResultsDao = suggestedSearchResultsDao;
   }
 
+  /**
+   * Suggested search terms when there are no results for a user search
+   *
+   * @return
+   */
   @DbConnection
   public SuggestedSearchTermsResponse get() {
 

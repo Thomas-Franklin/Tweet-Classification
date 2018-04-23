@@ -29,6 +29,14 @@ public class UsersResource {
     this.userResultsService = userResultsService;
   }
 
+  /**
+   * Paginated results for the users table
+   *
+   * @param value
+   * @param limit
+   * @param offset
+   * @return paginated results
+   */
   @GET
   @Path("/{offset:[0-9]+}/{limit:[0-9]+}")
   public List<ClassificationValueForTweets> getPaginatedResults(
@@ -42,6 +50,12 @@ public class UsersResource {
     return userResultsService.getPaginatedUserResults(value, offset, limit);
   }
 
+  /**
+   * Timeline for a username
+   *
+   * @param value
+   * @return timeline results
+   */
   @GET
   @Path("/timeline")
   public TimeLineForTweets getTimeLineForUsername(

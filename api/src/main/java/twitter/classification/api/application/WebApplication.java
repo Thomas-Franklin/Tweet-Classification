@@ -8,6 +8,10 @@ import twitter.classification.common.system.helper.FileVariables;
 
 public class WebApplication extends ResourceConfig {
 
+  /**
+   * Entry point of the jersey application for the api where it will load the configuration
+   * values from the text file and register the services which will be required
+   */
   public WebApplication() {
 
     packages("twitter.classification.api.application");

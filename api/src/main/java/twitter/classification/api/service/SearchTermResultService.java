@@ -74,6 +74,12 @@ public class SearchTermResultService {
     return new PaginatedResultsService().paginatedResults(new ArrayList<>(), paginatedSearchTermTweetsDao.get(searchTerm, offset, limit));
   }
 
+  /**
+   * Will return the timeline for a particular search term
+   *
+   * @param searchTerm
+   * @return
+   */
   @DbConnection
   public TimeLineForTweets getTimeLineForSearchTerm(String searchTerm) {
 

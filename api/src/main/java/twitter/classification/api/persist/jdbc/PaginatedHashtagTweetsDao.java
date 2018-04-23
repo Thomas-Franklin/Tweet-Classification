@@ -20,6 +20,14 @@ public class PaginatedHashtagTweetsDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Returns the paginated tweet results for a hashtag term
+   *
+   * @param hashtag
+   * @param offset
+   * @param limit
+   * @return paginated results
+   */
   public List<PaginatedTweetsModel> get(String hashtag, int offset, int limit) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());

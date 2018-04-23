@@ -8,15 +8,9 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import twitter.classification.api.persist.jdbc.models.ClassificationCountModel;
-import twitter.classification.api.persist.jdbc.models.TopHashtagsClassificationModel;
 import twitter.classification.api.persist.jdbc.queries.SelectSearchTermClassificationCountDbQuery;
-import twitter.classification.api.persist.jdbc.queries.SelectTopHashtagsClassificationCountDbQuery;
-import twitter.classification.common.persist.ConnectionFactory;
 import twitter.classification.common.persist.ConnectionManager;
-import twitter.classification.common.persist.jdbc.MySqlConnectionFactory;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;
 
 public class SelectSearchTermClassificationCountDao {
@@ -31,6 +25,12 @@ public class SelectSearchTermClassificationCountDao {
     this.connectionManager = connectionManager;
   }
 
+  /**
+   * Classification count results for a search term
+   *
+   * @param searchTerm
+   * @return classification count results
+   */
   public List<ClassificationCountModel> select(String searchTerm) {
 
     DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionManager.getConnection());
@@ -41,20 +41,5 @@ public class SelectSearchTermClassificationCountDao {
       e.printStackTrace();
     }
     return null;
-  }
-
-  public static void main(String[] args) {
-
-    ConnectionFactory connectionFactory = new MySqlConnectionFactory("twitter", "password", "jdbc:mysql://localhost:3307/twitter_classification?autoReconnect=true&useSSL=false");
-
-    DbQueryRunner dbQueryRunner = new DbQueryRunner(connectionFactory.getConnection());
-
-    try {
-      List<ClassificationCountModel> classificationCountModelList = dbQueryRunner.executeQuery(new SelectSearchTermClassificationCountDbQuery().buildQuery(), ClassificationCountModel.class, "xxxsdsds", "xxxsdsds");
-
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
   }
 }
