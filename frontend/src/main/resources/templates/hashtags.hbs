@@ -46,7 +46,7 @@
                         </thead>
                         <tbody>
                         {{#each hashtagResultsList}}
-                        <tr>
+                        <tr data-toggle="tooltip" data-placement="bottom" title="Click to view {{this.hashtagValue}} stats">
                             <th scope="row">{{increment @index}}</th>
                             <td>
                                 <div class="radiotext">

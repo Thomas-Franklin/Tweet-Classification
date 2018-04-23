@@ -51,7 +51,7 @@
  -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark navbar-fixed">
     <div class="container">
-        <a class="navbar-brand" href="/">Tweet Classification</a>
+        <a class="navbar-brand" href="/" data-toggle="tooltip" data-placement="bottom" title="Return home">Tweet Classification</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -61,20 +61,20 @@
             <ul class="navbar-nav ml-auto">
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search hashtags/users" id="searchTermValue">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchTerm">Search</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchTerm" data-toggle="tooltip" data-placement="bottom" title="Perform search using term">Search</button>
                 </form>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link {{pathIsActive this path 'dashboard'}}" href="/">Dashboard</a>
+                <li class="nav-item"><a class="nav-link {{pathIsActive this path 'dashboard'}}" href="/" data-toggle="tooltip" data-placement="bottom" title="Return home">Dashboard</a>
                 </li>
-                <li class="nav-item"><a class="nav-link {{pathIsActive this path 'users'}}" href="/users">Users</a></li>
+                <li class="nav-item"><a class="nav-link {{pathIsActive this path 'users'}}" href="/users" data-toggle="tooltip" data-placement="bottom" title="Go to users page">Users</a></li>
                 <li class="nav-item"><a class="nav-link {{pathIsActive this path 'hashtags'}}"
-                                        href="/hashtags">Hashtags</a></li>
+                                        href="/hashtags" data-toggle="tooltip" data-placement="bottom" title="Go to hashtags page">Hashtags</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navDropDown" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">More</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDropDown">
-                        <a class="dropdown-item" href="/terms">Terms of Service</a>
+                        <a class="dropdown-item" href="/terms" data-toggle="tooltip" data-placement="bottom" title="View terms of service">Terms of Service</a>
                     </div>
                 </li>
             </ul>
@@ -113,10 +113,10 @@
     </div>
     <div class="second-bar">
         <div class="container">
-            <h2 class="logo"><a href="/">Tweet Classification</a></h2>
-            <div class="social-icons">
-                <a href="/users">Users</a>
-                <a href="/hashtags">Hashtags</a>
+            <h2 class="logo"><a href="/" data-toggle="tooltip" data-placement="bottom" title="Return home">Tweet Classification</a></h2>
+            <div class="footer-links">
+                <a href="/users" data-toggle="tooltip" data-placement="bottom" title="Go to users page">Users</a>
+                <a href="/hashtags" data-toggle="tooltip" data-placement="bottom" title="Go to hashtags page">Hashtags</a>
             </div>
         </div>
     </div>

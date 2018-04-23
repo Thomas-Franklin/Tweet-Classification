@@ -49,6 +49,11 @@ public class ClassificationResource {
     this.classificationFromVerificationCheck = classificationFromVerificationCheck;
   }
 
+  /**
+   * Post method to classify the processed item from the preprocessor and a label will be assigned
+   * @param preProcessedItem
+   * @return
+   */
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
