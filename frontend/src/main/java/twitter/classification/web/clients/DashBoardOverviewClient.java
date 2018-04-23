@@ -35,6 +35,12 @@ public class DashBoardOverviewClient {
     this.client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
   }
 
+  /**
+   * The dashboard overview results for the homepage
+   *
+   * @return dashboard overview results
+   * @throws ProcessingClientException
+   */
   public Optional<DashBoardOverviewResponse> fetch() throws ProcessingClientException {
 
     Response response;

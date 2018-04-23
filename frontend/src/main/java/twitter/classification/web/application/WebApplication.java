@@ -9,6 +9,11 @@ import twitter.classification.web.application.binder.TemplateRenderBinder;
 
 public class WebApplication extends ResourceConfig {
 
+  /**
+   * Entry point to the jersey application for the web application,
+   * will load the configuration values and register the binders which
+   * bind services for injection later
+   */
   public WebApplication() {
 
     packages("twitter.classification.web.application");

@@ -29,6 +29,13 @@ public class SearchResultsClient {
     this.client = ClientBuilder.newClient(new ClientConfig(new JacksonJsonProvider()));
   }
 
+  /**
+   * Return the search results for a particular term
+   *
+   * @param searchTerm
+   * @return search results for the term
+   * @throws ProcessingClientException
+   */
   public SearchResultsResponse get(String searchTerm) throws ProcessingClientException {
 
     Response response;

@@ -32,11 +32,16 @@ public class UsersResource {
       TopUsersResultsClient topUsersResultsClient
   ) {
 
-
     this.templateRender = templateRender;
     this.topUsersResultsClient = topUsersResultsClient;
   }
 
+  /**
+   * Results page for the top hashtag results
+   *
+   * @return html for the top hashtags results
+   * @throws ProcessingClientException
+   */
   @GET
   @Produces(MediaType.TEXT_HTML)
   public String topHashtagsPage() throws ProcessingClientException {

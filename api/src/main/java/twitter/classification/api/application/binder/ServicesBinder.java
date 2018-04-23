@@ -14,6 +14,7 @@ import twitter.classification.api.persist.jdbc.SelectDashBoardOverviewValuesDao;
 import twitter.classification.api.persist.jdbc.SelectSearchTermClassificationCountDao;
 import twitter.classification.api.persist.jdbc.SelectTopHashtagsClassificationCountDao;
 import twitter.classification.api.persist.jdbc.SelectTopUsersClassificationCountDao;
+import twitter.classification.api.persist.jdbc.SuggestedSearchResultsDao;
 import twitter.classification.api.persist.jdbc.TestDatabaseConnectionDao;
 import twitter.classification.api.persist.jdbc.TimeLineForHashtagsDao;
 import twitter.classification.api.persist.jdbc.TimeLineForSearchTermDao;
@@ -24,6 +25,7 @@ import twitter.classification.api.persist.jdbc.TweetsForUsersDao;
 import twitter.classification.api.service.DashBoardOverviewService;
 import twitter.classification.api.service.DashBoardServicesStatusService;
 import twitter.classification.api.service.HashtagResultsService;
+import twitter.classification.api.service.SuggestedSearchResultsService;
 import twitter.classification.api.service.UserResultsService;
 import twitter.classification.api.service.SearchTermResultService;
 import twitter.classification.api.service.TopHashTagResultService;
@@ -56,6 +58,7 @@ public class ServicesBinder extends AbstractBinder {
     bind(TimeLineForHashtagsDao.class).to(TimeLineForHashtagsDao.class);
     bind(TimeLineForUsersDao.class).to(TimeLineForUsersDao.class);
     bind(TimeLineForSearchTermDao.class).to(TimeLineForSearchTermDao.class);
+    bind(SuggestedSearchResultsDao.class).to(SuggestedSearchResultsDao.class);
 
     bind(DashBoardOverviewService.class).to(DashBoardOverviewService.class);
     bind(DashBoardServicesStatusService.class).to(DashBoardServicesStatusService.class);
@@ -64,6 +67,7 @@ public class ServicesBinder extends AbstractBinder {
     bind(HashtagResultsService.class).to(HashtagResultsService.class);
     bind(UserResultsService.class).to(UserResultsService.class);
     bind(SearchTermResultService.class).to(SearchTermResultService.class);
+    bind(SuggestedSearchResultsService.class).to(SuggestedSearchResultsService.class);
 
     bind(DbConnectionResolver.class).to(DbConnectionResolver.class).in(Singleton.class);
   }

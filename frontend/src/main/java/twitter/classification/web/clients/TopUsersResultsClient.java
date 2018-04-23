@@ -30,6 +30,12 @@ public class TopUsersResultsClient {
     this.client = ClientBuilder.newClient(new ClientConfig(new JacksonJsonProvider()));
   }
 
+  /**
+   * Return top 10 users results
+   *
+   * @return top 10 users results
+   * @throws ProcessingClientException
+   */
   public TopUsersResponse get() throws ProcessingClientException {
 
     Response response;

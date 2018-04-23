@@ -29,6 +29,12 @@ public class TopHashTagsResultsClient {
     this.client = ClientBuilder.newClient(new ClientConfig(new JacksonJsonProvider()));
   }
 
+  /**
+   * Return the top 10 hashtags based on the amount of classifications associated to it
+   *
+   * @return top 10 hashtags
+   * @throws ProcessingClientException
+   */
   public TopHashtagsResponse get() throws ProcessingClientException {
 
     Response response;

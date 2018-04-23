@@ -30,11 +30,16 @@ public class HashtagsResource {
       TopHashTagsResultsClient topHashTagsResultsClient
   ) {
 
-
     this.templateRender = templateRender;
     this.topHashTagsResultsClient = topHashTagsResultsClient;
   }
 
+  /**
+   * For returning the HTML for the top hashtags results page
+   *
+   * @return html for top hashtag results
+   * @throws ProcessingClientException
+   */
   @GET
   @Produces(MediaType.TEXT_HTML)
   public String topHashtagsPage() throws ProcessingClientException {

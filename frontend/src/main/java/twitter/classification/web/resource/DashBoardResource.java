@@ -55,6 +55,14 @@ public class DashBoardResource {
     this.dashBoardServiceStatusClient = dashBoardServiceStatusClient;
   }
 
+  /**
+   * Returns the dashboard homepage html with the various status and states
+   * required
+   *
+   * @return html for the homepage
+   * @throws ProcessingClientException
+   * @throws JsonProcessingException
+   */
   @GET
   @Produces(MediaType.TEXT_HTML)
   public String homePage() throws ProcessingClientException, JsonProcessingException {

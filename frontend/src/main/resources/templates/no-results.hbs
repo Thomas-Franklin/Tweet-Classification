@@ -8,6 +8,11 @@
                 particular hashtags that have been streamed in to the service with the current filter.</p>
 
             <p>If you would like, you could preform a new search for one of the suggested terms below:</p>
+            <ul>
+            {{#each alternativeSearchSuggestions}}
+                <li>{{this.value}}</li>
+            {{/each}}
+            </ul>
 
         </div>
     </div>

@@ -29,6 +29,12 @@ public class DashBoardServiceStatusClient {
     this.client = ClientBuilder.newClient(new ClientConfig(new JacksonJsonProvider()));
   }
 
+  /**
+   * The status of the running services in the system
+   *
+   * @return dashboard services
+   * @throws ProcessingClientException
+   */
   public DashBoardServiceStatusResponse get() throws ProcessingClientException {
 
     Response response;

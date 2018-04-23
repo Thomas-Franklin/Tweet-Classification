@@ -33,31 +33,40 @@ public class HandleBarsTemplateRender implements TemplateRender {
         .with(new ConcurrentMapTemplateCache());
   }
 
+  /**
+   * Renders a handlebars template based on the name
+   *
+   * @param templateName String
+   * @param context      Object
+   * @return the constructed html page
+   */
   @Override
   public String render(String templateName, Object context) {
 
     try {
+
       return handlebars.compile(templateName).apply(context);
     } catch (IOException exception) {
+
       throw new RuntimeException(exception);
     }
   }
 
-  @Override
-  public void precompile(String templateName) {
-
-    try {
-      handlebars.compile(templateName);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
+  /**
+   * Helper to list the status groups as success (green) or danger (red)
+   *
+   * @return the list group class for success or danger
+   */
   private static Helper<Object> listGroupColourHelper() {
 
     return ((context, options) -> options.param(0) ? "list-group-item-success" : "list-group-item-danger");
   }
 
+  /**
+   * Helper which increments the index by 1, as it starts at 0
+   *
+   * @return index value + 1
+   */
   private static Helper<Object> rankIncreaseHelper() {
 
     return (context, options) -> ((Integer) context + 1);
