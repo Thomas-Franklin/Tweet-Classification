@@ -1,5 +1,6 @@
 package twitter.classification.api.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,24 +8,33 @@ import javax.inject.Inject;
 
 import twitter.classification.api.persist.jdbc.PaginatedHashtagTweetsDao;
 import twitter.classification.api.persist.jdbc.TimeLineForHashtagsDao;
+import twitter.classification.api.persist.jdbc.TweetsForHashtagsDao;
+import twitter.classification.api.persist.jdbc.models.ProcessedHashtagTweetsForWordCloudModel;
+import twitter.classification.api.persist.jdbc.models.ProcessedTweetsForWordCloudModel;
+import twitter.classification.api.persist.jdbc.models.ProcessedUserTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.models.TimeLineForTweetsModel;
+import twitter.classification.api.wordclouds.WordCloudCreationService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.TimeLineForTweets;
+import twitter.classification.common.models.WordCloudResponse;
 import twitter.classification.common.persist.DbConnection;
 
 public class HashtagResultsService {
 
   private PaginatedHashtagTweetsDao paginatedHashtagTweetsDao;
   private TimeLineForHashtagsDao timeLineForHashtagsDao;
+  private TweetsForHashtagsDao tweetsForHashtagsDao;
 
   @Inject
   public HashtagResultsService(
       PaginatedHashtagTweetsDao paginatedHashtagTweetsDao,
-      TimeLineForHashtagsDao timeLineForHashtagsDao
+      TimeLineForHashtagsDao timeLineForHashtagsDao,
+      TweetsForHashtagsDao tweetsForHashtagsDao
   ) {
 
     this.paginatedHashtagTweetsDao = paginatedHashtagTweetsDao;
     this.timeLineForHashtagsDao = timeLineForHashtagsDao;
+    this.tweetsForHashtagsDao = tweetsForHashtagsDao;
   }
 
   /**
@@ -63,5 +73,24 @@ public class HashtagResultsService {
         .setRumoursOverThreeHour(timeLineForTweetsModel.getCountOfRumoursOverThreeHours())
         .setNonRumoursOverFourHour(timeLineForTweetsModel.getCountOfNonRumoursOverFourHours())
         .setRumoursOverFourHour(timeLineForTweetsModel.getCountOfRumoursOverFourHours());
+  }
+
+  /**
+   * Wordcloud results for a hashtag
+   *
+   * @param hashtag
+   * @return
+   */
+  @DbConnection
+  public WordCloudResponse getWordCloudForHashtag(String hashtag) throws IOException {
+
+    List<ProcessedHashtagTweetsForWordCloudModel> processedHashtagTweetsForWordCloudModels = tweetsForHashtagsDao.get(hashtag);
+    List<String> processedTweets = new ArrayList<>();
+
+    for (ProcessedTweetsForWordCloudModel processedTweetsForWordCloudModel : processedHashtagTweetsForWordCloudModels) {
+      processedTweets.add(processedTweetsForWordCloudModel.getOriginalTextList());
+    }
+
+    return new WordCloudResponse().setWordCloudImage(new WordCloudCreationService().base64String(processedTweets));
   }
 }

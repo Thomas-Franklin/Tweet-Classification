@@ -7,7 +7,21 @@ $('input[name="userRadioGroup"]').click(function () {
     getUsersPieChart(target);
     getUsersBarChart(target);
     getUsersTimeLineChart(target);
+    getWordCloudForUser(target);
 });
+
+function getWordCloudForUser(target) {
+
+    $.ajax({
+       url: 'http://localhost:9000/users/' + target.substring(1, target.length) + '/wordcloud',
+        dataType: 'json',
+        async: true,
+        success: function (data) {
+            $("div" + target + "WordCloud .word-cloud-container").empty();
+            $("div" + target + "WordCloud .word-cloud-container").append("<img width='100%' src='data:image/png;base64,"+data.wordCloudImage+"'/>");
+        }
+    });
+}
 
 function getUsersTable(target, page) {
 
@@ -25,12 +39,13 @@ function getUsersTable(target, page) {
                 "<th scope=\"col\">Tweet ID</th>" +
                 "<th scope=\"col\">Classification Value</th>" +
                 "<th scope=\"col\">Tweet Text</th>" +
+                "<th scope=\"col\">Created On</th>" +
                 "</tr>" +
                 "</thead>" +
                 "<tbody>";
 
             data.forEach(function (tweet) {
-                table += '<tr><th scope="row">' + tweet.id + '</th><td><p>' + tweet.classificationValue + '</p></td><td>' + tweet.tweetText + '</td></tr>'
+                table += '<tr><th scope="row">' + tweet.id + '</th><td><p>' + tweet.classificationValue + '</p></td><td>' + tweet.tweetText + '</td><td>' + tweet.createdOn + '</td></tr>'
             });
 
             table += "</tbody></table>";

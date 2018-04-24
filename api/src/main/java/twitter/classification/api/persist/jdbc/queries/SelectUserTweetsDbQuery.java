@@ -12,13 +12,14 @@ public class SelectUserTweetsDbQuery implements DbQuery {
   @Override
   public String buildQuery() {
 
-    return "SELECT classification_types.classification_value, tweets.processed_tweet_text, tweets.id " +
+    return "SELECT classification_types.classification_value, tweets.original_tweet_text, tweets.id, tweets.created_on " +
         "FROM users " +
         "  JOIN users_tweet_classifications ON users.id = users_tweet_classifications.user_id " +
         "  JOIN tweets ON users_tweet_classifications.tweet_id = tweets.id " +
         "  JOIN classification_types ON tweets.classification_id = classification_types.id " +
         "WHERE users.username = ? " +
         "GROUP BY tweets.id " +
+        "ORDER BY tweets.created_on DESC " +
         "LIMIT ?, ?;";
   }
 }

@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import twitter.classification.api.persist.jdbc.models.ProcessedHashtagTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.models.ProcessedUserTweetsForWordCloudModel;
-import twitter.classification.api.persist.jdbc.queries.TweetsForHashtagWordCloudDbQuery;
 import twitter.classification.api.persist.jdbc.queries.TweetsForUserWordCloudDbQuery;
 import twitter.classification.common.persist.ConnectionManager;
 import twitter.classification.common.persist.jdbc.utils.DbQueryRunner;

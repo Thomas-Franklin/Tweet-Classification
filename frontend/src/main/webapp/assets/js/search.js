@@ -6,7 +6,21 @@ $(document).ready(function () {
     getSearchResultsBarChart(searchTerm);
     getSearchResultsPieChart(searchTerm);
     getSearchTimeLineChart(searchTerm);
+    getWordCloudForSearchTerm(searchTerm);
 });
+
+function getWordCloudForSearchTerm(searchTerm) {
+
+    $.ajax({
+        url: 'http://localhost:9000/search/' + searchTerm + '/wordcloud',
+        dataType: 'json',
+        async: true,
+        success: function (data) {
+            $("div#searchTermWordCloud .word-cloud-container").empty();
+            $("div#searchTermWordCloud .word-cloud-container").append("<img width='100%' src='data:image/png;base64,"+data.wordCloudImage+"'/>");
+        }
+    });
+}
 
 function getSearchResultsPieChart(searchTerm) {
 
@@ -122,12 +136,13 @@ function getTableForSearch(searchTerm, page) {
                 "<th scope=\"col\">Tweet ID</th>" +
                 "<th scope=\"col\">Classification Value</th>" +
                 "<th scope=\"col\">Tweet Text</th>" +
+                "<th scope=\"col\">Created On</th>" +
                 "</tr>" +
                 "</thead>" +
                 "<tbody>";
 
             data.forEach(function (tweet) {
-                table += '<tr><th scope="row">' + tweet.id + '</th><td><p>' + tweet.classificationValue + '</p></td><td>' + tweet.tweetText + '</td></tr>'
+                table += '<tr><th scope="row">' + tweet.id + '</th><td><p>' + tweet.classificationValue + '</p></td><td>' + tweet.tweetText + '</td><td>' + tweet.createdOn + '</td></tr>'
             });
 
             table += "</tbody></table>";

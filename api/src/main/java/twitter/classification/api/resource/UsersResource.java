@@ -1,5 +1,6 @@
 package twitter.classification.api.resource;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import twitter.classification.api.service.UserResultsService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.TimeLineForTweets;
+import twitter.classification.common.models.WordCloudResponse;
 
 @Singleton
 @Path("/users/{value}")
@@ -63,5 +65,20 @@ public class UsersResource {
   ) {
 
     return userResultsService.getTimeLineForUsername(value);
+  }
+
+  /**
+   * Word cloud image for a username
+   *
+   * @param value
+   * @return timeline results
+   */
+  @GET
+  @Path("/wordcloud")
+  public WordCloudResponse getWordcloudForUsername(
+      @PathParam("value") String value
+  ) throws IOException {
+
+    return userResultsService.getWordCloudForUsername(value);
   }
 }

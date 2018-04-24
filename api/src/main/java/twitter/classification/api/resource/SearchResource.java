@@ -19,6 +19,7 @@ import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.SearchResultsResponse;
 import twitter.classification.common.models.SuggestedSearchTermsResponse;
 import twitter.classification.common.models.TimeLineForTweets;
+import twitter.classification.common.models.WordCloudResponse;
 
 @Singleton
 @Path("/search")
@@ -101,5 +102,20 @@ public class SearchResource {
   ) {
 
     return searchTermResultService.getTimeLineForSearchTerm(value);
+  }
+
+  /**
+   * Wordcloud for a particular search term
+   *
+   * @param value
+   * @return timeline results
+   */
+  @GET
+  @Path("/{value}/wordcloud")
+  public WordCloudResponse getWordCloudForSearchTerm(
+      @PathParam("value") String value
+  ) throws IOException {
+
+    return searchTermResultService.getWordCloudForSearchTerm(value);
   }
 }

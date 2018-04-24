@@ -9,6 +9,9 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="View timeline chart information">
             <a class="nav-link" id="{{value}}TimeLineChartTab" role="tab" data-toggle="tab" href="#{{value}}TimeLineChart" data-target="#{{value}}TimeLineChart">Timeline</a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="View word cloud for {{value}}">
+            <a class="nav-link" id="{{value}}WordCloudTab" role="tab" data-toggle="tab" href="#{{value}}WordCloud" data-target="#{{value}}WordCloud">Word Cloud</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div id="{{value}}PieChart" class="container tab-pane fade show active" aria-labelledby="{{value}}PieChartTab"><br>
@@ -24,6 +27,10 @@
         <div id="{{value}}TimeLineChart" class="container tab-pane fade" aria-labelledby="{{value}}TimeLineChartTab"><br>
             <div class="chart-container">
                 <canvas id="{{value}}TimeLineChartCanvas"></canvas>
+            </div>
+        </div>
+        <div id="{{value}}WordCloud" class="container tab-pane fade" aria-labelledby="{{value}}WordCloudTab"><br>
+            <div class="word-cloud-container">
             </div>
         </div>
     </div>

@@ -1,15 +1,20 @@
 package twitter.classification.api.persist.jdbc.models;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import twitter.classification.common.persist.Column;
 
 public class PaginatedTweetsModel {
 
   @Column(name = "classification_value")
   private String classificationValue;
-  @Column(name = "processed_tweet_text")
+  @Column(name = "original_tweet_text")
   private String tweetText;
   @Column(name = "id")
   private Long id;
+  @Column(name = "created_on")
+  private Timestamp createdOn;
 
   public PaginatedTweetsModel() {
   }
@@ -42,5 +47,17 @@ public class PaginatedTweetsModel {
   public void setId(Long id) {
 
     this.id = id;
+  }
+
+  public Timestamp getCreatedOn() {
+
+    return createdOn;
+  }
+
+  public PaginatedTweetsModel setCreatedOn(Timestamp createdOn) {
+
+    this.createdOn = createdOn;
+
+    return this;
   }
 }

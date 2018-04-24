@@ -9,11 +9,15 @@ import javax.inject.Inject;
 import twitter.classification.api.persist.jdbc.PaginatedSearchTermTweetsDao;
 import twitter.classification.api.persist.jdbc.SelectSearchTermClassificationCountDao;
 import twitter.classification.api.persist.jdbc.TimeLineForSearchTermDao;
+import twitter.classification.api.persist.jdbc.TweetsForSearchTermDao;
 import twitter.classification.api.persist.jdbc.models.ClassificationCountModel;
+import twitter.classification.api.persist.jdbc.models.ProcessedTweetsForWordCloudModel;
 import twitter.classification.api.persist.jdbc.models.TimeLineForTweetsModel;
+import twitter.classification.api.wordclouds.WordCloudCreationService;
 import twitter.classification.common.models.ClassificationValueForTweets;
 import twitter.classification.common.models.SearchResultsResponse;
 import twitter.classification.common.models.TimeLineForTweets;
+import twitter.classification.common.models.WordCloudResponse;
 import twitter.classification.common.persist.DbConnection;
 
 public class SearchTermResultService {
@@ -21,18 +25,21 @@ public class SearchTermResultService {
   private SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao;
   private PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao;
   private TimeLineForSearchTermDao timeLineForSearchTermDao;
+  private TweetsForSearchTermDao tweetsForSearchTermDao;
 
   @Inject
   public SearchTermResultService(
       SelectSearchTermClassificationCountDao selectSearchTermClassificationCountDao,
       PaginatedSearchTermTweetsDao paginatedSearchTermTweetsDao,
-      TimeLineForSearchTermDao timeLineForSearchTermDao
+      TimeLineForSearchTermDao timeLineForSearchTermDao,
+      TweetsForSearchTermDao tweetsForSearchTermDao
   ) {
 
 
     this.selectSearchTermClassificationCountDao = selectSearchTermClassificationCountDao;
     this.paginatedSearchTermTweetsDao = paginatedSearchTermTweetsDao;
     this.timeLineForSearchTermDao = timeLineForSearchTermDao;
+    this.tweetsForSearchTermDao = tweetsForSearchTermDao;
   }
 
   /**
@@ -96,5 +103,24 @@ public class SearchTermResultService {
         .setRumoursOverThreeHour(timeLineForTweetsModel.getCountOfRumoursOverThreeHours())
         .setNonRumoursOverFourHour(timeLineForTweetsModel.getCountOfNonRumoursOverFourHours())
         .setRumoursOverFourHour(timeLineForTweetsModel.getCountOfRumoursOverFourHours());
+  }
+
+  /**
+   * Wordcloud results for a searchTerm
+   *
+   * @param searchTerm
+   * @return
+   */
+  @DbConnection
+  public WordCloudResponse getWordCloudForSearchTerm(String searchTerm) throws IOException {
+
+    List<ProcessedTweetsForWordCloudModel> processedTweetsForWordCloudModels = tweetsForSearchTermDao.get(searchTerm);
+    List<String> processedTweets = new ArrayList<>();
+
+    for (ProcessedTweetsForWordCloudModel processedTweetsForWordCloudModel : processedTweetsForWordCloudModels) {
+      processedTweets.add(processedTweetsForWordCloudModel.getOriginalTextList());
+    }
+
+    return new WordCloudResponse().setWordCloudImage(new WordCloudCreationService().base64String(processedTweets));
   }
 }

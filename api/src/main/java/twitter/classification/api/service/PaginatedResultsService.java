@@ -23,6 +23,7 @@ public class PaginatedResultsService {
       classificationValueForTweets.setId(paginatedTweetsModel.getId().intValue());
       classificationValueForTweets.setTweetText(paginatedTweetsModel.getTweetText());
       classificationValueForTweets.setClassificationValue(paginatedTweetsModel.getClassificationValue());
+      classificationValueForTweets.setCreatedOn(paginatedTweetsModel.getCreatedOn());
 
       classificationValueForTweetsList.add(classificationValueForTweets);
     }
