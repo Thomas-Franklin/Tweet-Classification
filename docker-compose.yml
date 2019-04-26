@@ -65,7 +65,7 @@ services:
       retries: 10
 
   queue-reader:
-    image: frolvlad/alpine-oraclejdk8:slim
+    image: frolvlad/alpine-java:jdk8-slim
     volumes:
       - ./queue-reader/build/libs/queue-reader-all.jar:/app.jar
     entrypoint: ["sh", "-c", "java -jar /app.jar"]

@@ -13,3 +13,10 @@ configuration.txt
 ~$*
 classes/
 *.model
+*/bin/
+*/.classpath
+*/.settings/
+*/.project
+.project
+.settings
+.vscode

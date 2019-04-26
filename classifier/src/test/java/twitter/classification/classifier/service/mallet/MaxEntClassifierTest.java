@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +60,7 @@ public class MaxEntClassifierTest {
 
   @Test
   @SuppressWarnings("Duplicates")
+  @Ignore // only ran when required as it is a longer test than the others
   public void evaluateClassifier() throws FileNotFoundException {
 
     InstanceList testInstances = new InstanceList(classifier.getInstancePipe());
